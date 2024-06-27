@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cocybodv8vkj3"]
+[gd_scene load_steps=3 format=3 uid="uid://cocybodv8vkj3"]
 
-[ext_resource type="Texture2D" uid="uid://dvq6pjearomlg" path="res://icon.svg" id="1_ctpxi"]
+[ext_resource type="Script" path="res://root.gd" id="1_rn5q3"]
+[ext_resource type="PackedScene" uid="uid://61m51j7a007w" path="res://pet.tscn" id="2_g1fhd"]
 
 [node name="Root" type="Node2D"]
+script = ExtResource("1_rn5q3")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(609, 286)
-texture = ExtResource("1_ctpxi")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pet" parent="CanvasLayer" instance=ExtResource("2_g1fhd")]

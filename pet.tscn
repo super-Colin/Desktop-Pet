@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://61m51j7a007w"]
+
+[ext_resource type="Script" path="res://pet.gd" id="1_pa7gm"]
+[ext_resource type="Texture2D" uid="uid://dvq6pjearomlg" path="res://icon.svg" id="2_2lyff"]
+
+[node name="Pet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("1_pa7gm")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(1, 0.25098, 1, 1)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(96, 92)
+texture = ExtResource("2_2lyff")
