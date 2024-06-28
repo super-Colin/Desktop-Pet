@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://61m51j7a007w"]
+[gd_scene load_steps=4 format=3 uid="uid://61m51j7a007w"]
 
 [ext_resource type="Script" path="res://pet.gd" id="1_pa7gm"]
 [ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
+[ext_resource type="Script" path="res://Behaviour.gd" id="2_ovmnc"]
 
 [node name="Pet" type="Control"]
 layout_mode = 3
@@ -13,6 +14,49 @@ grow_vertical = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("1_pa7gm")
 
+[node name="Behaviour" type="Node" parent="."]
+script = ExtResource("2_ovmnc")
+
+[node name="BehaviourTimer" type="Timer" parent="Behaviour"]
+wait_time = 30.0
+autostart = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Behaviour"]
+
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(96, 92)
 texture = ExtResource("2_h6co6")
+
+[node name="SpeechBox" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ColorRect" type="ColorRect" parent="SpeechBox"]
+layout_mode = 2
+color = Color(0.309804, 0.133333, 0, 0.67451)
+
+[node name="MarginContainer" type="MarginContainer" parent="SpeechBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SpeechBox/MarginContainer"]
+layout_mode = 2
+
+[node name="Speech" type="Label" parent="SpeechBox/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hello"
