@@ -4,6 +4,11 @@ var lastState
 var currentState
 var nextState
 
+
+
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#$"BehaviourTimer".timeout.connect(bored_hover)
