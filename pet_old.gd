@@ -1,11 +1,7 @@
-extends Node2D
+extends Control
 
-
-# Signals
 signal doubleClicked
 signal changedScreenCorner
-
-
 
 # Dragging
 var mouseHeldFrames = 0
@@ -20,26 +16,23 @@ var sprite_flying = load("res://pet_assets/flyMan_fly.png")
 var positionOnScreen = Vector2i(0,0) # 0,0 =top left / 1,1 = bottom right
 
 
+#This will be a work around for trying to get a true screen size of the current monitor. I have 2 monitors, one above the other, and it seems to add the y value of the top monitor to the lower, but not the x values
 
-func _ready():
+# I have 2 monitors, one above the other, and it seems to add the y value of the top monitor to the lower, but not the x values
+# I'm trying to tell what part of the screen the game is on and getting unexpected results. I have 2 monitors, one above the other, and it seems to add the y value of the top monitor to the lower, but not the x values (I'm guessing because it has the lowest and highest x values??)
+
+
+func _ready()->void:
 	%DraggableArea.gui_input.connect(setDraggingStatus)
-	pass # Replace with function body.
-
-
-func _process(_delta):
-	pass
+	checkScreenCorner()
 
 
 
+func _process(_delta)->void:
+	handleDragging()
 
 
 
-
-
-
-
-
-# --- Dragging / Detect Double Click ---
 
 
 func handleDragging()->void:
@@ -89,9 +82,15 @@ func setDraggingStatus(event)->void:
 		beingDragged = event.pressed
 		checkScreenCorner()
 
-# --- END Dragging / Detect Double Click ---
 
 
+
+func say(toSay:String, duration:float = 5.0)->void:
+	%SpeechBox.visible = true
+	%Speech.text = toSay
+	await get_tree().create_timer(duration).timeout
+	#%SpeechBox.visible = false
+	return
 
 
 
