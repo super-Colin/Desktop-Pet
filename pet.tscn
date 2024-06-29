@@ -19,6 +19,10 @@ script = ExtResource("3_vbt87")
 
 [node name="ClickTimer" type="Timer" parent="Mouse"]
 
+[node name="DragTimer" type="Timer" parent="Mouse"]
+
+[node name="DoubleClickBuffer" type="Timer" parent="Mouse"]
+
 [node name="Behaviour" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_ovmnc")

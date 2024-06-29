@@ -23,7 +23,7 @@ func _ready():
 
 
 func _process(_delta):
-	$Mouse.handleDragging()
+	%Mouse.handleDragging()
 	handleDragAnimation()
 	
 

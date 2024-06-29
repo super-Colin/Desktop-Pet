@@ -5,8 +5,18 @@ extends Node
 # These should only be things that run once on ready
 # They are more a convienence for the dev than anything...
 
+
 # Time between holding a click down turning into a dragging action
-var clickToDragTimeout = 0.2
+var clickToDragTimeout = 0.08
+# Time between holding a click down and up being a "single click" action
+var clickToSingleClickTimeout = 0.14
+# Wait this long for a double click befoer calling it a single click
+# To prevent single clicks happening on double clicks
+# Added on top of single click timeout
+var doubleClickBuffer = 0.14
+# There is some overlap on these 
+# So it's possible to drag and single click in one motion
+# But the timing is so small it's negligible
 
 
 @export var useCodeConfigs: bool = true
@@ -23,7 +33,6 @@ func _ready():
 		print("setting configs through code")
 		#%DraggableArea.size = spriteSize
 		configSpriteSizeBased()
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,7 +49,6 @@ func configSpriteSizeBased():
 	get_window().size = spriteSize + Vector2(1,1)
 	#print($"../CanvasLayer/GridContainer".anchors_preset)
 	#$"../CanvasLayer/GridContainer".anchors_preset = 8
-	#$"../CanvasLayer/GridContainer".position = Vector2.ZERO # -1 to account for empty ui container on the side and top
 	$"../CanvasLayer/GridContainer".position = Vector2(-2, -2) # -2 to account for empty ui container on the side and top
 
 
