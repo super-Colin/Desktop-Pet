@@ -18,7 +18,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
@@ -37,9 +37,9 @@ func bored_hover():
 
 
 func bored_speak():
-	#print("I'm bored..")
-	%SpeechBox.visible = true
-	%Speech.text = "I'm bored..."
+	print("I'm bored..")
+	#%SpeechBox.visible = true
+	#%Speech.text = "I'm bored..."
 
 func tellJoke_fromResponse(result, response_code, headers, body):
 	var json = JSON.parse_string(body.get_string_from_utf8())

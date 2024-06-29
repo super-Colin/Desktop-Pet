@@ -5,8 +5,11 @@ extends Node
 # These should only be things that run once on ready
 # They are more a convienence for the dev than anything...
 
-@export var useCodeConfigs: bool = true
+# Time between holding a click down turning into a dragging action
+var clickToDragTimeout = 0.2
 
+
+@export var useCodeConfigs: bool = true
 
 
 #The size of the sprite being used
@@ -24,7 +27,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 

@@ -1,14 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://boxb655r78rcu"]
+[gd_scene load_steps=6 format=3 uid="uid://boxb655r78rcu"]
 
 [ext_resource type="Script" path="res://pet.gd" id="1_pa7gm"]
-[ext_resource type="Script" path="res://configs.gd" id="2_733f5"]
+[ext_resource type="Script" path="res://config.gd" id="2_733f5"]
 [ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
+[ext_resource type="Script" path="res://Behaviour.gd" id="2_ovmnc"]
+[ext_resource type="Script" path="res://mouse.gd" id="3_vbt87"]
 
 [node name="Pet" type="Node2D"]
 script = ExtResource("1_pa7gm")
 
-[node name="Configs" type="Node" parent="."]
+[node name="Config" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_733f5")
+
+[node name="Mouse" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_vbt87")
+
+[node name="ClickTimer" type="Timer" parent="Mouse"]
+
+[node name="Behaviour" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ovmnc")
+
+[node name="BehaviourTimer" type="Timer" parent="Behaviour"]
+wait_time = 30.0
+autostart = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Behaviour"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -48,7 +67,7 @@ layout_mode = 2
 [node name="Control5" type="Control" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 
-[node name="DraggableArea" type="Button" parent="CanvasLayer/GridContainer"]
+[node name="DraggableArea" type="CenterContainer" parent="CanvasLayer/GridContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
@@ -56,12 +75,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="DebugRect" type="ColorRect" parent="CanvasLayer/GridContainer/DraggableArea"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+mouse_filter = 1
 color = Color(0, 0.929412, 0.929412, 0.54902)
 
 [node name="Sprite" type="Sprite2D" parent="CanvasLayer/GridContainer/DraggableArea"]
