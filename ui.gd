@@ -5,6 +5,7 @@ var menuOpen = false
 
 
 func _ready():
+	%SpeechOut.add_text("this is some text that I'm saying")
 	pass # Replace with function body.
 
 
