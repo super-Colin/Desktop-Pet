@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://pet_old.gd" id="1_pa7gm"]
 [ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
-[ext_resource type="Script" path="res://Behaviour.gd" id="2_ovmnc"]
+[ext_resource type="Script" path="res://behaviour.gd" id="2_ovmnc"]
 
 [node name="Pet_old" type="Control"]
 layout_mode = 3

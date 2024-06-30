@@ -49,7 +49,7 @@ func configSpriteSizeBased():
 	get_window().size = spriteSize + Vector2(1,1)
 	#print($"../CanvasLayer/GridContainer".anchors_preset)
 	#$"../CanvasLayer/GridContainer".anchors_preset = 8
-	$"../CanvasLayer/GridContainer".position = Vector2(-2, -2) # -2 to account for empty ui container on the side and top
+	%GridWrapper.position = Vector2(-2, -2) # -2 to account for empty ui container on the side and top
 
 
 
