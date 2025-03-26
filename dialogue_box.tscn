@@ -16,6 +16,14 @@ offset_top = 10.0
 offset_right = 390.0
 offset_bottom = 392.0
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Remove any invisble formatting around the content in your clipboard"
+text = "Flatten"
+
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilnc5")
@@ -26,7 +34,7 @@ layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="CodeTab" parent="TabContainer" instance=ExtResource("1_senjy")]
+[node name="Code" parent="TabContainer" instance=ExtResource("1_senjy")]
 layout_mode = 2
 metadata/_tab_index = 0
 

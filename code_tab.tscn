@@ -27,22 +27,36 @@ layout_mode = 2
 text = "Templates
 "
 
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Templates
+"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SnippetList" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="NewSnippetButton" type="Button" parent="HBoxContainer/ScrollContainer/SnippetList"]
+[node name="NewSnippetButton" type="Button" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "New Snippet"
 
-[node name="SnippetRow" parent="HBoxContainer/ScrollContainer/SnippetList" instance=ExtResource("1_v2ypb")]
+[node name="SnippetList" type="VBoxContainer" parent="HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SnippetRow" parent="HBoxContainer/ScrollContainer/VBoxContainer/SnippetList" instance=ExtResource("1_v2ypb")]
+layout_mode = 2
+
+[node name="SnippetRow2" parent="HBoxContainer/ScrollContainer/VBoxContainer/SnippetList" instance=ExtResource("1_v2ypb")]
 layout_mode = 2
 
 [node name="SnippetEditor" type="VBoxContainer" parent="."]
