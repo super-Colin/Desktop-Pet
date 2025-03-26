@@ -1,7 +1,7 @@
 extends Node2D
 
+# Snippy
 
-# I decided not to make the other "modules" into scenes since aren't used elsewhere in the project
 
 # Signals
 signal doubleClicked
@@ -19,10 +19,12 @@ var positionOnScreen = Vector2i(0,0) # 0,0 =top left / 1,1 = bottom right
 
 
 func _ready():
-	# Area to interpret mouse inputs specially
+	# Modules may depend on elements in the tree
+	# But dependencies between each other are set here
 	%DraggableArea.gui_input.connect(%Mouse.interpretMouseInput)
 	%Mouse.rightClicked.connect(%UI.toggleMenu)
-	pass # Replace with function body.
+	#%UI.sayInMenu(" hello from the main script")
+	#%JokeButton.pressed.connect(%Behaviour.tellJoke)
 
 
 func _process(_delta):
@@ -41,9 +43,3 @@ func handleDragAnimation()->void:
 	else: if not %Mouse.beingDragged and not %Sprite.texture == sprite_standing:
 		#print("stopped dragging, switching to standing sprite")
 		%Sprite.texture = sprite_standing
-
-
-
-
-
-

@@ -1,0 +1,173 @@
+[gd_scene load_steps=8 format=3 uid="uid://boxb655r78rcu"]
+
+[ext_resource type="Script" path="res://pet.gd" id="1_pa7gm"]
+[ext_resource type="Script" path="res://config.gd" id="2_733f5"]
+[ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
+[ext_resource type="Script" path="res://behaviour.gd" id="2_ovmnc"]
+[ext_resource type="Script" path="res://mouse.gd" id="3_vbt87"]
+[ext_resource type="Script" path="res://ui.gd" id="5_xwxfk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0xho"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.815686, 0.345098, 1, 0.596078)
+corner_detail = 1
+
+[node name="Pet" type="Node2D"]
+script = ExtResource("1_pa7gm")
+
+[node name="Config" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_733f5")
+
+[node name="Mouse" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_vbt87")
+
+[node name="ClickTimer" type="Timer" parent="Mouse"]
+
+[node name="DragTimer" type="Timer" parent="Mouse"]
+
+[node name="DoubleClickBuffer" type="Timer" parent="Mouse"]
+
+[node name="Behaviour" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ovmnc")
+
+[node name="BehaviourTimer" type="Timer" parent="Behaviour"]
+wait_time = 30.0
+autostart = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Behaviour"]
+
+[node name="UI" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_xwxfk")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.988235, 0.721569, 0.866667, 0.227451)
+
+[node name="GridWrapper" type="GridContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="0,0" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="Top" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="0,2" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="Left" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="DraggableArea" type="CenterContainer" parent="CanvasLayer/GridWrapper"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="DebugRect" type="ColorRect" parent="CanvasLayer/GridWrapper/DraggableArea"]
+layout_mode = 2
+mouse_filter = 1
+color = Color(0, 0.929412, 0.929412, 0.54902)
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/GridWrapper/DraggableArea"]
+unique_name_in_owner = true
+position = Vector2(96, 94)
+texture = ExtResource("2_h6co6")
+
+[node name="Right" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="MainMenu" type="MarginContainer" parent="CanvasLayer/GridWrapper/Right"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+offset_right = 400.0
+offset_bottom = 200.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Me" type="VBoxContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer/Me"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer/Me/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="Joke" type="Button" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Joke"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Joke" type="Button" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+text = "A longer Joke"
+
+[node name="Stuff" type="VBoxContainer" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_j0xho")
+placeholder_text = "What's up?"
+
+[node name="SpeechOutMenu" type="RichTextLabel" parent="CanvasLayer/GridWrapper/Right/MainMenu/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_vertical = 8
+text = "Some text that I'm saying"
+
+[node name="2,0" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="Bottom" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2
+
+[node name="2, 2" type="Control" parent="CanvasLayer/GridWrapper"]
+layout_mode = 2

@@ -6,15 +6,16 @@ var nextState
 
 
 
-
+# Snippy
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#$"BehaviourTimer".timeout.connect(bored_hover)
-	$"BehaviourTimer".timeout.connect(bored_speak)
-	$"..".doubleClicked.connect(tellJoke)
-	pass # Replace with function body.
+	#$"..".doubleClicked.connect(tellJoke)
+	pass
+	#$"BehaviourTimer".timeout.connect(bored)
+	
 
 
 # "_process" calls are in main Pet script
@@ -33,8 +34,10 @@ func bored_hover():
 	get_window().position += Vector2i(0, 50)
 
 
-func bored_speak():
+func bored():
 	print("I'm bored..")
+	#await %UI.sayInMenu("I'm bored...", 1.5)
+	await %UI.sayInMenu("Hyrdate :)", 1.5)
 	#%SpeechBox.visible = true
 	#%Speech.text = "I'm bored..."
 
@@ -45,14 +48,14 @@ func tellJoke_fromResponse(result, response_code, headers, body):
 	print(response_code)
 	print(headers)
 	print(body.get_string_from_utf8())
-	await $"..".say(json["setup"])
-	await $"..".say(json["punchline"])
+	await %UI.sayInMenu(json["setup"], 7.0)
+	await %UI.sayInMenu(str(json["punchline"], " \n", urlToBBcodeLink("Official Joke API", "official-joke-api.appspot.com")), 30.0)
+	
 	return json
 
 func tellJoke():
 	$HTTPRequest.request_completed.connect(tellJoke_fromResponse)
-	#$HTTPRequest.request("https://api.github.com/repos/godotengine/godot/releases/latest")
 	$HTTPRequest.request("https://official-joke-api.appspot.com/random_joke")
-	return "hi"
 
-
+func urlToBBcodeLink( text:String, url:String):
+	return str("[url=", url, "]", text, "[/url]")

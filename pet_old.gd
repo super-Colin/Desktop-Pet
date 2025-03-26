@@ -91,7 +91,3 @@ func say(toSay:String, duration:float = 5.0)->void:
 	await get_tree().create_timer(duration).timeout
 	#%SpeechBox.visible = false
 	return
-
-
-
-

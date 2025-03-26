@@ -3,11 +3,23 @@ extends Node
 
 var menuOpen = false
 
+var speaking = false
+var toSayStack = []
+var lastSaidStack = []
+
+
 
 func _ready():
-	%SpeechOut.add_text("this is some text that I'm saying")
+	#%SpeechOutMenu.add_text("this is some text that I'm saying")
 	pass # Replace with function body.
 
+func addToLastSaid(lastThingSaid):
+	if lastSaidStack.size() < 3:
+		lastSaidStack.append(lastThingSaid)
+	else:
+		lastSaidStack.pop_front()
+		lastSaidStack.append(lastThingSaid)
+	pass
 
 
 func toggleMenu():
@@ -15,21 +27,33 @@ func toggleMenu():
 		hideMenu()
 	else:
 		expandMenu()
-	pass
+	#menuOpen = not menuOpen
 
 
 func expandMenu():
-	%MainMenu.visible = true
 	#print(get_window().size)
 	#print(%GridWrapper.size)
 	#print(%DraggableArea.size)
 	#print(%MainMenu.size)
-	get_window().size = %MainMenu.size + %DraggableArea.size
+	#%SpeechOutMenu.visible = true
+	#get_window().size = %MainMenu.size + %DraggableArea.size
+	get_tree().get_root().get_window().size = Vector2(1000,1000)
 	menuOpen = true
 
 func hideMenu():
 	print("hiding menu")
 	get_window().size =%DraggableArea.size
 	menuOpen = false
-	print(get_window().size)
-	
+
+
+
+
+
+
+func sayInMenu(toSay:String, duration:float = 0.0)->void:
+	%SpeechOutMenu.text = toSay
+	if duration > 0:
+		speaking = true
+		await get_tree().create_timer(duration).timeout
+		%SpeechOutMenu.clear()
+		speaking = false

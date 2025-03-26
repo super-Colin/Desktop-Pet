@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=3 uid="uid://gphxfnof4hxd"]
+
+[ext_resource type="PackedScene" uid="uid://d3muq5wew7rtc" path="res://snippet_row.tscn" id="1_v2ypb"]
+[ext_resource type="Script" uid="uid://cap7wq2nvxm8r" path="res://code_tab.gd" id="1_vl4ct"]
+
+[node name="CodeTab" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vl4ct")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Snippets" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Snippets"
+
+[node name="Templates" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Templates
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SnippetList" type="VBoxContainer" parent="HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewSnippetButton" type="Button" parent="HBoxContainer/ScrollContainer/SnippetList"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "New Snippet"
+
+[node name="SnippetRow" parent="HBoxContainer/ScrollContainer/SnippetList" instance=ExtResource("1_v2ypb")]
+layout_mode = 2
+
+[node name="SnippetEditor" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CodeEditNode" type="CodeEdit" parent="SnippetEditor"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Placeholder Text"
+wrap_mode = 1
+gutters_draw_line_numbers = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SnippetEditor"]
+layout_mode = 2
+
+[node name="SnippetCancelButton" type="Button" parent="SnippetEditor/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Cancel"
+
+[node name="SnippetName" type="LineEdit" parent="SnippetEditor/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Snippet Name"
+
+[node name="SnippetSaveButton" type="Button" parent="SnippetEditor/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"

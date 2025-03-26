@@ -127,4 +127,3 @@ func checkScreenCorner():
 		currentScreenCorner = newCorner
 	#print("Current window corner:")
 	#print(positionOnScreen)
-
