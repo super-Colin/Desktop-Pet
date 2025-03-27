@@ -10,8 +10,9 @@ var lastSaidStack = []
 const defaultSize = Vector2(125, 140)
 var expandedtSize = Vector2(800, 800)
 
+var alwaysOnTop = false
 
-
+signal toggledAlwaysOnTop(onOrOff)
 
 
 func _ready():
@@ -50,6 +51,15 @@ func toggleMenu():
 		hideMenu()
 	else:
 		expandMenu()
+
+
+func setAlwaysOnTop(on:bool=false): 
+	print("ui - always on top: ", on)
+	alwaysOnTop = on
+	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, alwaysOnTop)
+	toggledAlwaysOnTop.emit(alwaysOnTop)
+
+
 
 
 func expandMenu():

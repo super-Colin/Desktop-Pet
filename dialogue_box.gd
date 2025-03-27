@@ -9,6 +9,10 @@ extends PanelContainer
 func _ready() -> void:
 	%WidthSlider.drag_ended.connect(handleChangeWidth)
 	%HeightSlider.drag_ended.connect(handleChangeHeight)
+	%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
+
+
+
 
 
 func handleChangeWidth(valChanged):

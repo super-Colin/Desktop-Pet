@@ -74,11 +74,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="DebugRect" type="ColorRect" parent="CanvasLayer/GridWrapper/DraggableArea"]
-layout_mode = 2
-mouse_filter = 1
-color = Color(0, 0.929412, 0.929412, 0.54902)
-
 [node name="Sprite" type="Sprite2D" parent="CanvasLayer/GridWrapper/DraggableArea"]
 unique_name_in_owner = true
 position = Vector2(96, 94)
@@ -96,14 +91,6 @@ offset_bottom = 0.0
 
 [node name="BottomLeft" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2
-
-[node name="DragResize" type="Button" parent="CanvasLayer/GridWrapper/BottomLeft"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 45.0
-offset_bottom = 31.0
-text = "Drag"
-metadata/_edit_use_anchors_ = true
 
 [node name="Bottom" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2

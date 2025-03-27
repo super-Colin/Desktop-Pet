@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://gphxfnof4hxd"]
+[gd_scene load_steps=5 format=3 uid="uid://gphxfnof4hxd"]
 
 [ext_resource type="PackedScene" uid="uid://d3muq5wew7rtc" path="res://snippet_row.tscn" id="1_v2ypb"]
 [ext_resource type="Script" uid="uid://cap7wq2nvxm8r" path="res://code_tab.gd" id="1_vl4ct"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl4ct"]
+bg_color = Color(0.443422, 0, 0.0709508, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f8yj6"]
+bg_color = Color(0.0843763, 0.234238, 7.21961e-08, 1)
 
 [node name="CodeTab" type="VBoxContainer"]
 anchors_preset = 15
@@ -86,7 +92,7 @@ size_flags_stretch_ratio = 0.5
 
 [node name="CodeEditNode" type="CodeEdit" parent="VSplitContainer/SnippetEditor"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 150)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Placeholder Text"
@@ -98,7 +104,9 @@ layout_mode = 2
 
 [node name="SnippetCancelButton" type="Button" parent="VSplitContainer/SnippetEditor/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_vl4ct")
 text = "Cancel"
 
 [node name="SnippetName" type="LineEdit" parent="VSplitContainer/SnippetEditor/HBoxContainer"]
@@ -109,5 +117,7 @@ placeholder_text = "Snippet Name"
 
 [node name="SnippetSaveButton" type="Button" parent="VSplitContainer/SnippetEditor/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_f8yj6")
 text = "Save"
