@@ -22,7 +22,7 @@ func _ready():
 	# Modules may depend on elements in the tree
 	# But dependencies between each other are set here
 	%DraggableArea.gui_input.connect(%Mouse.interpretMouseInput)
-	%Mouse.rightClicked.connect(%UI.toggleMenu)
+	%Mouse.rightClicked.connect(UI.toggleMenu)
 	#%UI.sayInMenu(" hello from the main script")
 	#%JokeButton.pressed.connect(%Behaviour.tellJoke)
 

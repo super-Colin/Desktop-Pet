@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://boxb655r78rcu"]
+[gd_scene load_steps=7 format=3 uid="uid://boxb655r78rcu"]
 
 [ext_resource type="Script" uid="uid://bosim76hmbf0x" path="res://pet.gd" id="1_pa7gm"]
 [ext_resource type="Script" uid="uid://bsihee3phcbmx" path="res://config.gd" id="2_733f5"]
 [ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
 [ext_resource type="Script" uid="uid://bhdgai321eek8" path="res://behaviour.gd" id="2_ovmnc"]
 [ext_resource type="Script" uid="uid://d3qoc5nak4vhg" path="res://mouse.gd" id="3_vbt87"]
-[ext_resource type="Script" uid="uid://d2sufjeanua0e" path="res://ui.gd" id="5_xwxfk"]
 [ext_resource type="PackedScene" uid="uid://c8m8svhtp2ksf" path="res://dialogue_box.tscn" id="7_uvuc8"]
 
 [node name="Pet" type="Node2D"]
@@ -35,10 +34,6 @@ autostart = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Behaviour"]
 
-[node name="UI" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("5_xwxfk")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DebugRect" type="ColorRect" parent="CanvasLayer"]
@@ -56,8 +51,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 columns = 3
 
 [node name="TopLeft" type="Control" parent="CanvasLayer/GridWrapper"]
@@ -95,13 +88,24 @@ layout_mode = 2
 [node name="DialogueBox" parent="CanvasLayer/GridWrapper/Right" instance=ExtResource("7_uvuc8")]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 offset_right = 380.0
 offset_bottom = 382.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="BottomLeft" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2
+
+[node name="DragResize" type="Button" parent="CanvasLayer/GridWrapper/BottomLeft"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 31.0
+text = "Drag"
+metadata/_edit_use_anchors_ = true
 
 [node name="Bottom" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2

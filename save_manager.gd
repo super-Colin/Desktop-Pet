@@ -1,17 +1,13 @@
 extends Node
 
+signal saveLoaded
+signal saved
 
 @onready var saveGameConfigNode:ConfigFile = ConfigFile.new()
-
 
 const SAVE_DIRECTORY_PATH = "user://"
 const SAVE_FILE_TITLE = "config"
 const SAVE_FILE_PATH = SAVE_DIRECTORY_PATH + SAVE_FILE_TITLE + ".cfg"
-
-
-signal saveLoaded
-signal saved
-
 
 
 func _ready() -> void:
@@ -58,8 +54,6 @@ func load_from_file(fileName:String, fileContent:String, fileExtension:String=".
 	var file = FileAccess.open("user://" + fileName + fileExtension, FileAccess.READ)
 	var content = file.get_as_text()
 	return content
-
-
 
 
 func saveGame_all():

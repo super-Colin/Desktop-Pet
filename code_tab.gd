@@ -8,18 +8,34 @@ const SAVE_SECTION = "code_tab"
 
 func _ready() -> void:
 	snippets = Saver.loadGameSection(SAVE_SECTION, "snippets", snippets)
-	
+	#
 	%NewSnippetButton.pressed.connect(openSnippetPad)
+	%QuickSnippetButton.pressed.connect(quickSnip)
 	%SnippetCancelButton.pressed.connect(closeSnippetPad)
 	%SnippetSaveButton.pressed.connect(saveNewSnippet)
-	
+	#
+	closeSnippetPad()
 	refreshSnippetsList()
+
+
+func quickSnip():
+	var clipboardContent = DisplayServer.clipboard_get()
+	if not clipboardContent: # if not a string in clipboard
+		return
+	#print("code - ")
+	var title = clipboardContent.left(18).strip_edges()
+	snippets[title] = clipboardContent
+	saveSnippets()
+	refreshSnippetsList()
+
+
 
 func saveNewSnippet():
 	print("code - editor input is: ", %CodeEditNode.text)
 	snippets[%SnippetName.text] = %CodeEditNode.text
 	saveSnippets()
 	refreshSnippetsList()
+	closeSnippetPad()
 
 func saveSnippets():
 	Saver.saveGameSection(SAVE_SECTION, "snippets", snippets)
@@ -50,6 +66,6 @@ func openSnippetPad():
 
 func closeSnippetPad():
 	$SnippetEditor.visible = false
-	$SnippetEditor.text = ""
+	%CodeEditNode.text = ""
 
 #

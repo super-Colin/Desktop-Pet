@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8m8svhtp2ksf"]
+[gd_scene load_steps=5 format=3 uid="uid://c8m8svhtp2ksf"]
 
+[ext_resource type="Script" uid="uid://ce3exek2bxi8c" path="res://dialogue_box.gd" id="1_n23yb"]
 [ext_resource type="PackedScene" uid="uid://gphxfnof4hxd" path="res://code_tab.tscn" id="1_senjy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_senjy"]
+bg_color = Color(0.466971, 0.186746, 1.44392e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilnc5"]
 content_margin_left = 8.0
@@ -10,73 +14,104 @@ content_margin_bottom = 4.0
 bg_color = Color(0.815686, 0.345098, 1, 0.596078)
 corner_detail = 1
 
-[node name="DialogueBox" type="VBoxContainer"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 390.0
-offset_bottom = 392.0
+[node name="DialogueBox" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_senjy")
+script = ExtResource("1_n23yb")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBoxContainer"]
+[node name="Hotbar" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Flatten" type="Button" parent="VBoxContainer/Hotbar"]
 layout_mode = 2
 tooltip_text = "Remove any invisble formatting around the content in your clipboard"
 text = "Flatten"
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="Flatten2" type="Button" parent="VBoxContainer/Hotbar"]
+layout_mode = 2
+tooltip_text = "Remove any invisble formatting around the content in your clipboard"
+text = "Width"
+
+[node name="WidthSlider" type="HSlider" parent="VBoxContainer/Hotbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 400.0
+max_value = 1000.0
+step = 10.0
+value = 400.0
+
+[node name="HeightSlider" type="HSlider" parent="VBoxContainer/Hotbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 400.0
+max_value = 1000.0
+step = 10.0
+value = 400.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilnc5")
 placeholder_text = "What's up?"
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Code" parent="TabContainer" instance=ExtResource("1_senjy")]
+[node name="Code" parent="VBoxContainer/TabContainer" instance=ExtResource("1_senjy")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Me" type="VBoxContainer" parent="TabContainer"]
+[node name="Me" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Me"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Me"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Me/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Me/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Me/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 
-[node name="JokeButton" type="Button" parent="TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="JokeButton" type="Button" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Joke"
 
-[node name="MarginContainer2" type="MarginContainer" parent="TabContainer/Me/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Joke" type="Button" parent="TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="Joke" type="Button" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 text = "A longer Joke"
 
-[node name="Stuff" type="VBoxContainer" parent="TabContainer"]
+[node name="Stuff" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="SpeechOutMenu" type="RichTextLabel" parent="."]
+[node name="SpeechOutMenu" type="RichTextLabel" parent="VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 120)
