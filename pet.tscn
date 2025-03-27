@@ -46,54 +46,33 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.988235, 0.721569, 0.866667, 0.227451)
 
-[node name="GridWrapper" type="GridContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 3
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="TopLeft" type="Control" parent="CanvasLayer/GridWrapper"]
+[node name="XAxisBox" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" groups=["xAxisBox"]]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="Top" type="Control" parent="CanvasLayer/GridWrapper"]
-layout_mode = 2
-
-[node name="TopRight" type="Control" parent="CanvasLayer/GridWrapper"]
-layout_mode = 2
-
-[node name="Left" type="Control" parent="CanvasLayer/GridWrapper"]
-layout_mode = 2
-
-[node name="DraggableArea" type="CenterContainer" parent="CanvasLayer/GridWrapper"]
+[node name="DraggableArea" type="CenterContainer" parent="CanvasLayer/VBoxContainer/XAxisBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/GridWrapper/DraggableArea"]
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/VBoxContainer/XAxisBox/DraggableArea"]
 unique_name_in_owner = true
-position = Vector2(96, 94)
 texture = ExtResource("2_h6co6")
+centered = false
 
-[node name="Right" type="Control" parent="CanvasLayer/GridWrapper"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="DialogueBox" parent="CanvasLayer/GridWrapper/Right" groups=["dialogueBox"] instance=ExtResource("7_uvuc8")]
+[node name="DialogueBox" parent="CanvasLayer/VBoxContainer/XAxisBox" groups=["dialogueBox"] instance=ExtResource("7_uvuc8")]
 unique_name_in_owner = true
-layout_mode = 1
-offset_bottom = 0.0
-
-[node name="BottomLeft" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2
-
-[node name="Bottom" type="Control" parent="CanvasLayer/GridWrapper"]
-layout_mode = 2
-
-[node name="BottomRight" type="Control" parent="CanvasLayer/GridWrapper"]
-layout_mode = 2
+size_flags_vertical = 3

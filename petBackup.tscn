@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://8dnnvptjhgc6"]
+[gd_scene load_steps=7 format=3 uid="uid://bjwnxkrjypf6o"]
 
 [ext_resource type="Script" uid="uid://bosim76hmbf0x" path="res://pet.gd" id="1_0ttfa"]
 [ext_resource type="Script" uid="uid://bsihee3phcbmx" path="res://config.gd" id="2_c1gdq"]
@@ -42,6 +42,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 color = Color(0.988235, 0.721569, 0.866667, 0.227451)
 
 [node name="GridWrapper" type="GridContainer" parent="CanvasLayer"]
@@ -70,12 +72,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="DebugRect" type="ColorRect" parent="CanvasLayer/GridWrapper/DraggableArea"]
-layout_mode = 2
-mouse_filter = 1
-color = Color(0, 0.929412, 0.929412, 0.54902)
+size_flags_vertical = 0
 
 [node name="Sprite" type="Sprite2D" parent="CanvasLayer/GridWrapper/DraggableArea"]
 unique_name_in_owner = true
@@ -84,28 +81,18 @@ texture = ExtResource("5_sqms2")
 
 [node name="Right" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="DialogueBox" parent="CanvasLayer/GridWrapper/Right" instance=ExtResource("6_saotg")]
+[node name="DialogueBox" parent="CanvasLayer/GridWrapper/Right" groups=["dialogueBox"] instance=ExtResource("6_saotg")]
 unique_name_in_owner = true
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 380.0
-offset_bottom = 382.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
+offset_top = -18.5
+offset_right = 257.0
+offset_bottom = 18.5
 
 [node name="BottomLeft" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2
-
-[node name="DragResize" type="Button" parent="CanvasLayer/GridWrapper/BottomLeft"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 45.0
-offset_bottom = 31.0
-text = "Drag"
-metadata/_edit_use_anchors_ = true
 
 [node name="Bottom" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2

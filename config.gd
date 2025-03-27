@@ -47,11 +47,11 @@ func configSpriteSizeBased():
 	%DraggableArea.custom_minimum_size = spriteSize
 	# Position the sprite in the center of the draggable area
 	print(%Sprite)
-	%Sprite.position = (spriteSize / 2) - Vector2(1,1)
+	#%Sprite.position = (spriteSize / 2) - Vector2(1,1)
 	get_window().size = spriteSize + Vector2(1,1)
 	#print($"../CanvasLayer/GridContainer".anchors_preset)
 	#$"../CanvasLayer/GridContainer".anchors_preset = 8
-	%GridWrapper.position = Vector2(-2, -2) # -2 to account for empty ui container on the side and top
+	#%GridWrapper.position = Vector2(-2, -2) # -2 to account for empty ui container on the side and top
 
 
 

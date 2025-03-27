@@ -8,11 +8,12 @@ var toSayStack = []
 var lastSaidStack = []
 
 const defaultSize = Vector2(125, 140)
-var expandedtSize = Vector2(800, 800)
+var expandedSize = Vector2(800, 800)
 
 var alwaysOnTop = false
 
 signal toggledAlwaysOnTop(onOrOff)
+signal flippedXAxis
 
 
 func _ready():
@@ -23,8 +24,13 @@ func _ready():
 
 
 func handleWindowResize(newSize:Vector2):
-	expandedtSize = newSize
-	get_window().size = expandedtSize
+	var sizeDif = expandedSize - newSize
+	expandedSize = newSize
+	get_window().size = expandedSize
+	if xAlignment == "left":
+		print("box - sizeDif: ", sizeDif)
+		get_window().position += Vector2i(sizeDif.x, 0)
+		xShift += sizeDif.x
 
 
 
@@ -46,6 +52,35 @@ func addToLastSaid(lastThingSaid):
 		#print("")
 
 
+
+var xAlignment = "right"
+var xShift = 0
+func switchSidesX():
+	print("ui - switching sides X")
+	var container = get_tree().get_first_node_in_group("xAxisBox")
+	var dialogueBox = container.get_node("DialogueBox")
+	xShift = (dialogueBox.get_rect().size.x)
+	if xAlignment == "right":
+		container.move_child(dialogueBox, 0)
+		xAlignment = "left"
+		xShift *= -1
+	else:
+		container.move_child(dialogueBox, -1)
+		xAlignment = "right"
+	get_window().position += Vector2i(xShift, 0)
+	flippedXAxis.emit()
+
+
+
+func switchSidesY():
+	print("ui - switching sides Y")
+	#%DraggableArea.vertical_alignment=shrink_end
+	# Set tabs to bottom
+	# set hotbar below 
+	# reorder internals...
+
+
+
 func toggleMenu():
 	if menuOpen:
 		hideMenu()
@@ -64,14 +99,18 @@ func setAlwaysOnTop(on:bool=false):
 
 func expandMenu():
 	#get_window().size = %MainMenu.size + %DraggableArea.size
-	get_tree().get_root().get_window().size = expandedtSize
+	get_tree().get_root().get_window().size = expandedSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = true
+	if xAlignment == "left":
+		get_window().position += Vector2i(xShift, 0)
 	menuOpen = true
 
 func hideMenu():
 	print("hiding menu")
 	get_window().size = defaultSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = false
+	if xAlignment == "left":
+		get_window().position -= Vector2i(xShift, 0)
 	menuOpen = false
 
 
