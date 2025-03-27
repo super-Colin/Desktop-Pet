@@ -18,100 +18,108 @@ corner_detail = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_senjy")
 script = ExtResource("1_n23yb")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Hotbar" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Hotbar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Flatten" type="Button" parent="VBoxContainer/Hotbar"]
+[node name="Flatten" type="Button" parent="MarginContainer/VBoxContainer/Hotbar"]
 layout_mode = 2
 tooltip_text = "Remove any invisble formatting around the content in your clipboard"
 text = "Flatten"
 
-[node name="Flatten2" type="Button" parent="VBoxContainer/Hotbar"]
+[node name="Flatten2" type="Button" parent="MarginContainer/VBoxContainer/Hotbar"]
 layout_mode = 2
 tooltip_text = "Remove any invisble formatting around the content in your clipboard"
 text = "Width"
 
-[node name="WidthSlider" type="HSlider" parent="VBoxContainer/Hotbar"]
+[node name="WidthSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Hotbar"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-min_value = 400.0
-max_value = 1000.0
+min_value = 600.0
+max_value = 1200.0
 step = 10.0
-value = 400.0
+value = 800.0
 
-[node name="HeightSlider" type="HSlider" parent="VBoxContainer/Hotbar"]
+[node name="HeightSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Hotbar"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-min_value = 400.0
+min_value = 450.0
 max_value = 1000.0
 step = 10.0
-value = 400.0
+value = 500.0
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilnc5")
 placeholder_text = "What's up?"
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Code" parent="VBoxContainer/TabContainer" instance=ExtResource("1_senjy")]
+[node name="Code" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("1_senjy")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Me" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+[node name="Me" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Me"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Me/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 
-[node name="JokeButton" type="Button" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="JokeButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Joke"
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Joke" type="Button" parent="VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer2"]
+[node name="Joke" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 text = "A longer Joke"
 
-[node name="Stuff" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+[node name="Stuff" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="SpeechOutMenu" type="RichTextLabel" parent="VBoxContainer"]
+[node name="SpeechOutMenu" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 120)

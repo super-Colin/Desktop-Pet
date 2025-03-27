@@ -1,22 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://boxb655r78rcu"]
+[gd_scene load_steps=7 format=3 uid="uid://8dnnvptjhgc6"]
 
-[ext_resource type="Script" uid="uid://bosim76hmbf0x" path="res://pet.gd" id="1_pa7gm"]
-[ext_resource type="Script" uid="uid://bsihee3phcbmx" path="res://config.gd" id="2_733f5"]
-[ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
-[ext_resource type="Script" uid="uid://bhdgai321eek8" path="res://behaviour.gd" id="2_ovmnc"]
-[ext_resource type="Script" uid="uid://d3qoc5nak4vhg" path="res://mouse.gd" id="3_vbt87"]
-[ext_resource type="PackedScene" uid="uid://c8m8svhtp2ksf" path="res://dialogue_box.tscn" id="7_uvuc8"]
+[ext_resource type="Script" uid="uid://bosim76hmbf0x" path="res://pet.gd" id="1_0ttfa"]
+[ext_resource type="Script" uid="uid://bsihee3phcbmx" path="res://config.gd" id="2_c1gdq"]
+[ext_resource type="Script" uid="uid://d3qoc5nak4vhg" path="res://mouse.gd" id="3_71hr0"]
+[ext_resource type="Script" uid="uid://bhdgai321eek8" path="res://behaviour.gd" id="4_abv2e"]
+[ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="5_sqms2"]
+[ext_resource type="PackedScene" uid="uid://c8m8svhtp2ksf" path="res://dialogue_box.tscn" id="6_saotg"]
 
 [node name="Pet" type="Node2D"]
-script = ExtResource("1_pa7gm")
+script = ExtResource("1_0ttfa")
 
 [node name="Config" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_733f5")
+script = ExtResource("2_c1gdq")
 
 [node name="Mouse" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_vbt87")
+script = ExtResource("3_71hr0")
 
 [node name="ClickTimer" type="Timer" parent="Mouse"]
 
@@ -26,7 +26,7 @@ script = ExtResource("3_vbt87")
 
 [node name="Behaviour" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_ovmnc")
+script = ExtResource("4_abv2e")
 
 [node name="BehaviourTimer" type="Timer" parent="Behaviour"]
 wait_time = 30.0
@@ -42,8 +42,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 color = Color(0.988235, 0.721569, 0.866667, 0.227451)
 
 [node name="GridWrapper" type="GridContainer" parent="CanvasLayer"]
@@ -72,7 +70,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 4
 
 [node name="DebugRect" type="ColorRect" parent="CanvasLayer/GridWrapper/DraggableArea"]
 layout_mode = 2
@@ -82,17 +80,21 @@ color = Color(0, 0.929412, 0.929412, 0.54902)
 [node name="Sprite" type="Sprite2D" parent="CanvasLayer/GridWrapper/DraggableArea"]
 unique_name_in_owner = true
 position = Vector2(96, 94)
-texture = ExtResource("2_h6co6")
+texture = ExtResource("5_sqms2")
 
 [node name="Right" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="DialogueBox" parent="CanvasLayer/GridWrapper/Right" groups=["dialogueBox"] instance=ExtResource("7_uvuc8")]
+[node name="DialogueBox" parent="CanvasLayer/GridWrapper/Right" instance=ExtResource("6_saotg")]
 unique_name_in_owner = true
-layout_mode = 1
-offset_bottom = 0.0
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 380.0
+offset_bottom = 382.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="BottomLeft" type="Control" parent="CanvasLayer/GridWrapper"]
 layout_mode = 2

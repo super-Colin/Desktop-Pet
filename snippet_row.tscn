@@ -1,13 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3muq5wew7rtc"]
+[gd_scene load_steps=6 format=3 uid="uid://d3muq5wew7rtc"]
 
 [ext_resource type="Script" uid="uid://cnfxgrf5cxb7r" path="res://snippet_row.gd" id="1_cmdpm"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v1a3r"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6pl2"]
+bg_color = Color(0.176471, 0.247059, 0.0705882, 0.670588)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmdpm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmdpm"]
-bg_color = Color(0.495902, 0.495902, 0.495902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn7v5"]
+bg_color = Color(0.199373, 0.199373, 0.199373, 1)
 
 [node name="SnippetRow" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_u6pl2")
 script = ExtResource("1_cmdpm")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -16,11 +22,11 @@ layout_mode = 2
 [node name="Title" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxEmpty_v1a3r")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cmdpm")
 text = "New Snippet"
 
 [node name="Edit" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(30, 0)
+custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_cmdpm")
@@ -30,5 +36,5 @@ text = "E"
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_cmdpm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vn7v5")
 text = "X"

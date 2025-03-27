@@ -62,10 +62,10 @@ func editExistingSnippet(snippetName:String):
 
 
 func openSnippetPad():
-	$SnippetEditor.visible = true
+	%SnippetEditor.visible = true
 
 func closeSnippetPad():
-	$SnippetEditor.visible = false
+	%SnippetEditor.visible = false
 	%CodeEditNode.text = ""
 
 #

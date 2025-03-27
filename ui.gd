@@ -7,7 +7,8 @@ var speaking = false
 var toSayStack = []
 var lastSaidStack = []
 
-const defaultSize = Vector2(100, 100)
+const defaultSize = Vector2(125, 140)
+var expandedtSize = Vector2(800, 800)
 
 
 
@@ -21,7 +22,8 @@ func _ready():
 
 
 func handleWindowResize(newSize:Vector2):
-	get_window().size = newSize
+	expandedtSize = newSize
+	get_window().size = expandedtSize
 
 
 
@@ -52,12 +54,14 @@ func toggleMenu():
 
 func expandMenu():
 	#get_window().size = %MainMenu.size + %DraggableArea.size
-	get_tree().get_root().get_window().size = Vector2(1000,1000)
+	get_tree().get_root().get_window().size = expandedtSize
+	get_tree().get_first_node_in_group("dialogueBox").visible = true
 	menuOpen = true
 
 func hideMenu():
 	print("hiding menu")
 	get_window().size = defaultSize
+	get_tree().get_first_node_in_group("dialogueBox").visible = false
 	menuOpen = false
 
 

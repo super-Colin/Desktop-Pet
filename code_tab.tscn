@@ -9,95 +9,105 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_vl4ct")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="SnippetsButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="SnippetsButton" type="Button" parent="VSplitContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Snippets"
 
-[node name="TemplatesButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="TemplatesButton" type="Button" parent="VSplitContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Templates
 "
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="VSplitContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Templates
 "
 
-[node name="RightSideScrollable" type="ScrollContainer" parent="HBoxContainer"]
+[node name="RightSideScrollable" type="ScrollContainer" parent="VSplitContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Snippets" type="VBoxContainer" parent="HBoxContainer/RightSideScrollable"]
+[node name="Snippets" type="VBoxContainer" parent="VSplitContainer/HBoxContainer/RightSideScrollable"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightSideScrollable/Snippets"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets"]
 layout_mode = 2
 
-[node name="NewSnippetButton" type="Button" parent="HBoxContainer/RightSideScrollable/Snippets/HBoxContainer"]
+[node name="NewSnippetButton" type="Button" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "New Snippet"
 
-[node name="QuickSnippetButton" type="Button" parent="HBoxContainer/RightSideScrollable/Snippets/HBoxContainer"]
+[node name="QuickSnippetButton" type="Button" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quick Snip"
 
-[node name="SnippetList" type="VBoxContainer" parent="HBoxContainer/RightSideScrollable/Snippets"]
+[node name="SnippetList" type="VBoxContainer" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SnippetRow" parent="HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("1_v2ypb")]
+[node name="SnippetRow" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("1_v2ypb")]
 layout_mode = 2
 
-[node name="SnippetRow2" parent="HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("1_v2ypb")]
+[node name="SnippetRow2" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("1_v2ypb")]
 layout_mode = 2
 
-[node name="SnippetEditor" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="CodeEditNode" type="CodeEdit" parent="SnippetEditor"]
+[node name="SnippetEditor" type="VBoxContainer" parent="VSplitContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="CodeEditNode" type="CodeEdit" parent="VSplitContainer/SnippetEditor"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Placeholder Text"
 wrap_mode = 1
 gutters_draw_line_numbers = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SnippetEditor"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/SnippetEditor"]
 layout_mode = 2
 
-[node name="SnippetCancelButton" type="Button" parent="SnippetEditor/HBoxContainer"]
+[node name="SnippetCancelButton" type="Button" parent="VSplitContainer/SnippetEditor/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Cancel"
 
-[node name="SnippetName" type="LineEdit" parent="SnippetEditor/HBoxContainer"]
+[node name="SnippetName" type="LineEdit" parent="VSplitContainer/SnippetEditor/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Snippet Name"
 
-[node name="SnippetSaveButton" type="Button" parent="SnippetEditor/HBoxContainer"]
+[node name="SnippetSaveButton" type="Button" parent="VSplitContainer/SnippetEditor/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Save"
