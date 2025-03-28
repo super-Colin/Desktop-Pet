@@ -1,0 +1,113 @@
+[gd_scene load_steps=3 format=3 uid="uid://b31kqduwxl6rw"]
+
+[ext_resource type="Script" uid="uid://3pe2vcnpo1qg" path="res://hotbar.gd" id="1_mjyg7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n23yb"]
+bg_color = Color(0.114767, 0.45413, 1.92523e-07, 1)
+
+[node name="Hotbar" type="VBoxContainer"]
+offset_right = 381.0
+offset_bottom = 155.0
+script = ExtResource("1_mjyg7")
+
+[node name="Flatten" type="Button" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+tooltip_text = "Remove any invisble formatting around the content in your clipboard"
+text = "Flatten"
+
+[node name="AlwaysOnTopToggle" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+tooltip_text = "Toggle \"alway on top\" mode"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n23yb")
+toggle_mode = true
+text = "Top"
+
+[node name="Sides" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+tooltip_text = "Toggle which side the pop out is on"
+text = "<---//--->"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "W:"
+horizontal_alignment = 1
+
+[node name="WidthSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 600.0
+max_value = 1200.0
+step = 10.0
+value = 800.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+text = "H:"
+horizontal_alignment = 1
+
+[node name="HeightSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+min_value = 300.0
+max_value = 1000.0
+step = 10.0
+value = 500.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button4" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button5" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button6" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button7" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"
+
+[node name="Button8" type="Button" parent="."]
+layout_mode = 2
+text = "something
+"

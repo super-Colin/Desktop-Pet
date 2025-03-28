@@ -2,12 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ce3exek2bxi8c" path="res://dialogue_box.gd" id="1_n23yb"]
 [ext_resource type="PackedScene" uid="uid://gphxfnof4hxd" path="res://code_tab.tscn" id="1_senjy"]
+[ext_resource type="PackedScene" uid="uid://tlof5wxfa42m" path="res://to_do_tab.tscn" id="3_0nste"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_senjy"]
 bg_color = Color(0.466971, 0.186746, 1.44392e-07, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n23yb"]
-bg_color = Color(0.520766, 0.0232354, 0.422955, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilnc5"]
 content_margin_left = 8.0
@@ -39,72 +37,6 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Hotbar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Flatten" type="Button" parent="MarginContainer/VBoxContainer/Hotbar"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-tooltip_text = "Remove any invisble formatting around the content in your clipboard"
-text = "Flatten"
-
-[node name="AlwaysOnTopToggle" type="Button" parent="MarginContainer/VBoxContainer/Hotbar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-tooltip_text = "Remove any invisble formatting around the content in your clipboard"
-theme_override_styles/pressed = SubResource("StyleBoxFlat_n23yb")
-toggle_mode = true
-text = "Top"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Hotbar"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Hotbar/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Hotbar/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-text = "W:"
-horizontal_alignment = 1
-
-[node name="WidthSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Hotbar/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-min_value = 600.0
-max_value = 1200.0
-step = 10.0
-value = 800.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Hotbar/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Hotbar/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(25, 0)
-layout_mode = 2
-text = "H:"
-horizontal_alignment = 1
-
-[node name="HeightSlider" type="HSlider" parent="MarginContainer/VBoxContainer/Hotbar/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-min_value = 450.0
-max_value = 1000.0
-step = 10.0
-value = 500.0
-
-[node name="Sides" type="Button" parent="MarginContainer/VBoxContainer/Hotbar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-tooltip_text = "Remove any invisble formatting around the content in your clipboard"
-text = "Sides"
-
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilnc5")
@@ -113,16 +45,21 @@ placeholder_text = "What's up?"
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 1
 
-[node name="Code" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("1_senjy")]
+[node name="Snips" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("1_senjy")]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
+
+[node name="To Do" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("3_0nste")]
+layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="Me" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
+metadata/_tab_index = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me"]
 layout_mode = 2
@@ -152,10 +89,10 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 text = "A longer Joke"
 
-[node name="Stuff" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+[node name="Timer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="SpeechOutMenu" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

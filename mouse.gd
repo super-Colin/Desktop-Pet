@@ -5,7 +5,7 @@ signal singleClicked
 signal doubleClicked
 signal rightClicked
 
-signal changedScreenCorner
+
 
 
 # Dragging
@@ -123,8 +123,8 @@ func checkScreenCorner():
 	else:
 		newCorner.y = 0
 	if not newCorner == currentScreenCorner:
-		print("Changed screen corner; from: ", currentScreenCorner, " to: ", newCorner)
-		changedScreenCorner.emit()
+		print("mouse - Changed screen corner; from: ", currentScreenCorner, " to: ", newCorner)
 		currentScreenCorner = newCorner
+		UI.changedScreenCorner.emit(currentScreenCorner)
 	#print("Current window corner:")
 	#print(positionOnScreen)

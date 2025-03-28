@@ -52,16 +52,3 @@ func configSpriteSizeBased():
 	#print($"../CanvasLayer/GridContainer".anchors_preset)
 	#$"../CanvasLayer/GridContainer".anchors_preset = 8
 	#%GridWrapper.position = Vector2(-2, -2) # -2 to account for empty ui container on the side and top
-
-
-
- #Rect2 get_rect() const
-#
-#Returns a Rect2 representing the Sprite2D's boundary in local coordinates. Can be used to detect if the Sprite2D was clicked.
-#
-#Example:
-#
-#func _input(event):
-	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		#if get_rect().has_point(to_local(event.position)):
-			#print("A click!")

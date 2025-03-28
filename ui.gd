@@ -12,15 +12,22 @@ var expandedSize = Vector2(800, 800)
 
 var alwaysOnTop = false
 
+signal changedScreenCorner(newCorner)
 signal toggledAlwaysOnTop(onOrOff)
 signal flippedXAxis
+signal expandedSizeUpdated
 
 
 func _ready():
 	#%SpeechOutMenu.add_text("this is some text that I'm saying")
+	#changedScreenCorner.connect(handleCornerChange) # Drag area moves out from under mouse... :/
 	pass # Replace with function body.
 
-
+func handleCornerChange(newCorner):
+	if newCorner.x == 0 and xAlignment == "left":
+		switchSidesX()
+	elif newCorner.x == 1 and xAlignment == "right":
+		switchSidesX()
 
 
 func handleWindowResize(newSize:Vector2):
@@ -31,6 +38,7 @@ func handleWindowResize(newSize:Vector2):
 		print("box - sizeDif: ", sizeDif)
 		get_window().position += Vector2i(sizeDif.x, 0)
 		xShift += sizeDif.x
+	expandedSizeUpdated.emit()
 
 
 

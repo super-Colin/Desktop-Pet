@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://boxb655r78rcu"]
+[gd_scene load_steps=9 format=3 uid="uid://boxb655r78rcu"]
 
 [ext_resource type="Script" uid="uid://bosim76hmbf0x" path="res://pet.gd" id="1_pa7gm"]
 [ext_resource type="Script" uid="uid://bsihee3phcbmx" path="res://config.gd" id="2_733f5"]
 [ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
 [ext_resource type="Script" uid="uid://bhdgai321eek8" path="res://behaviour.gd" id="2_ovmnc"]
 [ext_resource type="Script" uid="uid://d3qoc5nak4vhg" path="res://mouse.gd" id="3_vbt87"]
+[ext_resource type="PackedScene" uid="uid://b31kqduwxl6rw" path="res://hotbar.tscn" id="6_uvuc8"]
 [ext_resource type="PackedScene" uid="uid://c8m8svhtp2ksf" path="res://dialogue_box.tscn" id="7_uvuc8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvuc8"]
+bg_color = Color(0.526721, 3.19588e-05, 0.419489, 1)
 
 [node name="Pet" type="Node2D"]
 script = ExtResource("1_pa7gm")
@@ -37,6 +41,7 @@ autostart = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="DebugRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -60,17 +65,40 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="DraggableArea" type="CenterContainer" parent="CanvasLayer/VBoxContainer/XAxisBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/XAxisBox"]
+layout_mode = 2
+
+[node name="DraggableArea" type="CenterContainer" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/VBoxContainer/XAxisBox/DraggableArea"]
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/DraggableArea"]
 unique_name_in_owner = true
 texture = ExtResource("2_h6co6")
 centered = false
+
+[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_uvuc8")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Hotbar" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/Panel/ScrollContainer" instance=ExtResource("6_uvuc8")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="DialogueBox" parent="CanvasLayer/VBoxContainer/XAxisBox" groups=["dialogueBox"] instance=ExtResource("7_uvuc8")]
 unique_name_in_owner = true

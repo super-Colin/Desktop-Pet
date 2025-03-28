@@ -1,7 +1,8 @@
 extends Node2D
 
 # Snippy
-
+# saySomething("hydrate")
+# saySomething("stand up / stretch")
 
 # Signals
 signal doubleClicked

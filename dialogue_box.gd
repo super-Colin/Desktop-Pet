@@ -7,11 +7,12 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	%WidthSlider.drag_ended.connect(handleChangeWidth)
-	%HeightSlider.drag_ended.connect(handleChangeHeight)
-	%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
-	%Sides.pressed.connect(UI.switchSidesX)
-	UI.flippedXAxis.connect(flipHotbarButtonOrder)
+	#%WidthSlider.drag_ended.connect(handleChangeWidth)
+	#%HeightSlider.drag_ended.connect(handleChangeHeight)
+	#%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
+	#%Sides.pressed.connect(UI.switchSidesX)
+	#UI.flippedXAxis.connect(flipHotbarButtonOrder)
+	pass
 
 func flipHotbarButtonOrder():
 	print("dialogue - flipping hotbar")
