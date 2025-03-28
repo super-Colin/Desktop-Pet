@@ -123,7 +123,7 @@ func checkScreenCorner():
 	else:
 		newCorner.y = 0
 	if not newCorner == currentScreenCorner:
-		print("mouse - Changed screen corner; from: ", currentScreenCorner, " to: ", newCorner)
+		#print("mouse - Changed screen corner; from: ", currentScreenCorner, " to: ", newCorner)
 		currentScreenCorner = newCorner
 		UI.changedScreenCorner.emit(currentScreenCorner)
 	#print("Current window corner:")

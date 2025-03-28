@@ -8,9 +8,15 @@ var toSayStack = []
 var lastSaidStack = []
 
 const defaultSize = Vector2(125, 140)
-var expandedSize = Vector2(800, 800)
+var shrunkenSize:Vector2 = defaultSize
+var expandedSize:Vector2 = Vector2(800, 800)
+
 
 var alwaysOnTop = false
+
+var xAlignment = "right"
+var xShift = 0
+
 
 signal changedScreenCorner(newCorner)
 signal toggledAlwaysOnTop(onOrOff)
@@ -19,8 +25,7 @@ signal expandedSizeUpdated
 
 
 func _ready():
-	#%SpeechOutMenu.add_text("this is some text that I'm saying")
-	#changedScreenCorner.connect(handleCornerChange) # Drag area moves out from under mouse... :/
+	changedScreenCorner.connect(handleCornerChange) # Drag area moves out from under mouse... :/ .. could warp mouse??
 	pass # Replace with function body.
 
 func handleCornerChange(newCorner):
@@ -28,6 +33,13 @@ func handleCornerChange(newCorner):
 		switchSidesX()
 	elif newCorner.x == 1 and xAlignment == "right":
 		switchSidesX()
+
+
+func handleChangeShrunkenHeight(newYBufferSize):
+	print("ui - new y buffer: ", newYBufferSize)
+	shrunkenSize.y = defaultSize.y + newYBufferSize
+	if menuOpen == false:
+		get_window().size = shrunkenSize
 
 
 func handleWindowResize(newSize:Vector2):
@@ -44,25 +56,8 @@ func handleWindowResize(newSize:Vector2):
 
 
 
-func addToLastSaid(lastThingSaid):
-	if lastSaidStack.size() < 3:
-		lastSaidStack.append(lastThingSaid)
-	else:
-		lastSaidStack.pop_front()
-		lastSaidStack.append(lastThingSaid)
 
 
-#func _input(event: InputEvent) -> void:
-	#if Input.is_action_pressed("left_click")
-
-#func _physics_process(delta: float) -> void:
-	#if %DragResize.button_pressed:
-		#print("")
-
-
-
-var xAlignment = "right"
-var xShift = 0
 func switchSidesX():
 	print("ui - switching sides X")
 	var container = get_tree().get_first_node_in_group("xAxisBox")
@@ -79,13 +74,6 @@ func switchSidesX():
 	flippedXAxis.emit()
 
 
-
-func switchSidesY():
-	print("ui - switching sides Y")
-	#%DraggableArea.vertical_alignment=shrink_end
-	# Set tabs to bottom
-	# set hotbar below 
-	# reorder internals...
 
 
 
@@ -115,7 +103,7 @@ func expandMenu():
 
 func hideMenu():
 	print("hiding menu")
-	get_window().size = defaultSize
+	get_window().size = shrunkenSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = false
 	if xAlignment == "left":
 		get_window().position -= Vector2i(xShift, 0)
@@ -124,6 +112,22 @@ func hideMenu():
 
 
 
+
+#func switchSidesY():
+	#print("ui - switching sides Y")
+	##%DraggableArea.vertical_alignment=shrink_end
+	## Set tabs to bottom
+	## set hotbar below 
+	## reorder internals...
+
+
+
+#func addToLastSaid(lastThingSaid):
+	#if lastSaidStack.size() < 3:
+		#lastSaidStack.append(lastThingSaid)
+	#else:
+		#lastSaidStack.pop_front()
+		#lastSaidStack.append(lastThingSaid)
 
 
 #func sayInMenu(toSay:String, duration:float = 0.0)->void:

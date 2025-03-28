@@ -37,21 +37,31 @@ func saveNewList():
 	todoLists[%TodoName.text] = {}
 	refreshListsList()
 	swapActiveList(%TodoName.text)
-	saveTodos()
+	clearInputBar()
 	makingList = false
+	saveTodos()
+	%TodoName.text = ""
+	%TodoName.grab_focus()
 
 func saveNewTodo():
-	print("todo - new todo is: ", %TodoName.text)
+	#print("todo - new todo is: ", %TodoName.text)
 	todoLists[currentList][%TodoName.text] = false
-	saveTodos()
-	#refreshSnippetsList()
-	#closeSnippetPad()
+	clearInputBar()
 	refreshTodoList()
+	saveTodos()
+	%TodoName.text = ""
 
 func saveTodos():
 	Saver.saveGameSection(SAVE_SECTION, "todoLists", todoLists)
 	Saver.saveGameSection(SAVE_SECTION, "currentList", currentList)
+	print("todo - saved")
 
+func clearInputBar():
+	%TodoName.text = ""
+
+func swapActiveList(newList:String):
+	currentList = newList
+	refreshTodoList()
 
 func refreshListsList():
 	for c in %ListsList.get_children():
@@ -62,14 +72,18 @@ func refreshListsList():
 		newButton.pressed.connect(swapActiveList.bind(key))
 		%ListsList.add_child(newButton)
 
-func swapActiveList(newList:String):
-	currentList = newList
-	refreshTodoList()
 
 func refreshTodoList():
+	#print("todo - ", todoLists[currentList])
 	for c in %TodosList.get_children():
 		c.queue_free()
 	for key in todoLists[currentList].keys():
 		var newRow = todoRowScene.instantiate()
 		newRow.setUp(key, todoLists[currentList][key])
+		newRow.todoToggled.connect(todoToggled)
 		%TodosList.add_child(newRow)
+
+func todoToggled(name:String, isCompleted:bool):
+	todoLists[currentList][name] = isCompleted
+	print("todo - todo toggled: ", name, ", ", isCompleted, ", list: ", todoLists[currentList])
+	saveTodos()

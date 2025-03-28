@@ -8,9 +8,15 @@ extends Container
 func _ready() -> void:
 	%WidthSlider.drag_ended.connect(handleChangeWidth)
 	%HeightSlider.drag_ended.connect(handleChangeHeight)
+	%ShrunkenHeightSlider.drag_ended.connect(handleChangeShrunkenHeight)
 	%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
 	%Sides.pressed.connect(UI.switchSidesX)
 	#UI.flippedXAxis.connect(flipHotbarButtonOrder)
+	#LineEdit
+
+func handleChangeShrunkenHeight(valChanged):
+	UI.handleChangeShrunkenHeight(%ShrunkenHeightSlider.value)
+
 
 func handleChangeWidth(valChanged):
 	var currentSize = get_tree().get_root().get_window().size

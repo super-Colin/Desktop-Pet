@@ -24,28 +24,12 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_dr5ri")
 toggle_mode = true
 text = "New To Do"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/Title"]
-visible = false
-clip_contents = false
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-bbcode_enabled = true
-text = "[s]New To Do[/s]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Strike" type="Line2D" parent="HBoxContainer/Title"]
 unique_name_in_owner = true
 position = Vector2(-17, -14)
-points = PackedVector2Array(14, 24, 144, 43)
+points = PackedVector2Array(14, 24, 1637, 59)
 width = 4.0
-default_color = Color(1, 1, 1, 0.572549)
+default_color = Color(0.164706, 1, 0.0980392, 0.470588)
 
 [node name="Delete" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)

@@ -46,6 +46,7 @@ placeholder_text = "What's up?"
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 1
+drag_to_rearrange_enabled = true
 
 [node name="Snips" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("1_senjy")]
 visible = false
@@ -56,38 +57,10 @@ metadata/_tab_index = 0
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Me" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+[node name="Images" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-
-[node name="JokeButton" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Joke"
-
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Joke" type="Button" parent="MarginContainer/VBoxContainer/TabContainer/Me/HBoxContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
-text = "A longer Joke"
 
 [node name="Timer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
 visible = false

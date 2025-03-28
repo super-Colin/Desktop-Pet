@@ -80,6 +80,12 @@ unique_name_in_owner = true
 texture = ExtResource("2_h6co6")
 centered = false
 
+[node name="FloatingWindows" type="ScrollContainer" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/DraggableArea"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/DraggableArea/FloatingWindows"]
+layout_mode = 2
+
 [node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -97,8 +103,6 @@ size_flags_vertical = 3
 
 [node name="Hotbar" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/Panel/ScrollContainer" instance=ExtResource("6_uvuc8")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="DialogueBox" parent="CanvasLayer/VBoxContainer/XAxisBox" groups=["dialogueBox"] instance=ExtResource("7_uvuc8")]
 unique_name_in_owner = true
