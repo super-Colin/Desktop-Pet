@@ -3,13 +3,12 @@ extends Node
 
 var menuOpen = false
 
-var speaking = false
-var toSayStack = []
-var lastSaidStack = []
-
-const defaultSize = Vector2(125, 140)
+const defaultSize = Vector2(200, 140)
+var shrunkenSizeYBuffer = 50
 var shrunkenSize:Vector2 = defaultSize
 var expandedSize:Vector2 = Vector2(800, 800)
+
+
 
 
 var alwaysOnTop = false
@@ -22,24 +21,43 @@ signal changedScreenCorner(newCorner)
 signal toggledAlwaysOnTop(onOrOff)
 signal flippedXAxis
 signal expandedSizeUpdated
+signal loaded
+
+const SAVE_SECTION = "ui"
+
+
+func loadPreferences():
+	#shrunkenSize = Saver.loadGameSection(SAVE_SECTION, "shrunkenSize", shrunkenSize)
+	expandedSize = Saver.loadGameSection(SAVE_SECTION, "expandedSize", expandedSize)
+	shrunkenSizeYBuffer = Saver.loadGameSection(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
+	xAlignment = Saver.loadGameSection(SAVE_SECTION, "xAlignment", xAlignment)
+	loaded.emit()
+	print("ui - loaded")
+
+func savePreferences():
+	#Saver.setValForBatchSave(SAVE_SECTION, "shrunkenSize", shrunkenSize)
+	Saver.setValForBatchSave(SAVE_SECTION, "expandedSize", expandedSize)
+	Saver.setValForBatchSave(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
+	Saver.setValForBatchSave(SAVE_SECTION, "xAlignment", xAlignment)
+	Saver.saveBatch()
+	print("ui - saved")
 
 
 func _ready():
+	loadPreferences()
 	changedScreenCorner.connect(handleCornerChange) # Drag area moves out from under mouse... :/ .. could warp mouse??
-	pass # Replace with function body.
+	#handleChangeShrunkenHeight(50) # not loaded pref
 
-func handleCornerChange(newCorner):
-	if newCorner.x == 0 and xAlignment == "left":
-		switchSidesX()
-	elif newCorner.x == 1 and xAlignment == "right":
-		switchSidesX()
+
 
 
 func handleChangeShrunkenHeight(newYBufferSize):
 	print("ui - new y buffer: ", newYBufferSize)
-	shrunkenSize.y = defaultSize.y + newYBufferSize
+	shrunkenSizeYBuffer = newYBufferSize
+	shrunkenSize.y = defaultSize.y + shrunkenSizeYBuffer
 	if menuOpen == false:
 		get_window().size = shrunkenSize
+	savePreferences()
 
 
 func handleWindowResize(newSize:Vector2):
@@ -51,12 +69,17 @@ func handleWindowResize(newSize:Vector2):
 		get_window().position += Vector2i(sizeDif.x, 0)
 		xShift += sizeDif.x
 	expandedSizeUpdated.emit()
+	savePreferences()
 
 
 
 
 
-
+func handleCornerChange(newCorner):
+	if newCorner.x == 0 and xAlignment == "left":
+		switchSidesX()
+	elif newCorner.x == 1 and xAlignment == "right":
+		switchSidesX()
 
 func switchSidesX():
 	print("ui - switching sides X")
@@ -119,21 +142,3 @@ func hideMenu():
 	## Set tabs to bottom
 	## set hotbar below 
 	## reorder internals...
-
-
-
-#func addToLastSaid(lastThingSaid):
-	#if lastSaidStack.size() < 3:
-		#lastSaidStack.append(lastThingSaid)
-	#else:
-		#lastSaidStack.pop_front()
-		#lastSaidStack.append(lastThingSaid)
-
-
-#func sayInMenu(toSay:String, duration:float = 0.0)->void:
-	#%SpeechOutMenu.text = toSay
-	#if duration > 0:
-		#speaking = true
-		#await get_tree().create_timer(duration).timeout
-		#%SpeechOutMenu.clear()
-		#speaking = false

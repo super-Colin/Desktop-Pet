@@ -63,6 +63,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Shrunken window height"
+min_value = 50.0
 max_value = 600.0
 step = 10.0
 value = 200.0
@@ -122,12 +123,12 @@ layout_mode = 2
 [node name="Button" type="Button" parent="Hotbar/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "?Undo?"
+text = "? Undo? "
 
 [node name="Button2" type="Button" parent="Hotbar/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "?Redo?"
+text = "? Redo ?"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Hotbar"]
 layout_mode = 2
@@ -135,12 +136,14 @@ layout_mode = 2
 [node name="Button" type="Button" parent="Hotbar/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "?Undo?"
+tooltip_text = "UI scale down"
+text = "? UI - ?"
 
 [node name="Button2" type="Button" parent="Hotbar/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "?Redo?"
+tooltip_text = "UI scale up"
+text = "? UI + ?"
 
 [node name="Button3" type="Button" parent="Hotbar"]
 layout_mode = 2

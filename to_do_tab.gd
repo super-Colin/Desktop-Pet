@@ -72,6 +72,7 @@ func refreshListsList():
 		newButton.pressed.connect(swapActiveList.bind(key))
 		%ListsList.add_child(newButton)
 
+# ui_text_accept
 
 func refreshTodoList():
 	#print("todo - ", todoLists[currentList])

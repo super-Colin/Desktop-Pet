@@ -24,6 +24,13 @@ func initialLoad():
 	return true
 
 
+func setValForBatchSave(sectionName, sectionKey, sectionData):
+	if saveGameConfigNode == null:print("saves - saveGameSection didn't have config var")
+	saveGameConfigNode.set_value(sectionName, sectionKey, sectionData)
+func saveBatch():
+	saveGameConfigNode.save(SAVE_FILE_PATH)
+	saved.emit()
+
 func saveGameSection(sectionName, sectionKey, sectionData):
 	if saveGameConfigNode == null:print("saves - saveGameSection didn't have config var")
 	saveGameConfigNode.set_value(sectionName, sectionKey, sectionData)
@@ -43,7 +50,7 @@ func initNewSaveFile():
 			print("save - couldn't delete previous save file, code: ", result)
 		else: print("save - deleted previous save file, code: ", result)
 	saveGameConfigNode = ConfigFile.new()
-	reset_saveStates_all()
+	#reset_saveStates_all()
 
 
 func save_to_file(fileName:String, fileContent:String, fileExtension:String=".txt", directory:String=""):
@@ -55,12 +62,12 @@ func load_from_file(fileName:String, fileContent:String, fileExtension:String=".
 	var content = file.get_as_text()
 	return content
 
-
-func saveGame_all():
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	for node in save_nodes:
-		get_tree().call_group("save", "_save")
-
-func reset_saveStates_all():
-	get_tree().call_group("save", "_resetSaveState")
-	saveGame_all()
+#
+#func saveGame_all():
+	#var save_nodes = get_tree().get_nodes_in_group("Persist")
+	#for node in save_nodes:
+		#get_tree().call_group("save", "_save")
+#
+#func reset_saveStates_all():
+	#get_tree().call_group("save", "_resetSaveState")
+	#saveGame_all()
