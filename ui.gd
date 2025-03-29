@@ -27,20 +27,20 @@ const SAVE_SECTION = "ui"
 
 
 func loadPreferences():
-	#shrunkenSize = Saver.loadGameSection(SAVE_SECTION, "shrunkenSize", shrunkenSize)
 	expandedSize = Saver.loadGameSection(SAVE_SECTION, "expandedSize", expandedSize)
 	shrunkenSizeYBuffer = Saver.loadGameSection(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
 	xAlignment = Saver.loadGameSection(SAVE_SECTION, "xAlignment", xAlignment)
+	setShrunkenSize()
 	loaded.emit()
 	print("ui - loaded")
 
 func savePreferences():
-	#Saver.setValForBatchSave(SAVE_SECTION, "shrunkenSize", shrunkenSize)
 	Saver.setValForBatchSave(SAVE_SECTION, "expandedSize", expandedSize)
 	Saver.setValForBatchSave(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
 	Saver.setValForBatchSave(SAVE_SECTION, "xAlignment", xAlignment)
 	Saver.saveBatch()
 	print("ui - saved")
+
 
 
 func _ready():
@@ -54,10 +54,15 @@ func _ready():
 func handleChangeShrunkenHeight(newYBufferSize):
 	print("ui - new y buffer: ", newYBufferSize)
 	shrunkenSizeYBuffer = newYBufferSize
-	shrunkenSize.y = defaultSize.y + shrunkenSizeYBuffer
+	setShrunkenSize()
 	if menuOpen == false:
 		get_window().size = shrunkenSize
 	savePreferences()
+
+func setShrunkenSize():
+	shrunkenSize.y = defaultSize.y + shrunkenSizeYBuffer
+
+
 
 
 func handleWindowResize(newSize:Vector2):

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4ne00l0xls1"]
+
+[ext_resource type="Script" uid="uid://blqho1l5hjda4" path="res://tabs/timer_row.gd" id="1_korbx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_korbx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsv4r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_korbx"]
+bg_color = Color(0.199373, 0.199373, 0.199373, 1)
+
+[node name="TimerRow" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_korbx")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_korbx")
+text = "Something"
+
+[node name="TimerLabelButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vsv4r")
+toggle_mode = true
+text = "00:00.0"
+
+[node name="Reset" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 0.507084, 0.440532, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_korbx")
+text = "R"
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_korbx")
+text = "X"

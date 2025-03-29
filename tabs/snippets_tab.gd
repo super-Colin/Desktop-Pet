@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 var snippets:Dictionary = {}
-var snippetRowScene = preload("res://snippet_row.tscn")
+var snippetRowScene = preload("res://tabs/snippet_row.tscn")
 
 const SAVE_SECTION = "code_tab"
 
@@ -22,7 +22,6 @@ func quickSnip():
 	var clipboardContent = DisplayServer.clipboard_get()
 	if not clipboardContent: # if not a string in clipboard
 		return
-	#print("code - ")
 	var title = clipboardContent.left(18).strip_edges()
 	snippets[title] = clipboardContent
 	saveSnippets()

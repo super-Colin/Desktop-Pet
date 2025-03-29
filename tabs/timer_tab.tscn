@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxv8c8kubeke7"]
+
+[ext_resource type="Script" uid="uid://dp06ueehmrdtk" path="res://tabs/timer_tab.gd" id="1_ahcwx"]
+[ext_resource type="PackedScene" uid="uid://b4ne00l0xls1" path="res://tabs/timer_row.tscn" id="2_ahcwx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ahcwx"]
+bg_color = Color(0.113429, 0.312392, 0.225213, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlull"]
+
+[node name="TimerTab" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ahcwx")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="NewListButton" type="Button" parent="HBoxContainer2/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ahcwx")
+text = "New List"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ListsList" type="VBoxContainer" parent="HBoxContainer2/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TemplatesButton" type="Button" parent="HBoxContainer2/VBoxContainer/ScrollContainer/ListsList"]
+layout_mode = 2
+text = "Placeholder
+"
+
+[node name="Button" type="Button" parent="HBoxContainer2/VBoxContainer/ScrollContainer/ListsList"]
+layout_mode = 2
+text = "Placeholder"
+
+[node name="RightSideScrollable" type="ScrollContainer" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/RightSideScrollable"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewCreator" type="HBoxContainer" parent="HBoxContainer2/RightSideScrollable/VBoxContainer"]
+layout_mode = 2
+
+[node name="TimerName" type="LineEdit" parent="HBoxContainer2/RightSideScrollable/VBoxContainer/NewCreator"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Dishes..."
+keep_editing_on_text_submit = true
+
+[node name="SaveTimerButton" type="Button" parent="HBoxContainer2/RightSideScrollable/VBoxContainer/NewCreator"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_mlull")
+text = "Save"
+
+[node name="TimersList" type="VBoxContainer" parent="HBoxContainer2/RightSideScrollable/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TimerRow" parent="HBoxContainer2/RightSideScrollable/VBoxContainer/TimersList" instance=ExtResource("2_ahcwx")]
+layout_mode = 2
+
+[node name="TimerRow2" parent="HBoxContainer2/RightSideScrollable/VBoxContainer/TimersList" instance=ExtResource("2_ahcwx")]
+layout_mode = 2

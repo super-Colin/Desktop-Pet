@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://tlof5wxfa42m"]
 
-[ext_resource type="Script" uid="uid://cyj3gs41iaki6" path="res://to_do_tab.gd" id="1_l0ivd"]
-[ext_resource type="PackedScene" uid="uid://cmu4jpxf562kr" path="res://to_do_row.tscn" id="1_okqnh"]
+[ext_resource type="Script" uid="uid://cyj3gs41iaki6" path="res://tabs/to_do_tab.gd" id="1_l0ivd"]
+[ext_resource type="PackedScene" uid="uid://cmu4jpxf562kr" path="res://tabs/to_do_row.tscn" id="1_okqnh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0ivd"]
 bg_color = Color(0.113429, 0.312392, 0.225213, 1)
@@ -71,6 +71,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Dishes..."
+keep_editing_on_text_submit = true
 
 [node name="SaveTodoButton" type="Button" parent="HBoxContainer/RightSideScrollable/VBoxContainer/NewCreator"]
 unique_name_in_owner = true

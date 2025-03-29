@@ -13,6 +13,13 @@ func _ready() -> void:
 	%Sides.pressed.connect(UI.switchSidesX)
 	UI.loaded.connect(setSlidersFromSave)
 	setSlidersFromSave()
+	
+	%Themes.pressed.connect(makeRightClickMenu)
+
+func makeRightClickMenu():
+	pass
+
+
 
 
 func handleChangeShrunkenHeight(valChanged):
