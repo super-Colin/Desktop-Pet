@@ -39,6 +39,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilnc5")
 placeholder_text = "What's up?"

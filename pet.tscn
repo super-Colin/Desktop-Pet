@@ -3,10 +3,73 @@
 [ext_resource type="Script" uid="uid://bosim76hmbf0x" path="res://pet.gd" id="1_pa7gm"]
 [ext_resource type="Script" uid="uid://bsihee3phcbmx" path="res://config.gd" id="2_733f5"]
 [ext_resource type="Texture2D" uid="uid://hyuu72u4l7fd" path="res://pet_assets/flyMan_still_stand.png" id="2_h6co6"]
-[ext_resource type="Script" uid="uid://bhdgai321eek8" path="res://behaviour.gd" id="2_ovmnc"]
 [ext_resource type="Script" uid="uid://d3qoc5nak4vhg" path="res://mouse.gd" id="3_vbt87"]
 [ext_resource type="PackedScene" uid="uid://b31kqduwxl6rw" path="res://hotbar.tscn" id="6_uvuc8"]
 [ext_resource type="PackedScene" uid="uid://c8m8svhtp2ksf" path="res://dialogue_box.tscn" id="7_uvuc8"]
+
+[sub_resource type="GDScript" id="GDScript_qae7j"]
+script/source = "extends Node
+
+var lastState
+var currentState
+var nextState
+
+
+
+# Snippy
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	#$\"BehaviourTimer\".timeout.connect(bored_hover)
+	#$\"..\".doubleClicked.connect(tellJoke)
+	pass
+	#$\"BehaviourTimer\".timeout.connect(bored)
+	
+
+
+# \"_process\" calls are in main Pet script
+
+
+
+func bored_hover():
+	get_window().position += Vector2i(0, -50)
+	await get_tree().create_timer(0.2).timeout
+	get_window().position += Vector2i(-50, 0)
+	await get_tree().create_timer(0.2).timeout
+	get_window().position += Vector2i(100, 0)
+	await get_tree().create_timer(0.2).timeout
+	get_window().position += Vector2i(-50, 0)
+	await get_tree().create_timer(0.2).timeout
+	get_window().position += Vector2i(0, 50)
+
+
+func bored():
+	print(\"I'm bored..\")
+	#await %UI.sayInMenu(\"I'm bored...\", 1.5)
+	await %UI.sayInMenu(\"Hyrdate :)\", 1.5)
+	#%SpeechBox.visible = true
+	#%Speech.text = \"I'm bored...\"
+
+func tellJoke_fromResponse(result, response_code, headers, body):
+	var json = JSON.parse_string(body.get_string_from_utf8())
+	#print(json[\"name\"])
+	print(result)
+	print(response_code)
+	print(headers)
+	print(body.get_string_from_utf8())
+	await %UI.sayInMenu(json[\"setup\"], 7.0)
+	await %UI.sayInMenu(str(json[\"punchline\"], \" \\n\", urlToBBcodeLink(\"Official Joke API\", \"official-joke-api.appspot.com\")), 30.0)
+	
+	return json
+
+func tellJoke():
+	$HTTPRequest.request_completed.connect(tellJoke_fromResponse)
+	$HTTPRequest.request(\"https://official-joke-api.appspot.com/random_joke\")
+
+func urlToBBcodeLink( text:String, url:String):
+	return str(\"[url=\", url, \"]\", text, \"[/url]\")
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvuc8"]
 bg_color = Color(0.526721, 3.19588e-05, 0.419489, 1)
@@ -30,7 +93,7 @@ script = ExtResource("3_vbt87")
 
 [node name="Behaviour" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_ovmnc")
+script = SubResource("GDScript_qae7j")
 
 [node name="BehaviourTimer" type="Timer" parent="Behaviour"]
 wait_time = 30.0

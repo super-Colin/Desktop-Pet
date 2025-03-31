@@ -19,7 +19,7 @@ func setUp(todoName:String, completed:bool):
 
 
 func setStrikeDimension():
-	print("todo row -  %Strike.points[1]: ", %Strike.points[1], ", ", $HBoxContainer/Title.get_rect().size)
+	#print("todo row -  %Strike.points[1]: ", %Strike.points[1], ", ", $HBoxContainer/newActiveTawTitle.get_rect().size)
 	var buttonSize = $HBoxContainer/Title.get_rect().size
 	var extraOffset = buttonSize * 0.2
 	%Strike.points[1] = buttonSize + extraOffset

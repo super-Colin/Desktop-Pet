@@ -22,24 +22,9 @@ signal toggledAlwaysOnTop(onOrOff)
 signal flippedXAxis
 signal expandedSizeUpdated
 signal loaded
+signal newActiveTab(newActiveTab:String)
 
 const SAVE_SECTION = "ui"
-
-
-func loadPreferences():
-	expandedSize = Saver.loadGameSection(SAVE_SECTION, "expandedSize", expandedSize)
-	shrunkenSizeYBuffer = Saver.loadGameSection(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
-	xAlignment = Saver.loadGameSection(SAVE_SECTION, "xAlignment", xAlignment)
-	setShrunkenSize()
-	loaded.emit()
-	print("ui - loaded")
-
-func savePreferences():
-	Saver.setValForBatchSave(SAVE_SECTION, "expandedSize", expandedSize)
-	Saver.setValForBatchSave(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
-	Saver.setValForBatchSave(SAVE_SECTION, "xAlignment", xAlignment)
-	Saver.saveBatch()
-	print("ui - saved")
 
 
 
@@ -47,6 +32,13 @@ func _ready():
 	loadPreferences()
 	changedScreenCorner.connect(handleCornerChange) # Drag area moves out from under mouse... :/ .. could warp mouse??
 	#handleChangeShrunkenHeight(50) # not loaded pref
+
+
+
+
+
+
+
 
 
 
@@ -70,7 +62,7 @@ func handleWindowResize(newSize:Vector2):
 	expandedSize = newSize
 	get_window().size = expandedSize
 	if xAlignment == "left":
-		print("box - sizeDif: ", sizeDif)
+		#print("box - sizeDif: ", sizeDif)
 		get_window().position += Vector2i(sizeDif.x, 0)
 		xShift += sizeDif.x
 	expandedSizeUpdated.emit()
@@ -87,7 +79,7 @@ func handleCornerChange(newCorner):
 		switchSidesX()
 
 func switchSidesX():
-	print("ui - switching sides X")
+	#print("ui - switching sides X")
 	var container = get_tree().get_first_node_in_group("xAxisBox")
 	var dialogueBox = container.get_node("DialogueBox")
 	xShift = (dialogueBox.get_rect().size.x)
@@ -105,15 +97,9 @@ func switchSidesX():
 
 
 
-func toggleMenu():
-	if menuOpen:
-		hideMenu()
-	else:
-		expandMenu()
-
 
 func setAlwaysOnTop(on:bool=false): 
-	print("ui - always on top: ", on)
+	#print("ui - always on top: ", on)
 	alwaysOnTop = on
 	DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, alwaysOnTop)
 	toggledAlwaysOnTop.emit(alwaysOnTop)
@@ -121,8 +107,12 @@ func setAlwaysOnTop(on:bool=false):
 
 
 
+
+func toggleMenu():
+	if menuOpen: hideMenu()
+	else: expandMenu()
+
 func expandMenu():
-	#get_window().size = %MainMenu.size + %DraggableArea.size
 	get_tree().get_root().get_window().size = expandedSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = true
 	if xAlignment == "left":
@@ -130,7 +120,7 @@ func expandMenu():
 	menuOpen = true
 
 func hideMenu():
-	print("hiding menu")
+	#print("hiding menu")
 	get_window().size = shrunkenSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = false
 	if xAlignment == "left":
@@ -138,6 +128,22 @@ func hideMenu():
 	menuOpen = false
 
 
+
+
+func loadPreferences():
+	expandedSize = Saver.loadGameSection(SAVE_SECTION, "expandedSize", expandedSize)
+	shrunkenSizeYBuffer = Saver.loadGameSection(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
+	xAlignment = Saver.loadGameSection(SAVE_SECTION, "xAlignment", xAlignment)
+	setShrunkenSize()
+	loaded.emit()
+	print("ui - loaded")
+
+func savePreferences():
+	Saver.setValForBatchSave(SAVE_SECTION, "expandedSize", expandedSize)
+	Saver.setValForBatchSave(SAVE_SECTION, "shrunkenSizeYBuffer", shrunkenSizeYBuffer)
+	Saver.setValForBatchSave(SAVE_SECTION, "xAlignment", xAlignment)
+	Saver.saveBatch()
+	print("ui - saved")
 
 
 

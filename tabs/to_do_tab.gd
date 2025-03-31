@@ -16,7 +16,8 @@ func _ready() -> void:
 	#
 	%SaveTodoButton.pressed.connect(saveTodo)
 	%NewListButton.pressed.connect(makingNewList)
-	%TodoName.text_submitted.connect(_textSubmitted)
+	%Name.text_submitted.connect(_textSubmitted)
+	%Name.focus_exited.connect(func():makingList = false)
 	#
 	if not todoLists.keys():
 		return
@@ -31,6 +32,7 @@ func _textSubmitted(newText):
 
 func makingNewList():
 	makingList = true
+	%Name.grab_focus()
 
 
 func saveTodo():
@@ -41,22 +43,22 @@ func saveTodo():
 
 func saveNewList():
 	#print("todo - new list is: ", %TodoName.text)
-	todoLists[%TodoName.text] = {}
+	todoLists[%Name.text] = {}
 	refreshListsList()
-	swapActiveList(%TodoName.text)
+	swapActiveList(%Name.text)
 	clearInputBar()
 	makingList = false
 	saveTodos()
-	%TodoName.text = ""
-	%TodoName.grab_focus()
+	%Name.text = ""
+	%Name.grab_focus()
 
 func saveNewTodo():
-	#print("todo - new todo is: ", %TodoName.text)
-	todoLists[currentList][%TodoName.text] = false
+	#print("todo - new todo is: ", %Name.text)
+	todoLists[currentList][%Name.text] = false
 	clearInputBar()
 	refreshTodoList()
 	saveTodos()
-	%TodoName.text = ""
+	%Name.text = ""
 
 func saveTodos():
 	Saver.saveGameSection(SAVE_SECTION, "todoLists", todoLists)
@@ -64,7 +66,7 @@ func saveTodos():
 	#print("todo - saved")
 
 func clearInputBar():
-	%TodoName.text = ""
+	%Name.text = ""
 
 func swapActiveList(newList:String):
 	currentList = newList

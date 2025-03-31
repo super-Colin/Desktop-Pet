@@ -20,8 +20,10 @@ clip_contents = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0.560784)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_dr5ri")
 toggle_mode = true
+button_pressed = true
 text = "New To Do"
 
 [node name="Strike" type="Line2D" parent="HBoxContainer/Title"]
