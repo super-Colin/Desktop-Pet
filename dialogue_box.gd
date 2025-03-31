@@ -2,17 +2,28 @@ extends PanelContainer
 
 
 
-
+signal left_click
+signal right_click
 
 
 
 func _ready() -> void:
-	#%WidthSlider.drag_ended.connect(handleChangeWidth)
-	#%HeightSlider.drag_ended.connect(handleChangeHeight)
-	#%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
-	#%Sides.pressed.connect(UI.switchSidesX)
-	#UI.flippedXAxis.connect(flipHotbarButtonOrder)
-	pass
+	gui_input.connect(onButtonGuiInput)
+
+
+func onButtonGuiInput(event=null):
+	if event is InputEventMouseButton and event.pressed:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				left_click.emit()
+			MOUSE_BUTTON_RIGHT:
+				print("dialogue - hiding context popup")
+				right_click.emit()
+				Globals.hideContextPopup()
+
+
+
+
 
 func flipHotbarButtonOrder():
 	print("dialogue - flipping hotbar")

@@ -4,6 +4,8 @@ extends Node2D
 # saySomething("hydrate")
 # saySomething("stand up / stretch")
 
+
+
 # Signals
 signal doubleClicked
 signal changedScreenCorner
@@ -16,8 +18,8 @@ var sprite_flying = load("res://pet_assets/flyMan_fly.png")
 
 # Context
 var positionOnScreen = Vector2i(0,0) # 0,0 =top left / 1,1 = bottom right
-
-
+var contextMenuOpen = false
+var openContextMenuRef
 
 func _ready():
 	# Modules may depend on elements in the tree
@@ -33,7 +35,6 @@ func _process(_delta):
 	$Mouse.handleDragging() # handles dragging the window around with the mouse
 	handleDragAnimation() # change animation while being dragged
 	
-
 
 
 func handleDragAnimation()->void:
