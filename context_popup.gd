@@ -8,6 +8,14 @@ var tabName:String = "default"
 func _ready() -> void:
 	#Globals.contextMenuClosed.connect(func():tabName = ""; title = "")
 	%AddToHotbarButton.pressed.connect(addHotbarShortcut)
+	%DeleteButton.pressed.connect(deleteHotbarShortcut)
+
+
+func deleteHotbarShortcut():
+	#Globals.deleteHotbarShortcut.emit(title, false)
+	#Globals.deleteHotbarShortcut.emit(tabName, title)
+	Globals.deleteHotbarShortcut.emit(title)
+
 
 
 func setUp(tab, label):

@@ -17,10 +17,20 @@ func _ready() -> void:
 	%ShrunkenHeightSlider.drag_ended.connect(handleChangeShrunkenHeight)
 	%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
 	%Sides.pressed.connect(UI.switchSidesX)
+	Globals.deleteHotbarShortcut.connect(deleteShortcut)
 	UI.loaded.connect(setSlidersFromSave)
 	setSlidersFromSave()
 	refreshHotbarList()
 
+#func deleteShortcut(tab, shortcutName):
+func deleteShortcut(shortcutName):
+	#print("hotbar - deleting : ", shortcutName, ", is shortcut: ", tab)
+	#if not tab == "HOTBAR":
+		#print("hotbar - actually NOT deleting : ", shortcutName)
+		#return
+	hotbarList.erase(shortcutName)
+	refreshHotbarList()
+	saveHotbar()
 
 func saveHotbar():
 	Saver.saveGameSection(SAVE_SECTION, "hotbar", hotbarList)

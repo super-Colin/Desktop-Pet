@@ -36,11 +36,6 @@ func refreshListsList():
 		newButton.setUp(SAVE_SECTION, key)
 		%ListsList.add_child(newButton)
 
-func swapActiveList(newList:String):
-	currentList = newList
-	refreshTodoList()
-	saveTodos()
-
 
 func refreshTodoList():
 	#print("todo - ", todoLists[currentList])
@@ -53,7 +48,7 @@ func refreshTodoList():
 		newRow.setUp(key, todoLists[currentList][key])
 		newRow.todoToggled.connect(todoToggled)
 		newRow.deleteRequested.connect(deleteTodo)
-		newRow.tabName = SAVE_SECTION
+		#newRow.tabName = SAVE_SECTION
 		%TodosList.add_child(newRow)
 
 
@@ -139,6 +134,10 @@ func saveTodos():
 func clearInputBar():
 	%Name.text = ""
 
+func swapActiveList(newList:String):
+	currentList = newList
+	refreshTodoList()
+	saveTodos()
 
 
 # ui_text_accept

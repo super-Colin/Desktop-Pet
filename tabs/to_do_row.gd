@@ -30,6 +30,7 @@ func setUp(todoName:String, completed:bool):
 
 
 
+
 func rowToggled():
 	isComplete = not isComplete
 	if isComplete:

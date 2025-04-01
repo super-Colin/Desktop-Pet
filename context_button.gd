@@ -21,6 +21,8 @@ func onButtonGuiInput(event=null):
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				left_click.emit()
+				if contextIsOpen:
+					Globals.hideContextPopup($'.')
 			MOUSE_BUTTON_RIGHT:
 				right_click.emit()
 				#print("context button - ", $'.', ", ", tabName, ", ",title)

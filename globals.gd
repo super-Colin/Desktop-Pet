@@ -1,7 +1,9 @@
 extends Node
 
 signal hotbarShortcutAdded(tab, listName)
-signal hotbarShortcutPressed(tab, listName)
+#signal hotbarShortcutPressed(tab, listName)
+#signal deleteHotbarShortcut(title, isHotbar)
+signal deleteHotbarShortcut(title)
 signal contextMenuClosed
 
 var dialogueBoxRef
@@ -14,6 +16,8 @@ var callerButton
 func _ready() -> void:
 	if not contextMenuRef:
 		return
+
+
 
 
 
