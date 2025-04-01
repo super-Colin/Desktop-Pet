@@ -3,6 +3,7 @@ extends Node
 signal hotbarShortcutAdded(tab, listName)
 #signal hotbarShortcutPressed(tab, listName)
 #signal deleteHotbarShortcut(title, isHotbar)
+signal deleteSublist(tab, title)
 signal deleteHotbarShortcut(title)
 signal contextMenuClosed
 

@@ -18,11 +18,18 @@ func _ready() -> void:
 	%NewListButton.pressed.connect(makingNewList)
 	%Name.text_submitted.connect(_textSubmitted)
 	%Name.focus_exited.connect(func():makingList = false)
+	Globals.deleteSublist.connect(_deleteSublist)
 	#
 	if not todoLists.keys():
 		return
 	refreshListsList()
 	refreshTodoList()
+
+func _deleteSublist(tab, title):
+	if tab == SAVE_SECTION:
+		deleteTodo(title)
+
+
 
 
 func refreshListsList():
@@ -56,6 +63,7 @@ func refreshTodoList():
 
 func deleteTodo(todoName):
 	todoLists[currentList].erase(todoName)
+	saveTodos()
 	refreshTodoList()
 
 func todoToggled(title):

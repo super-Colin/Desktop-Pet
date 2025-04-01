@@ -3,18 +3,22 @@ extends PanelContainer
 
 var title:String = "defualt"
 var tabName:String = "default"
+var task:String = "default"
 
 #
 func _ready() -> void:
 	#Globals.contextMenuClosed.connect(func():tabName = ""; title = "")
 	%AddToHotbarButton.pressed.connect(addHotbarShortcut)
-	%DeleteButton.pressed.connect(deleteHotbarShortcut)
+	%DeleteButton.pressed.connect(deleteSublist)
 
 
-func deleteHotbarShortcut():
-	#Globals.deleteHotbarShortcut.emit(title, false)
-	#Globals.deleteHotbarShortcut.emit(tabName, title)
-	Globals.deleteHotbarShortcut.emit(title)
+
+func deleteSublist():
+	if tabName == "HOTBAR":
+		Globals.deleteHotbarShortcut.emit(title)
+	else:
+		Globals.deleteSublist.emit(tabName, title)
+	
 
 
 
