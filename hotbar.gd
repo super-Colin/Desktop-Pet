@@ -1,11 +1,17 @@
 extends Container
 
+var buttonScene = preload("res://context_button.tscn")
 
+const SAVE_SECTION = "HOTBAR"
+var hotbarList:Dictionary = {} # "MyTodoList":{"dishes":true}
 
-
+signal shortcutPressed(tab, list)
 
 
 func _ready() -> void:
+	hotbarList = Saver.loadGameSection(SAVE_SECTION, "hotbarList", hotbarList)
+	print("hotbar - loaded list: ", hotbarList)
+	Globals.hotbarRef = $'.'
 	%WidthSlider.drag_ended.connect(handleChangeWidth)
 	%HeightSlider.drag_ended.connect(handleChangeHeight)
 	%ShrunkenHeightSlider.drag_ended.connect(handleChangeShrunkenHeight)
@@ -13,11 +19,44 @@ func _ready() -> void:
 	%Sides.pressed.connect(UI.switchSidesX)
 	UI.loaded.connect(setSlidersFromSave)
 	setSlidersFromSave()
-	
-	%Themes.pressed.connect(makeRightClickMenu)
+	refreshHotbarList()
 
-func makeRightClickMenu():
-	pass
+
+func saveHotbar():
+	Saver.saveGameSection(SAVE_SECTION, "hotbar", hotbarList)
+
+	#print("todo - saved")
+
+func refreshHotbarList():
+	#print("todo - ", todoLists[currentList])
+	for c in %Shortcuts.get_children():
+		c.queue_free()
+	for key in hotbarList.keys():
+		print("hotbar - list: ", hotbarList)
+		#buttonScene.deleteRequested.connect(deleteTodo)
+		#print("hotbar - added shortcut: ", newRow)
+		makeHotbarShortcut(hotbarList[key].tabName, hotbarList[key].listName)
+
+
+
+
+
+
+func makeHotbarShortcut(tabName, listName):
+	if not listName in hotbarList.keys():
+		hotbarList[listName] = {"tabName":tabName, "listName": listName}
+		Saver.saveGameSection(SAVE_SECTION, "hotbar", hotbarList)
+	print("hotbar - making shortcut: ", tabName, ", listName: ", listName)
+	var newButton = buttonScene.instantiate()
+	newButton.setUp(tabName, listName)
+	#Globals.dialogueBoxRef.shortCut
+	print("hotbar - added to list: ", hotbarList.keys())
+	newButton.pressed.connect(func(): shortcutPressed.emit(tabName, listName))
+	%Shortcuts.add_child(newButton)
+
+
+
+
 
 
 
@@ -39,21 +78,3 @@ func setSlidersFromSave():
 	%WidthSlider.value = UI.expandedSize.x
 	%HeightSlider.value = UI.expandedSize.y
 	print("hotbar - set sliders, ", UI.shrunkenSizeYBuffer, ", " , currentSize)
-
-
-
-
-
-
-#func flipHotbarButtonOrder():
-	#print("dialogue - flipping hotbar")
-	#var i = -1
-	#for c in %Hotbar.get_children():
-		#%Hotbar.move_child(c, i)
-		#i -= 1
-	#if UI.xAlignment == "right":
-		#%Hotbar.set_anchors_preset(Control.PRESET_CENTER_LEFT)
-		#%Hotbar.size_flags_horizontal = SIZE_SHRINK_BEGIN
-	#else:
-		#%Hotbar.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
-		#%Hotbar.size_flags_horizontal = SIZE_SHRINK_END

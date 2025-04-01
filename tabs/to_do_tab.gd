@@ -5,13 +5,10 @@ var todoLists:Dictionary = {} # "MyTodoList":{"dishes":true}
 var currentList:String = "defualt"
 var todoRowScene = preload("res://tabs/to_do_row.tscn")
 var buttonScene = preload("res://context_button.tscn")
-
-
-
-
 var makingList = false
+#var tabName = "todo"
 
-const SAVE_SECTION = "todo_tab"
+const SAVE_SECTION = "TODO_TAB"
 
 func _ready() -> void:
 	todoLists = Saver.loadGameSection(SAVE_SECTION, "todoLists", todoLists)
@@ -28,7 +25,21 @@ func _ready() -> void:
 	refreshTodoList()
 
 
+func refreshListsList():
+	for c in %ListsList.get_children():
+		c.queue_free()
+	#print("todo - todoLists: ", todoLists)
+	for key in todoLists.keys():
+		print("todo tab - key: ", key)
+		var newButton = buttonScene.instantiate()
+		newButton.pressed.connect(swapActiveList.bind(key))
+		newButton.setUp(SAVE_SECTION, key)
+		%ListsList.add_child(newButton)
 
+func swapActiveList(newList:String):
+	currentList = newList
+	refreshTodoList()
+	saveTodos()
 
 
 func refreshTodoList():
@@ -36,35 +47,28 @@ func refreshTodoList():
 	for c in %TodosList.get_children():
 		c.queue_free()
 	for key in todoLists[currentList].keys():
+		#print("todo row - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
+		print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
 		var newRow = todoRowScene.instantiate()
 		newRow.setUp(key, todoLists[currentList][key])
 		newRow.todoToggled.connect(todoToggled)
 		newRow.deleteRequested.connect(deleteTodo)
-		connectTodoRow(newRow, key, todoLists[currentList][key])
+		newRow.tabName = SAVE_SECTION
 		%TodosList.add_child(newRow)
 
 
 
 
-func connectTodoRow(rowNode, title, completed):
-	rowNode.todoToggled.connect(todoToggled.bind(rowNode, title, completed))
-	rowNode.setUp(title, completed)
-	#$HBoxContainer/Title.toggled.connect(updateCompletedStatusStyles)
-	#buttonNode.pressed.connect(func():deleteRequested.emit.bind()()
-
 func deleteTodo(todoName):
 	todoLists[currentList].erase(todoName)
 	refreshTodoList()
 
-func todoToggled(buttonNode, title, completed):
-	todoLists[currentList][name] = not todoLists[currentList][name]
+func todoToggled(title):
+	todoLists[currentList][title] = not todoLists[currentList][title]
 	#print("todo - todo toggled: ", name, ", ", isCompleted, ", list: ", todoLists[currentList])
+	print("todo - todo toggled: ", todoLists[currentList][title])
 	saveTodos()
-	#if todoLists[currentList][name]:
-		#makeStrikeVisible(buttonNode)
-		
-		
-
+	print("todo - saved")
 
 func makeStrikeVisible(buttonNode):
 	setStrikeDimension(buttonNode)
@@ -88,22 +92,6 @@ func showContext():
 func hideContext():
 	Globals.openContextMenuRef = null
 	$ContextPopup.visible = false
-
-
-
-#func updateCompletedStatusStyles(completed:bool):
-	#isComplete = completed
-	#if isComplete:
-		#var t = Timer.new()
-		#t.wait_time = 0.1
-		#t.autostart = true
-		#t.one_shot = true
-		#t.timeout.connect(makeStrikeVisible)
-		#$'.'.add_child(t)
-	#else:
-		#%Strike.visible = false
-	#todoToggled.emit(title, $HBoxContainer/Title.button_pressed)
-
 
 
 
@@ -151,18 +139,6 @@ func saveTodos():
 func clearInputBar():
 	%Name.text = ""
 
-func swapActiveList(newList:String):
-	currentList = newList
-	refreshTodoList()
-	saveTodos()
 
-func refreshListsList():
-	for c in %ListsList.get_children():
-		c.queue_free()
-	for key in todoLists.keys():
-		var newButton = Button.new()
-		newButton.text = key
-		newButton.pressed.connect(swapActiveList.bind(key))
-		%ListsList.add_child(newButton)
 
 # ui_text_accept

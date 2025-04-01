@@ -49,7 +49,7 @@ placeholder_text = "What's up?"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 3
+current_tab = 1
 drag_to_rearrange_enabled = true
 
 [node name="Snips" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("1_senjy")]
@@ -58,7 +58,6 @@ layout_mode = 2
 metadata/_tab_index = 0
 
 [node name="To Do" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("3_0nste")]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -68,6 +67,7 @@ layout_mode = 2
 metadata/_tab_index = 2
 
 [node name="Images" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabsContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 

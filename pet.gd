@@ -22,13 +22,17 @@ var contextMenuOpen = false
 var openContextMenuRef
 
 func _ready():
-	# Modules may depend on elements in the tree
-	# But dependencies between each other are set here
 	%DraggableArea.gui_input.connect(%Mouse.interpretMouseInput)
 	%Mouse.rightClicked.connect(UI.toggleMenu)
 	#%UI.sayInMenu(" hello from the main script")
 	#%JokeButton.pressed.connect(%Behaviour.tellJoke)
 	%DialogueBox.visible = false
+	%ContextPopup.visible = false
+	Globals.contextMenuRef = %ContextPopup
+	%Hotbar.shortcutPressed.connect(%DialogueBox.jumpToList)
+
+
+
 
 
 func _process(_delta):

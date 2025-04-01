@@ -3,7 +3,7 @@ extends VBoxContainer
 var snippets:Dictionary = {}
 var snippetRowScene = preload("res://tabs/snippet_row.tscn")
 
-const SAVE_SECTION = "code_tab"
+const SAVE_SECTION = "SNIPS_TAB"
 
 
 func _ready() -> void:

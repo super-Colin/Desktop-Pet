@@ -165,17 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/Panel/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Hotbar" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/Panel/ScrollContainer/MarginContainer2" instance=ExtResource("6_uvuc8")]
-unique_name_in_owner = true
+[node name="Hotbar" parent="CanvasLayer/VBoxContainer/XAxisBox/VBoxContainer/Panel/ScrollContainer" instance=ExtResource("6_uvuc8")]
 layout_mode = 2
 
 [node name="DialogueBox" parent="CanvasLayer/VBoxContainer/XAxisBox" groups=["dialogueBox"] instance=ExtResource("7_uvuc8")]

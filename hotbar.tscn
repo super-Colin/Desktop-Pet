@@ -5,30 +5,23 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n23yb"]
 bg_color = Color(0.114767, 0.45413, 1.92523e-07, 1)
 
-[node name="MarginContainer2" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Hotbar" type="VBoxContainer" parent="."]
-layout_mode = 2
+[node name="Hotbar" type="VBoxContainer"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 795.0
+offset_bottom = 467.0
 script = ExtResource("1_mjyg7")
 
-[node name="Flatten" type="Button" parent="Hotbar"]
+[node name="Standard" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Flatten" type="Button" parent="Standard"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 tooltip_text = "Remove any invisble formatting around the content in your clipboard"
 text = "Flatten"
 
-[node name="AlwaysOnTopToggle" type="Button" parent="Hotbar"]
+[node name="AlwaysOnTopToggle" type="Button" parent="Standard"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -37,27 +30,27 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_n23yb")
 toggle_mode = true
 text = "Top"
 
-[node name="Sides" type="Button" parent="Hotbar"]
+[node name="Sides" type="Button" parent="Standard"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 tooltip_text = "Toggle which side the pop out is on"
 text = "<---//--->"
 
-[node name="WindowDimensions" type="VBoxContainer" parent="Hotbar"]
+[node name="WindowDimensions" type="VBoxContainer" parent="Standard"]
 layout_mode = 2
 
-[node name="ShrunkenHeight" type="HBoxContainer" parent="Hotbar/WindowDimensions"]
+[node name="ShrunkenHeight" type="HBoxContainer" parent="Standard/WindowDimensions"]
 layout_mode = 2
 tooltip_text = "Shrunken window height"
 
-[node name="Label" type="Label" parent="Hotbar/WindowDimensions/ShrunkenHeight"]
+[node name="Label" type="Label" parent="Standard/WindowDimensions/ShrunkenHeight"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "SH:"
 horizontal_alignment = 1
 
-[node name="ShrunkenHeightSlider" type="HSlider" parent="Hotbar/WindowDimensions/ShrunkenHeight"]
+[node name="ShrunkenHeightSlider" type="HSlider" parent="Standard/WindowDimensions/ShrunkenHeight"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -69,17 +62,17 @@ step = 10.0
 value = 200.0
 scrollable = false
 
-[node name="ExpandedWidth" type="HBoxContainer" parent="Hotbar/WindowDimensions"]
+[node name="ExpandedWidth" type="HBoxContainer" parent="Standard/WindowDimensions"]
 layout_mode = 2
 tooltip_text = "Expanded window width"
 
-[node name="Label" type="Label" parent="Hotbar/WindowDimensions/ExpandedWidth"]
+[node name="Label" type="Label" parent="Standard/WindowDimensions/ExpandedWidth"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "W:"
 horizontal_alignment = 1
 
-[node name="WidthSlider" type="HSlider" parent="Hotbar/WindowDimensions/ExpandedWidth"]
+[node name="WidthSlider" type="HSlider" parent="Standard/WindowDimensions/ExpandedWidth"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -92,17 +85,17 @@ step = 10.0
 value = 800.0
 scrollable = false
 
-[node name="ExpandedHeight" type="HBoxContainer" parent="Hotbar/WindowDimensions"]
+[node name="ExpandedHeight" type="HBoxContainer" parent="Standard/WindowDimensions"]
 layout_mode = 2
 tooltip_text = "Expanded window height"
 
-[node name="Label" type="Label" parent="Hotbar/WindowDimensions/ExpandedHeight"]
+[node name="Label" type="Label" parent="Standard/WindowDimensions/ExpandedHeight"]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 text = "H:"
 horizontal_alignment = 1
 
-[node name="HeightSlider" type="HSlider" parent="Hotbar/WindowDimensions/ExpandedHeight"]
+[node name="HeightSlider" type="HSlider" parent="Standard/WindowDimensions/ExpandedHeight"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -114,64 +107,68 @@ step = 10.0
 value = 500.0
 scrollable = false
 
-[node name="MarginContainer" type="MarginContainer" parent="Hotbar"]
+[node name="MarginContainer" type="MarginContainer" parent="Standard"]
 visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Hotbar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Standard"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Hotbar/HBoxContainer"]
+[node name="Button" type="Button" parent="Standard/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "? Undo? "
 
-[node name="Button2" type="Button" parent="Hotbar/HBoxContainer"]
+[node name="Button2" type="Button" parent="Standard/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "? Redo ?"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Hotbar"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Standard"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Hotbar/HBoxContainer2"]
+[node name="Button" type="Button" parent="Standard/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "UI scale down"
 text = "? UI - ?"
 
-[node name="Button2" type="Button" parent="Hotbar/HBoxContainer2"]
+[node name="Button2" type="Button" parent="Standard/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "UI scale up"
 text = "? UI + ?"
 
-[node name="Themes" type="Button" parent="Hotbar"]
+[node name="Shortcuts" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Themes" type="Button" parent="Shortcuts"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Color Schemes"
 
-[node name="Button4" type="Button" parent="Hotbar"]
+[node name="Button4" type="Button" parent="Shortcuts"]
 layout_mode = 2
 text = "Export"
 
-[node name="Button5" type="Button" parent="Hotbar"]
+[node name="Button5" type="Button" parent="Shortcuts"]
 layout_mode = 2
 text = "Import"
 
-[node name="Button6" type="Button" parent="Hotbar"]
+[node name="Button6" type="Button" parent="Shortcuts"]
 layout_mode = 2
 text = "something
 "
 
-[node name="Button7" type="Button" parent="Hotbar"]
+[node name="Button7" type="Button" parent="Shortcuts"]
 layout_mode = 2
 text = "something
 "
 
-[node name="Button8" type="Button" parent="Hotbar"]
+[node name="Button8" type="Button" parent="Shortcuts"]
 layout_mode = 2
 text = "something
 "

@@ -5,37 +5,30 @@ signal left_click(nodeRef)
 signal right_click(nodeRef)
 
 var title:String
-
-
+var contextIsOpen = false
+var tabName
 
 
 
 func _ready() -> void:
-	gui_input.connect(_on_Button_gui_input)
+	#$'.'.pressed.connect(func():Globals.toggleContextMenu($'.', tabName, title))
+	gui_input.connect(onButtonGuiInput)
+	Globals.contextMenuClosed.connect(func():contextIsOpen = false)
 
-func _on_Button_gui_input(event):
+
+func onButtonGuiInput(event=null):
 	if event is InputEventMouseButton and event.pressed:
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
-				left_click.emit($'.')
+				left_click.emit()
 			MOUSE_BUTTON_RIGHT:
-				right_click.emit($'.')
-				if Globals.openContextMenuRef:
-					Globals.hideContextPopup()
-				else:
-					showContext()
+				right_click.emit()
+				#print("context button - ", $'.', ", ", tabName, ", ",title)
+				Globals.toggleContextMenu($'.', tabName, title)
+				
 
-func setUp(name:String):
-	title = name
+func setUp(tab, label):
+	tabName = tab
+	title = label
+	print("context button - set up; tab: ", tab, ", label: ", label)
 	$'.'.text = title
-
-
-func showContext():
-	print("context - openning")
-	Globals.openContextMenuRef = $'.'
-	#Globals.openContextMenuRef = $Menu
-	$ContextPopup.visible = true
-
-func hideContext():
-	Globals.openContextMenuRef = null
-	$ContextPopup.visible = false

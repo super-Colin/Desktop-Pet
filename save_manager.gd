@@ -27,11 +27,14 @@ func initialLoad():
 func setValForBatchSave(sectionName, sectionKey, sectionData):
 	if saveGameConfigNode == null:print("saves - saveGameSection didn't have config var")
 	saveGameConfigNode.set_value(sectionName, sectionKey, sectionData)
+
 func saveBatch():
 	saveGameConfigNode.save(SAVE_FILE_PATH)
+	print("SAVER - saved batch")
 	saved.emit()
 
 func saveGameSection(sectionName, sectionKey, sectionData):
+	print("SAVER - saving: ", sectionName)
 	if saveGameConfigNode == null:print("saves - saveGameSection didn't have config var")
 	saveGameConfigNode.set_value(sectionName, sectionKey, sectionData)
 	saveGameConfigNode.save(SAVE_FILE_PATH)
@@ -61,13 +64,3 @@ func load_from_file(fileName:String, fileContent:String, fileExtension:String=".
 	var file = FileAccess.open("user://" + fileName + fileExtension, FileAccess.READ)
 	var content = file.get_as_text()
 	return content
-
-#
-#func saveGame_all():
-	#var save_nodes = get_tree().get_nodes_in_group("Persist")
-	#for node in save_nodes:
-		#get_tree().call_group("save", "_save")
-#
-#func reset_saveStates_all():
-	#get_tree().call_group("save", "_resetSaveState")
-	#saveGame_all()
