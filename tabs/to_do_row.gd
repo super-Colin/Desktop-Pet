@@ -24,6 +24,7 @@ func setUp(todoName:String, completed:bool):
 	UI.expandedSizeUpdated.connect(setStrikeDimension, CONNECT_DEFERRED)
 	$HBoxContainer/Title.pressed.connect(rowToggled)
 	%Title.setUp(tabName, todoName)
+	%Delete.pressed.connect(func(): deleteRequested.emit(title))
 
 
 

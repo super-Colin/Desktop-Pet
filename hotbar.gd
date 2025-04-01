@@ -18,12 +18,19 @@ func _ready() -> void:
 	%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
 	%Sides.pressed.connect(UI.switchSidesX)
 	Globals.deleteHotbarShortcut.connect(deleteShortcut)
+	#Globals.verifyHotbarShortcut.connect(verifyShortcut)
 	UI.loaded.connect(setSlidersFromSave)
 	setSlidersFromSave()
 	refreshHotbarList()
 
+
+
+
+
 #func deleteShortcut(tab, shortcutName):
 func deleteShortcut(shortcutName):
+	if not shortcutName in hotbarList.keys():
+		return
 	#print("hotbar - deleting : ", shortcutName, ", is shortcut: ", tab)
 	#if not tab == "HOTBAR":
 		#print("hotbar - actually NOT deleting : ", shortcutName)
@@ -49,9 +56,6 @@ func refreshHotbarList():
 
 
 
-
-
-
 func makeHotbarShortcut(tabName, listName):
 	if not listName in hotbarList.keys():
 		hotbarList[listName] = {"tabName":tabName, "listName": listName}
@@ -60,6 +64,7 @@ func makeHotbarShortcut(tabName, listName):
 	var newButton = buttonScene.instantiate()
 	newButton.setUp(tabName, listName, true)
 	newButton.pressed.connect(func(): shortcutPressed.emit(tabName, listName))
+	newButton.deleteRequested.connect(deleteShortcut)
 	%Shortcuts.add_child(newButton)
 
 

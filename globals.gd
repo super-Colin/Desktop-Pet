@@ -7,6 +7,7 @@ signal deleteList(tab, list)
 signal deleteSublist(tab, title, sublist)
 signal deleteHotbarShortcut(title)
 signal contextMenuClosed
+signal verifyHotbarShortcut(tab, title)
 
 var dialogueBoxRef
 var hotbarRef
@@ -34,7 +35,6 @@ func positionContextPopup():
 	if not callerButton or not "contextIsOpen" in callerButton:
 		return
 	#print("globals - positionContextPopup: ", positionContextPopup)
-	#contextMenuRef.global_position = callerButton.global_position + Vector2(25,25)
 	contextMenuRef.global_position = get_viewport().get_mouse_position() + Vector2(10,10)
 
 
@@ -67,4 +67,7 @@ func showContextMenu(clickedNode, tab, listName, isShortcut = false):
 	contextMenuRef.setUp(tab, listName, isShortcut)
 	if "contextIsOpen" in clickedNode:
 		clickedNode.contextIsOpen = true
-		
+
+func popupTriggeredDelete():
+	if "emitDeleteRequest" in callerButton:
+		callerButton.emitDeleteRequest()

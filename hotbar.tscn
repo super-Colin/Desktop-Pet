@@ -114,6 +114,7 @@ theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Standard"]
+visible = false
 layout_mode = 2
 
 [node name="Button" type="Button" parent="Standard/HBoxContainer"]
@@ -127,6 +128,7 @@ size_flags_horizontal = 3
 text = "? Redo ?"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Standard"]
+visible = false
 layout_mode = 2
 
 [node name="Button" type="Button" parent="Standard/HBoxContainer2"]

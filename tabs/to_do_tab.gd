@@ -19,16 +19,37 @@ func _ready() -> void:
 	%Name.text_submitted.connect(_textSubmitted)
 	%Name.focus_exited.connect(func():makingList = false)
 	#Globals.deleteSublist.connect(_deleteSublist)
-	Globals.deleteSublist.connect(_deleteList)
+	#Globals.deleteSublist.connect(_deleteList)
 	#
 	if not todoLists.keys():
 		return
 	refreshListsList()
 	refreshTodoList()
 
-func _deleteList(tab, title):
-	if tab == SAVE_SECTION:
-		deleteTodo(title)
+#func _deleteList(tab, listName, task):
+	#if tab == SAVE_SECTION:
+		#if task:
+			#deleteTodo(task)
+		#else:
+			#todoLists[currentList].erase(listName)
+
+
+func deleteTodo(todoName):
+	print("todo tab - deleting: ", todoName)
+	todoLists[currentList].erase(todoName)
+	saveTodos()
+	refreshTodoList()
+
+#func deleteTodo(todoName):
+	
+
+func deleteList(listName):
+	print("todo tab - deleting list: ", listName)
+	todoLists.erase(listName)
+	currentList = todoLists.keys()[0]
+	Globals.deleteHotbarShortcut.emit(listName)
+	saveTodos()
+	refreshListsList()
 
 
 
@@ -41,7 +62,8 @@ func refreshListsList():
 		#print("todo tab - key: ", key)
 		var newButton = buttonScene.instantiate()
 		newButton.pressed.connect(swapActiveList.bind(key))
-		newButton.setUp(SAVE_SECTION, key)
+		newButton.setUp(SAVE_SECTION, key, false, )
+		newButton.deleteRequested.connect(deleteList)
 		%ListsList.add_child(newButton)
 
 
@@ -50,7 +72,7 @@ func refreshTodoList():
 	for c in %TodosList.get_children():
 		c.queue_free()
 	for key in todoLists[currentList].keys():
-		#print("todo row - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
+		print("todo row - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
 		#print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
 		var newRow = todoRowScene.instantiate()
 		newRow.setUp(key, todoLists[currentList][key])
@@ -62,10 +84,6 @@ func refreshTodoList():
 
 
 
-func deleteTodo(todoName):
-	todoLists[currentList].erase(todoName)
-	saveTodos()
-	refreshTodoList()
 
 func todoToggled(title):
 	todoLists[currentList][title] = not todoLists[currentList][title]
@@ -86,31 +104,19 @@ func setStrikeDimension(buttonNode):
 	var extraOffset = buttonSize * 0.2
 	buttonNode.getNode("Strike").points[1] = buttonSize + extraOffset
 
-func showContext():
-	#print("todo - openning context")
-	Globals.openContextMenuRef = $'.'
-	$ContextPopup.visible = true
-
-func hideContext():
-	Globals.openContextMenuRef = null
-	$ContextPopup.visible = false
-
 
 func _textSubmitted(newText):
 	saveTodo()
 
-
 func makingNewList():
 	makingList = true
 	%Name.grab_focus()
-
 
 func saveTodo():
 	if makingList:
 		saveNewList()
 	else:
 		saveNewTodo()
-
 
 func saveNewList():
 	#print("todo - new list is: ", %TodoName.text)
@@ -122,7 +128,6 @@ func saveNewList():
 	saveTodos()
 	%Name.text = ""
 	%Name.grab_focus()
-
 
 func saveNewTodo():
 	#print("todo - new todo is: ", %Name.text)

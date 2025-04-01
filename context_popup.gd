@@ -5,6 +5,7 @@ var title:String = "defualt"
 var tabName:String = "default"
 var task:String = "default"
 var isHotbarShortcut = false
+var callerButton
 
 
 
@@ -17,19 +18,21 @@ func _ready() -> void:
 
 
 func delete():
-	print("context popup - deleting: ", tabName, ", ", title)
-	if isHotbarShortcut:
-		Globals.deleteHotbarShortcut.emit(title)
-	else:
-		Globals.deleteSublist.emit(tabName, title)
+	Globals.popupTriggeredDelete()
+	#print("context popup - deleting: ", tabName, ", ", title)
+	#if isHotbarShortcut:
+		#Globals.deleteHotbarShortcut.emit(title)
+	#else:
+		#Globals.deleteSublist.emit(tabName, title, task)
 
 
 
 
-func setUp(tab, label, isShortcut = false):
-	title = label
+func setUp(tab, list, isShortcut = false, sublistItem = ""):
+	title = list
 	tabName = tab
 	isHotbarShortcut = isShortcut
+	task = sublistItem
 	#%AddToHotbarButton.pressed.connect(addHotbarShortcut)
 
 func addHotbarShortcut():
