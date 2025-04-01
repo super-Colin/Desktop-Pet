@@ -42,7 +42,7 @@ func rowToggled():
 
 
 func makeStrikeVisible():
-	print("todo row - making strike visible")
+	#print("todo row - making strike visible")
 	var t = Timer.new()
 	t.wait_time = 0.1
 	t.autostart = true

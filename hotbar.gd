@@ -33,7 +33,7 @@ func deleteShortcut(shortcutName):
 	saveHotbar()
 
 func saveHotbar():
-	Saver.saveGameSection(SAVE_SECTION, "hotbar", hotbarList)
+	Saver.saveGameSection(SAVE_SECTION, "hotbarList", hotbarList)
 
 	#print("todo - saved")
 
@@ -58,9 +58,7 @@ func makeHotbarShortcut(tabName, listName):
 		Saver.saveGameSection(SAVE_SECTION, "hotbar", hotbarList)
 	print("hotbar - making shortcut: ", tabName, ", listName: ", listName)
 	var newButton = buttonScene.instantiate()
-	newButton.setUp(tabName, listName)
-	#Globals.dialogueBoxRef.shortCut
-	print("hotbar - added to list: ", hotbarList.keys())
+	newButton.setUp(tabName, listName, true)
 	newButton.pressed.connect(func(): shortcutPressed.emit(tabName, listName))
 	%Shortcuts.add_child(newButton)
 

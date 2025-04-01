@@ -18,14 +18,15 @@ func _ready() -> void:
 	%NewListButton.pressed.connect(makingNewList)
 	%Name.text_submitted.connect(_textSubmitted)
 	%Name.focus_exited.connect(func():makingList = false)
-	Globals.deleteSublist.connect(_deleteSublist)
+	#Globals.deleteSublist.connect(_deleteSublist)
+	Globals.deleteSublist.connect(_deleteList)
 	#
 	if not todoLists.keys():
 		return
 	refreshListsList()
 	refreshTodoList()
 
-func _deleteSublist(tab, title):
+func _deleteList(tab, title):
 	if tab == SAVE_SECTION:
 		deleteTodo(title)
 
@@ -37,7 +38,7 @@ func refreshListsList():
 		c.queue_free()
 	#print("todo - todoLists: ", todoLists)
 	for key in todoLists.keys():
-		print("todo tab - key: ", key)
+		#print("todo tab - key: ", key)
 		var newButton = buttonScene.instantiate()
 		newButton.pressed.connect(swapActiveList.bind(key))
 		newButton.setUp(SAVE_SECTION, key)
@@ -50,7 +51,7 @@ func refreshTodoList():
 		c.queue_free()
 	for key in todoLists[currentList].keys():
 		#print("todo row - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
-		print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
+		#print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
 		var newRow = todoRowScene.instantiate()
 		newRow.setUp(key, todoLists[currentList][key])
 		newRow.todoToggled.connect(todoToggled)
@@ -68,10 +69,9 @@ func deleteTodo(todoName):
 
 func todoToggled(title):
 	todoLists[currentList][title] = not todoLists[currentList][title]
-	#print("todo - todo toggled: ", name, ", ", isCompleted, ", list: ", todoLists[currentList])
-	print("todo - todo toggled: ", todoLists[currentList][title])
+	#print("todo - todo toggled: ", todoLists[currentList][title])
 	saveTodos()
-	print("todo - saved")
+
 
 func makeStrikeVisible(buttonNode):
 	setStrikeDimension(buttonNode)
@@ -87,9 +87,8 @@ func setStrikeDimension(buttonNode):
 	buttonNode.getNode("Strike").points[1] = buttonSize + extraOffset
 
 func showContext():
-	print("context - openning")
+	#print("todo - openning context")
 	Globals.openContextMenuRef = $'.'
-	#Globals.openContextMenuRef = $Menu
 	$ContextPopup.visible = true
 
 func hideContext():
@@ -97,11 +96,8 @@ func hideContext():
 	$ContextPopup.visible = false
 
 
-
-
 func _textSubmitted(newText):
 	saveTodo()
-
 
 
 func makingNewList():
@@ -115,6 +111,7 @@ func saveTodo():
 	else:
 		saveNewTodo()
 
+
 func saveNewList():
 	#print("todo - new list is: ", %TodoName.text)
 	todoLists[%Name.text] = {}
@@ -126,6 +123,7 @@ func saveNewList():
 	%Name.text = ""
 	%Name.grab_focus()
 
+
 func saveNewTodo():
 	#print("todo - new todo is: ", %Name.text)
 	todoLists[currentList][%Name.text] = false
@@ -133,6 +131,7 @@ func saveNewTodo():
 	refreshTodoList()
 	saveTodos()
 	%Name.text = ""
+
 
 func saveTodos():
 	Saver.saveGameSection(SAVE_SECTION, "todoLists", todoLists)

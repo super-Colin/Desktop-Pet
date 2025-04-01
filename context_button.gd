@@ -7,6 +7,7 @@ signal right_click(nodeRef)
 var title:String
 var contextIsOpen = false
 var tabName
+var isHotbarShortcut = false
 
 
 
@@ -26,11 +27,12 @@ func onButtonGuiInput(event=null):
 			MOUSE_BUTTON_RIGHT:
 				right_click.emit()
 				#print("context button - ", $'.', ", ", tabName, ", ",title)
-				Globals.toggleContextMenu($'.', tabName, title)
+				Globals.toggleContextMenu($'.', tabName, title, isHotbarShortcut)
 				
 
-func setUp(tab, label):
+func setUp(tab, label, isShortcut = false):
+	print("context button - set up; tab: ", tab, ", label: ", label, ", is shortcut: ", isShortcut)
 	tabName = tab
 	title = label
-	print("context button - set up; tab: ", tab, ", label: ", label)
+	isHotbarShortcut = isShortcut
 	$'.'.text = title
