@@ -30,6 +30,7 @@ func _ready():
 	%ContextPopup.visible = false
 	Globals.contextMenuRef = %ContextPopup
 	%Hotbar.shortcutPressed.connect(%DialogueBox.jumpToList)
+	#%Hotbar.tab_changed.connect()
 
 
 

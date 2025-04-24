@@ -16,14 +16,12 @@ func _ready() -> void:
 
 
 
+func copy():
+	Globals.popupTriggeredCopy()
 
 func delete():
 	Globals.popupTriggeredDelete()
 	#print("context popup - deleting: ", tabName, ", ", title)
-	#if isHotbarShortcut:
-		#Globals.deleteHotbarShortcut.emit(title)
-	#else:
-		#Globals.deleteSublist.emit(tabName, title, task)
 
 
 
@@ -38,6 +36,8 @@ func setUp(tab, list, isShortcut = false, sublistItem = ""):
 func addHotbarShortcut():
 	print("popup - adding shortcut: ", tabName, ", ", title)
 	Globals.addToHotbar(tabName, title)
+	$'.'.visible = false
 
 func deleteHotbarShortcut():
 	Globals.deleteHotbarShortcut.emit(title)
+	$'.'.visible = false

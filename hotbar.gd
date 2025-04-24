@@ -31,10 +31,6 @@ func _ready() -> void:
 func deleteShortcut(shortcutName):
 	if not shortcutName in hotbarList.keys():
 		return
-	#print("hotbar - deleting : ", shortcutName, ", is shortcut: ", tab)
-	#if not tab == "HOTBAR":
-		#print("hotbar - actually NOT deleting : ", shortcutName)
-		#return
 	hotbarList.erase(shortcutName)
 	refreshHotbarList()
 	saveHotbar()

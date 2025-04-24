@@ -24,7 +24,7 @@ func quickSnip():
 		return
 	var title = clipboardContent.left(18).strip_edges()
 	snippets[title] = clipboardContent
-	saveSnippets()
+	save()
 	refreshSnippetsList()
 
 
@@ -32,12 +32,11 @@ func quickSnip():
 func saveNewSnippet():
 	print("code - editor input is: ", %CodeEditNode.text)
 	snippets[%SnippetName.text] = %CodeEditNode.text
-	saveSnippets()
+	save()
 	refreshSnippetsList()
 	closeSnippetPad()
 
-func saveSnippets():
-	Saver.saveGameSection(SAVE_SECTION, "snippets", snippets)
+
 
 func refreshSnippetsList():
 	for c in %SnippetList.get_children():
@@ -51,7 +50,7 @@ func refreshSnippetsList():
 
 func deleteExistingSnippet(snippetName:String):
 	snippets.erase(snippetName)
-	saveSnippets()
+	save()
 	refreshSnippetsList()
 
 func editExistingSnippet(snippetName:String):
@@ -67,4 +66,35 @@ func closeSnippetPad():
 	%SnippetEditor.visible = false
 	%CodeEditNode.text = ""
 
+
+func save():
+	Saver.saveGameSection(SAVE_SECTION, "snippets", snippets)
 #
+#func saveNewList():
+	##print("todo - new list is: ", %TodoName.text)
+	#todoLists[%Name.text] = {}
+	#refreshListsList()
+	#swapActiveList(%Name.text)
+	#clearInputBar()
+	#makingList = false
+	#saveTodos()
+	#%Name.text = ""
+	#%Name.grab_focus()
+#
+#func saveNewTodo():
+	##print("todo - new todo is: ", %Name.text)
+	#todoLists[currentList][%Name.text] = false
+	#clearInputBar()
+	#refreshSnippetsList()
+	#saveTodos()
+	#%Name.text = ""
+#
+#func saveTodos():
+	#Saver.saveGameSection(SAVE_SECTION, "todoLists", todoLists)
+	#Saver.saveGameSection(SAVE_SECTION, "currentList", currentList)
+	##print("todo - saved")
+#
+#func swapActiveList(newList:String):
+	#currentList = newList
+	#refreshTodoList()
+	#saveTodos()

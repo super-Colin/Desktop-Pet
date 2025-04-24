@@ -71,3 +71,6 @@ func showContextMenu(clickedNode, tab, listName, isShortcut = false):
 func popupTriggeredDelete():
 	if "emitDeleteRequest" in callerButton:
 		callerButton.emitDeleteRequest()
+func popupTriggeredCopy():
+	if "emitCopyRequest" in callerButton:
+		callerButton.emitCopyRequest()

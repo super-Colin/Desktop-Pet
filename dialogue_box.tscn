@@ -50,7 +50,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 1
-drag_to_rearrange_enabled = true
 
 [node name="Snips" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("1_senjy")]
 visible = false

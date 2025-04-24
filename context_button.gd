@@ -5,6 +5,7 @@ signal left_click(nodeRef)
 signal right_click(nodeRef)
 
 signal deleteRequested(title)
+signal copyRequested(title)
 
 var title:String
 var contextIsOpen = false
@@ -14,6 +15,9 @@ var isHotbarShortcut = false
 
 func emitDeleteRequest():
 	deleteRequested.emit(title)
+
+func emitCopyRequest():
+	copyRequested.emit(title)
 
 func _ready() -> void:
 	#$'.'.pressed.connect(func():Globals.toggleContextMenu($'.', tabName, title))

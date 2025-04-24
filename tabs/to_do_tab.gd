@@ -18,30 +18,19 @@ func _ready() -> void:
 	%NewListButton.pressed.connect(makingNewList)
 	%Name.text_submitted.connect(_textSubmitted)
 	%Name.focus_exited.connect(func():makingList = false)
-	#Globals.deleteSublist.connect(_deleteSublist)
-	#Globals.deleteSublist.connect(_deleteList)
 	#
 	if not todoLists.keys():
 		return
 	refreshListsList()
 	refreshTodoList()
 
-#func _deleteList(tab, listName, task):
-	#if tab == SAVE_SECTION:
-		#if task:
-			#deleteTodo(task)
-		#else:
-			#todoLists[currentList].erase(listName)
 
 
-func deleteTodo(todoName):
+func deleteListItem(todoName):
 	print("todo tab - deleting: ", todoName)
 	todoLists[currentList].erase(todoName)
 	saveTodos()
 	refreshTodoList()
-
-#func deleteTodo(todoName):
-	
 
 func deleteList(listName):
 	print("todo tab - deleting list: ", listName)
@@ -50,9 +39,6 @@ func deleteList(listName):
 	Globals.deleteHotbarShortcut.emit(listName)
 	saveTodos()
 	refreshListsList()
-
-
-
 
 func refreshListsList():
 	for c in %ListsList.get_children():
@@ -66,7 +52,6 @@ func refreshListsList():
 		newButton.deleteRequested.connect(deleteList)
 		%ListsList.add_child(newButton)
 
-
 func refreshTodoList():
 	#print("todo - ", todoLists[currentList])
 	for c in %TodosList.get_children():
@@ -77,7 +62,7 @@ func refreshTodoList():
 		var newRow = todoRowScene.instantiate()
 		newRow.setUp(key, todoLists[currentList][key])
 		newRow.todoToggled.connect(todoToggled)
-		newRow.deleteRequested.connect(deleteTodo)
+		newRow.deleteRequested.connect(deleteListItem)
 		#newRow.tabName = SAVE_SECTION
 		%TodosList.add_child(newRow)
 
@@ -89,7 +74,6 @@ func todoToggled(title):
 	todoLists[currentList][title] = not todoLists[currentList][title]
 	#print("todo - todo toggled: ", todoLists[currentList][title])
 	saveTodos()
-
 
 func makeStrikeVisible(buttonNode):
 	setStrikeDimension(buttonNode)
@@ -137,19 +121,21 @@ func saveNewTodo():
 	saveTodos()
 	%Name.text = ""
 
-
 func saveTodos():
 	Saver.saveGameSection(SAVE_SECTION, "todoLists", todoLists)
 	Saver.saveGameSection(SAVE_SECTION, "currentList", currentList)
 	#print("todo - saved")
 
-func clearInputBar():
-	%Name.text = ""
-
 func swapActiveList(newList:String):
 	currentList = newList
 	refreshTodoList()
 	saveTodos()
+
+
+
+func clearInputBar():
+	%Name.text = ""
+
 
 
 # ui_text_accept

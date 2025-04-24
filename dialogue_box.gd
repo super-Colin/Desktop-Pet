@@ -11,12 +11,17 @@ var tabOrder:Dictionary = {
 	"TODO_TAB":1,
 	"TIMER_TAB":2,
 }
+var lastActiveTab = 0
 
 
 func _ready() -> void:
 	tabOrder = Saver.loadGameSection(SAVE_SECTION, "tabOrder", tabOrder)
+	lastActiveTab = Saver.loadGameSection(SAVE_SECTION, "lastActiveTab", lastActiveTab)
+	%TabsContainer.current_tab = lastActiveTab
 	gui_input.connect(onButtonGuiInput)
 	Globals.dialogueBoxRef = $'.'
+	%TabsContainer.tab_changed.connect(saveLastActiveTab)
+	#%TabsContainer.active_tab_rearranged.connect(printTabs)
 
 
 func jumpToList(tab, listName):
@@ -28,6 +33,32 @@ func jumpToList(tab, listName):
 	#for key in %TabsContainer:
 		#print(key)
 
+
+
+func saveLastActiveTab(tabIndex):
+	Saver.saveGameSection(SAVE_SECTION, "lastActiveTab", tabIndex)
+
+
+func getTabNodeByName(name):
+	if name == "SNIPS_TAB":
+		return %TabsContainer/Snips
+	elif name == "TODO_TAB":
+		return %"TabsContainer/To Do"
+	elif name == "TIMER_TAB":
+		return %TabsContainer/Snips
+
+func getTabNumberByName(name):
+	if name == "SNIPS_TAB":
+		return %TabsContainer/Snips
+	elif name == "TODO_TAB":
+		return %"TabsContainer/To Do"
+	elif name == "TIMER_TAB":
+		return %TabsContainer/Snips
+
+func printTabs(g):
+	for t in %TabsContainer.get_children():
+		print(t.name)
+	print("------")
 
 
 
