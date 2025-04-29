@@ -30,6 +30,7 @@ func _ready():
 	%ContextPopup.visible = false
 	Globals.contextMenuRef = %ContextPopup
 	%Hotbar.shortcutPressed.connect(%DialogueBox.jumpToList)
+	Globals.closeProgramRequested.connect(closeProgram)
 	#%Hotbar.tab_changed.connect()
 
 
@@ -40,6 +41,12 @@ func _process(_delta):
 	$Mouse.handleDragging() # handles dragging the window around with the mouse
 	handleDragAnimation() # change animation while being dragged
 	
+
+
+func closeProgram():
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	get_tree().quit()
+
 
 
 func handleDragAnimation()->void:

@@ -34,7 +34,7 @@ func setUp(tab, list, isShortcut = false, sublistItem = ""):
 	#%AddToHotbarButton.pressed.connect(addHotbarShortcut)
 
 func addHotbarShortcut():
-	print("popup - adding shortcut: ", tabName, ", ", title)
+	#print("popup - adding shortcut: ", tabName, ", ", title)
 	Globals.addToHotbar(tabName, title)
 	$'.'.visible = false
 

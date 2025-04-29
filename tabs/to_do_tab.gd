@@ -3,6 +3,7 @@ extends VBoxContainer
 
 var todoLists:Dictionary = {} # "MyTodoList":{"dishes":true}
 var currentList:String = "defualt"
+var currentListButton:Node
 var todoRowScene = preload("res://tabs/to_do_row.tscn")
 var buttonScene = preload("res://context_button.tscn")
 var makingList = false
@@ -17,13 +18,40 @@ func _ready() -> void:
 	%SaveTodoButton.pressed.connect(saveTodo)
 	%NewListButton.pressed.connect(makingNewList)
 	%Name.text_submitted.connect(_textSubmitted)
-	%Name.focus_exited.connect(func():makingList = false)
+	%Name.focus_exited.connect(_focusLost)
 	#
 	if not todoLists.keys():
 		return
 	refreshListsList()
+	highlightListList(currentList)
 	refreshTodoList()
 
+func _focusLost():
+	makingList = false
+	%Name.placeholder_text = "New Todo Name"
+
+func highlightListList(listName:String):
+	var button = getListListButton(listName)
+	print("todo tab - hightlighting list: ", listName, ", button: ", button)
+	var newStyle = makeHighlightedButtonStylebox()
+	button.add_theme_stylebox_override("normal", newStyle)
+	button.add_theme_stylebox_override("hover", newStyle)
+	if currentListButton:
+		currentListButton.remove_theme_stylebox_override("normal")
+		currentListButton.remove_theme_stylebox_override("hover")
+	currentListButton = button
+
+
+func getListListButton(listName:String):
+	for c in %ListsList.get_children():
+		if "title" in c:
+			if c.title == listName:
+				return c
+
+func makeHighlightedButtonStylebox()->StyleBoxFlat:
+	var newStyle = StyleBoxFlat.new()
+	newStyle.bg_color = Color(0.498039, 1, 0, 0.3) # CHARTREUSE
+	return newStyle
 
 
 func deleteListItem(todoName):
@@ -56,8 +84,9 @@ func refreshTodoList():
 	#print("todo - ", todoLists[currentList])
 	for c in %TodosList.get_children():
 		c.queue_free()
+	sortByCompleted()
 	for key in todoLists[currentList].keys():
-		print("todo row - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
+		#print("todo tab - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
 		#print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
 		var newRow = todoRowScene.instantiate()
 		newRow.setUp(key, todoLists[currentList][key])
@@ -65,6 +94,14 @@ func refreshTodoList():
 		newRow.deleteRequested.connect(deleteListItem)
 		#newRow.tabName = SAVE_SECTION
 		%TodosList.add_child(newRow)
+
+
+func sortByCompleted():
+	for key in todoLists[currentList].keys():
+		if todoLists[currentList][key]:
+			todoLists[currentList].erase(key)
+			todoLists[currentList][key] = true
+
 
 
 
@@ -95,6 +132,7 @@ func _textSubmitted(newText):
 func makingNewList():
 	makingList = true
 	%Name.grab_focus()
+	%Name.placeholder_text = "New List Name"
 
 func saveTodo():
 	if makingList:
@@ -104,18 +142,21 @@ func saveTodo():
 
 func saveNewList():
 	#print("todo - new list is: ", %TodoName.text)
-	todoLists[%Name.text] = {}
+	var capitalized = %Name.text.capitalize()
+	todoLists[capitalized] = {}
 	refreshListsList()
-	swapActiveList(%Name.text)
+	swapActiveList(capitalized)
 	clearInputBar()
 	makingList = false
 	saveTodos()
 	%Name.text = ""
+	%Name.placeholder_text = "New Todo Name"
 	%Name.grab_focus()
 
 func saveNewTodo():
 	#print("todo - new todo is: ", %Name.text)
-	todoLists[currentList][%Name.text] = false
+	var capitalized = %Name.text.capitalize()
+	todoLists[currentList][capitalized] = false
 	clearInputBar()
 	refreshTodoList()
 	saveTodos()
@@ -129,6 +170,7 @@ func saveTodos():
 func swapActiveList(newList:String):
 	currentList = newList
 	refreshTodoList()
+	highlightListList(currentList)
 	saveTodos()
 
 

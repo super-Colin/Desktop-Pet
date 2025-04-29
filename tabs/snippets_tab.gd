@@ -26,6 +26,11 @@ func quickSnip():
 	snippets[title] = clipboardContent
 	save()
 	refreshSnippetsList()
+	Globals.hideContextPopup($'.')
+
+
+#Globals.hideContextPopup($'.')
+
 
 
 
@@ -52,24 +57,32 @@ func deleteExistingSnippet(snippetName:String):
 	snippets.erase(snippetName)
 	save()
 	refreshSnippetsList()
+	Globals.hideContextPopup($'.')
 
 func editExistingSnippet(snippetName:String):
 	openSnippetPad()
 	%CodeEditNode.text = snippets[snippetName]
 	%SnippetName.text = snippetName
+	Globals.hideContextPopup($'.')
 
 
 func openSnippetPad():
 	%SnippetEditor.visible = true
+	Globals.hideContextPopup($'.')
 
 func closeSnippetPad():
 	%SnippetEditor.visible = false
 	%CodeEditNode.text = ""
+	Globals.hideContextPopup($'.')
 
 
 func save():
 	Saver.saveGameSection(SAVE_SECTION, "snippets", snippets)
-#
+
+
+
+
+
 #func saveNewList():
 	##print("todo - new list is: ", %TodoName.text)
 	#todoLists[%Name.text] = {}

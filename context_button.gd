@@ -39,7 +39,7 @@ func onButtonGuiInput(event=null):
 				
 
 func setUp(tab, label, isShortcut = false):
-	print("context button - set up; tab: ", tab, ", label: ", label, ", is shortcut: ", isShortcut)
+	#print("context button - set up; tab: ", tab, ", label: ", label, ", is shortcut: ", isShortcut)
 	tabName = tab
 	title = label
 	isHotbarShortcut = isShortcut

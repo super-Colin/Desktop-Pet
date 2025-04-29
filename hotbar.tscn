@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b31kqduwxl6rw"]
+[gd_scene load_steps=4 format=3 uid="uid://b31kqduwxl6rw"]
 
 [ext_resource type="Script" uid="uid://3pe2vcnpo1qg" path="res://hotbar.gd" id="1_mjyg7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n23yb"]
 bg_color = Color(0.114767, 0.45413, 1.92523e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjyg7"]
+bg_color = Color(0.6, 0, 0.0705882, 0.658824)
 
 [node name="Hotbar" type="VBoxContainer"]
 offset_left = 5.0
@@ -19,7 +22,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 tooltip_text = "Remove any invisble formatting around the content in your clipboard"
-text = "Flatten"
+text = "Flatten Clipboard"
 
 [node name="AlwaysOnTopToggle" type="Button" parent="Standard"]
 unique_name_in_owner = true
@@ -108,10 +111,8 @@ value = 500.0
 scrollable = false
 
 [node name="MarginContainer" type="MarginContainer" parent="Standard"]
-visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Standard"]
 visible = false
@@ -174,3 +175,17 @@ text = "something
 layout_mode = 2
 text = "something
 "
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 10
+
+[node name="Close" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+tooltip_text = "Remove any invisble formatting around the content in your clipboard"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_mjyg7")
+text = "[X] Close"

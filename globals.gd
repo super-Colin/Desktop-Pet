@@ -9,6 +9,8 @@ signal deleteHotbarShortcut(title)
 signal contextMenuClosed
 signal verifyHotbarShortcut(tab, title)
 
+signal closeProgramRequested
+
 var dialogueBoxRef
 var hotbarRef
 var contextMenuRef
@@ -51,6 +53,8 @@ func toggleContextMenu(clickedNode, tab, list, isShortcut = false):
 	#print("globals - toggling context menu, visible = : ", contextMenuIsOpen)
 
 func hideContextPopup(clickedNode):
+	if not contextMenuRef:
+		return
 	contextMenuRef.visible = false
 	contextMenuIsOpen = false
 	if "contextIsOpen" in clickedNode:
@@ -71,6 +75,9 @@ func showContextMenu(clickedNode, tab, listName, isShortcut = false):
 func popupTriggeredDelete():
 	if "emitDeleteRequest" in callerButton:
 		callerButton.emitDeleteRequest()
+		hideContextPopup(callerButton)
+
 func popupTriggeredCopy():
 	if "emitCopyRequest" in callerButton:
 		callerButton.emitCopyRequest()
+		hideContextPopup(callerButton)

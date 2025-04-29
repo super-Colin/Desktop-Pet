@@ -17,11 +17,13 @@ func _ready() -> void:
 	%ShrunkenHeightSlider.drag_ended.connect(handleChangeShrunkenHeight)
 	%AlwaysOnTopToggle.toggled.connect(UI.setAlwaysOnTop)
 	%Sides.pressed.connect(UI.switchSidesX)
+	%Close.pressed.connect(func(): Globals.closeProgramRequested.emit())
 	Globals.deleteHotbarShortcut.connect(deleteShortcut)
 	#Globals.verifyHotbarShortcut.connect(verifyShortcut)
 	UI.loaded.connect(setSlidersFromSave)
 	setSlidersFromSave()
 	refreshHotbarList()
+	gui_input.connect(onButtonGuiInput)
 
 
 
@@ -50,6 +52,15 @@ func refreshHotbarList():
 		#print("hotbar - added shortcut: ", newRow)
 		makeHotbarShortcut(hotbarList[key].tabName, hotbarList[key].listName)
 
+func onButtonGuiInput(event=null):
+	if event is InputEventMouseButton and event.pressed:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				#left_click.emit()
+				Globals.hideContextPopup($'.')
+			MOUSE_BUTTON_RIGHT:
+				#right_click.emit()
+				Globals.hideContextPopup($'.')
 
 
 func makeHotbarShortcut(tabName, listName):
@@ -80,6 +91,7 @@ func handleChangeWidth(valChanged):
 func handleChangeHeight(valChanged):
 	var currentSize = get_tree().get_root().get_window().size
 	UI.handleWindowResize(Vector2(currentSize.x, %HeightSlider.value))
+	Globals.hideContextPopup($'.')
 
 func setSlidersFromSave():
 	var currentSize = get_tree().get_root().get_window().size
