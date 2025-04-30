@@ -39,11 +39,13 @@ layout_mode = 2
 text = "Snippets"
 
 [node name="TemplatesButton" type="Button" parent="VSplitContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Templates
 "
 
 [node name="Button" type="Button" parent="VSplitContainer/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Placeholder
 "

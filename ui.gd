@@ -113,6 +113,8 @@ func toggleMenu():
 	else: expandMenu()
 
 func expandMenu():
+	if menuOpen:
+		return
 	get_tree().get_root().get_window().size = expandedSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = true
 	if xAlignment == "left":
@@ -120,6 +122,8 @@ func expandMenu():
 	menuOpen = true
 
 func hideMenu():
+	if not menuOpen:
+		return
 	#print("hiding menu")
 	get_window().size = shrunkenSize
 	get_tree().get_first_node_in_group("dialogueBox").visible = false

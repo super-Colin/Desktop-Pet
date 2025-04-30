@@ -52,12 +52,12 @@ func toggleContextMenu(clickedNode, tab, list, isShortcut = false):
 			showContextMenu(clickedNode, tab, list, isShortcut)
 	#print("globals - toggling context menu, visible = : ", contextMenuIsOpen)
 
-func hideContextPopup(clickedNode):
+func hideContextPopup(clickedNode=null):
 	if not contextMenuRef:
 		return
 	contextMenuRef.visible = false
 	contextMenuIsOpen = false
-	if "contextIsOpen" in clickedNode:
+	if clickedNode and "contextIsOpen" in clickedNode:
 		clickedNode.contextIsOpen = false
 
 func showContextMenu(clickedNode, tab, listName, isShortcut = false):
@@ -76,6 +76,14 @@ func popupTriggeredDelete():
 	if "emitDeleteRequest" in callerButton:
 		callerButton.emitDeleteRequest()
 		hideContextPopup(callerButton)
+
+
+func popupTriggeredDuplicateList():
+	if "emitDuplicateRequest" in callerButton:
+		callerButton.emitDuplicateRequest()
+		hideContextPopup(callerButton)
+
+
 
 func popupTriggeredCopy():
 	if "emitCopyRequest" in callerButton:

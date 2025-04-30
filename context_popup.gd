@@ -12,9 +12,12 @@ var callerButton
 func _ready() -> void:
 	#Globals.contextMenuClosed.connect(func():tabName = ""; title = "")
 	%AddToHotbarButton.pressed.connect(addHotbarShortcut)
+	%Duplicate.pressed.connect(duplicateList)
 	%DeleteButton.pressed.connect(delete)
 
 
+func duplicateList():
+	Globals.popupTriggeredDuplicateList()
 
 func copy():
 	Globals.popupTriggeredCopy()

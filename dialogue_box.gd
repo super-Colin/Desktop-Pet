@@ -30,6 +30,7 @@ func jumpToList(tab, listName):
 	%TabsContainer.current_tab = tabOrder[tab]
 	if tab == "TODO_TAB":
 		$"MarginContainer/VBoxContainer/TabsContainer/To Do".swapActiveList(listName)
+	UI.expandMenu()
 	#for key in %TabsContainer:
 		#print(key)
 

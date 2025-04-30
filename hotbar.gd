@@ -67,7 +67,7 @@ func makeHotbarShortcut(tabName, listName):
 	if not listName in hotbarList.keys():
 		hotbarList[listName] = {"tabName":tabName, "listName": listName}
 		Saver.saveGameSection(SAVE_SECTION, "hotbar", hotbarList)
-	print("hotbar - making shortcut: ", tabName, ", listName: ", listName)
+	#print("hotbar - making shortcut: ", tabName, ", listName: ", listName)
 	var newButton = buttonScene.instantiate()
 	newButton.setUp(tabName, listName, true)
 	newButton.pressed.connect(func(): shortcutPressed.emit(tabName, listName))

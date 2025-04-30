@@ -6,6 +6,7 @@ signal right_click(nodeRef)
 
 signal deleteRequested(title)
 signal copyRequested(title)
+signal duplicateRequested(title)
 
 var title:String
 var contextIsOpen = false
@@ -18,6 +19,11 @@ func emitDeleteRequest():
 
 func emitCopyRequest():
 	copyRequested.emit(title)
+
+func emitDuplicateRequest():
+	duplicateRequested.emit(title)
+
+
 
 func _ready() -> void:
 	#$'.'.pressed.connect(func():Globals.toggleContextMenu($'.', tabName, title))

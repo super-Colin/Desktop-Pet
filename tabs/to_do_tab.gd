@@ -7,6 +7,10 @@ var currentListButton:Node
 var todoRowScene = preload("res://tabs/to_do_row.tscn")
 var buttonScene = preload("res://context_button.tscn")
 var makingList = false
+
+var makingDuplicate:bool = false
+var duplicatingList:String = ""
+
 #var tabName = "todo"
 
 const SAVE_SECTION = "TODO_TAB"
@@ -28,7 +32,9 @@ func _ready() -> void:
 
 func _focusLost():
 	makingList = false
-	%Name.placeholder_text = "New Todo Name"
+	makingDuplicate = false
+	duplicatingList = ""
+	%Name.placeholder_text = "New Todo"
 
 func highlightListList(listName:String):
 	var button = getListListButton(listName)
@@ -36,9 +42,11 @@ func highlightListList(listName:String):
 	var newStyle = makeHighlightedButtonStylebox()
 	button.add_theme_stylebox_override("normal", newStyle)
 	button.add_theme_stylebox_override("hover", newStyle)
-	if currentListButton:
+	button.add_theme_stylebox_override("pressed", newStyle)
+	if currentListButton and currentListButton != button:
 		currentListButton.remove_theme_stylebox_override("normal")
 		currentListButton.remove_theme_stylebox_override("hover")
+		currentListButton.remove_theme_stylebox_override("pressed")
 	currentListButton = button
 
 
@@ -52,6 +60,15 @@ func makeHighlightedButtonStylebox()->StyleBoxFlat:
 	var newStyle = StyleBoxFlat.new()
 	newStyle.bg_color = Color(0.498039, 1, 0, 0.3) # CHARTREUSE
 	return newStyle
+
+
+
+func duplicateList(listName):
+	print("todo tab - duplicate list")
+	makingDuplicate = true
+	duplicatingList = listName
+	%Name.grab_focus()
+	%Name.placeholder_text = "New Duplicate List Name"
 
 
 func deleteListItem(todoName):
@@ -78,7 +95,9 @@ func refreshListsList():
 		newButton.pressed.connect(swapActiveList.bind(key))
 		newButton.setUp(SAVE_SECTION, key, false, )
 		newButton.deleteRequested.connect(deleteList)
+		newButton.duplicateRequested.connect(duplicateList)
 		%ListsList.add_child(newButton)
+
 
 func refreshTodoList():
 	#print("todo - ", todoLists[currentList])
@@ -92,8 +111,11 @@ func refreshTodoList():
 		newRow.setUp(key, todoLists[currentList][key])
 		newRow.todoToggled.connect(todoToggled)
 		newRow.deleteRequested.connect(deleteListItem)
+		
 		#newRow.tabName = SAVE_SECTION
 		%TodosList.add_child(newRow)
+
+
 
 
 func sortByCompleted():
@@ -137,10 +159,25 @@ func makingNewList():
 func saveTodo():
 	if makingList:
 		saveNewList()
+	elif makingDuplicate:
+		saveNewDuplicateList()
 	else:
 		saveNewTodo()
 
-func saveNewList():
+func saveNewDuplicateList():
+	print("todo tab - saving duplicate list: ", duplicatingList)
+	var capitalized = %Name.text.capitalize()
+	todoLists[capitalized] = todoLists[duplicatingList].duplicate()
+	refreshListsList()
+	swapActiveList(capitalized)
+	clearInputBar()
+	makingDuplicate = false
+	duplicatingList = ""
+	saveTodos()
+	cleanInputBar()
+
+
+func saveNewList(isDuplicate=false):
 	#print("todo - new list is: ", %TodoName.text)
 	var capitalized = %Name.text.capitalize()
 	todoLists[capitalized] = {}
@@ -149,9 +186,14 @@ func saveNewList():
 	clearInputBar()
 	makingList = false
 	saveTodos()
+	cleanInputBar()
+
+func cleanInputBar():
 	%Name.text = ""
-	%Name.placeholder_text = "New Todo Name"
+	%Name.placeholder_text = "New Todo"
 	%Name.grab_focus()
+
+
 
 func saveNewTodo():
 	#print("todo - new todo is: ", %Name.text)
