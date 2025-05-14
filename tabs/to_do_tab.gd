@@ -166,7 +166,7 @@ func saveTodo():
 
 func saveNewDuplicateList():
 	print("todo tab - saving duplicate list: ", duplicatingList)
-	var capitalized = %Name.text.capitalize()
+	var capitalized = Globals.customCapitalize(%Name.text)
 	todoLists[capitalized] = todoLists[duplicatingList].duplicate()
 	refreshListsList()
 	swapActiveList(capitalized)
@@ -179,7 +179,7 @@ func saveNewDuplicateList():
 
 func saveNewList(isDuplicate=false):
 	#print("todo - new list is: ", %TodoName.text)
-	var capitalized = %Name.text.capitalize()
+	var capitalized = Globals.customCapitalize(%Name.text)
 	todoLists[capitalized] = {}
 	refreshListsList()
 	swapActiveList(capitalized)
@@ -197,7 +197,7 @@ func cleanInputBar():
 
 func saveNewTodo():
 	#print("todo - new todo is: ", %Name.text)
-	var capitalized = %Name.text.capitalize()
+	var capitalized = Globals.customCapitalize(%Name.text)
 	todoLists[currentList][capitalized] = false
 	clearInputBar()
 	refreshTodoList()

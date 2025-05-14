@@ -89,3 +89,21 @@ func popupTriggeredCopy():
 	if "emitCopyRequest" in callerButton:
 		callerButton.emitCopyRequest()
 		hideContextPopup(callerButton)
+
+
+
+
+
+
+
+func customCapitalize(input:String)->String:
+	var output:String = ""
+	for word in input.split(" "):
+		output += word.left(1).to_upper() + word.erase(0,1) + " "
+	return output.rstrip(" ")
+
+
+
+
+
+#

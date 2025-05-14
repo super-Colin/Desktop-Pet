@@ -25,7 +25,6 @@ func _ready():
 	%DraggableArea.gui_input.connect(%Mouse.interpretMouseInput)
 	%Mouse.rightClicked.connect(UI.toggleMenu)
 	#%UI.sayInMenu(" hello from the main script")
-	#%JokeButton.pressed.connect(%Behaviour.tellJoke)
 	%DialogueBox.visible = false
 	%ContextPopup.visible = false
 	Globals.contextMenuRef = %ContextPopup
