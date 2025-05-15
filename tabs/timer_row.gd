@@ -1,41 +1,76 @@
-extends PanelContainer
+extends RowTemplate
+#class_name TimerRow 
+
+#signal editRequested(itemName:String)
+#signal deleteRequested(itemName:String)
+#signal updated(itemName:String, data:Dictionary)
+#signal saveRequested(itemName:String)
 
 
-signal timerToggled(title:String, toggledOn:bool)
-signal editRequested(snippetName:String)
-signal deleteRequested(snippetName:String)
-
-var title:String
+#var title:String
+#var data = {}
+var dataDefault = {
+		"time":0.0
+	}
 var timing = false
-var time = 0.0
 
 
 func _ready() -> void:
-	%Title.pressed.connect(toggleIsTiming)
+	if data == {}:
+		data = dataDefault
+	#%Title.pressed.connect(toggleIsTiming)
 	%TimerLabelButton.pressed.connect(toggleIsTiming)
-	$HBoxContainer/Delete.pressed.connect(func():deleteRequested.emit(%Title.text))
+	$HBoxContainer/Delete.pressed.connect(func():deleteRequested.emit(title))
+	print("timer row - ready: ", data )
+	pass
 
 
 
-func setUp(name:String, currentTime:float):
+
+func setUp(name:String, setupData:Dictionary):
 	title = name
-	%Title.text = title
-	%TimerLabelButton.text =  str(currentTime)
+	#print("timer row - setupDic: ", setupData, ", ", data )
+	if setupData == {}: # if no saved data
+		data = dataDefault
+		requestSave() # save the default data
+	else: data = setupData
+	#print("timer row - setupDic: ", setupData, ", ", data )
+	%TimerLabelButton.text = title + "\n" + floatToTimeFormat(data.time)
 
 
-func roundDecimalPoints(num, decimalsPlaces=2):
-	return "%0.2f" % time
+
+func floatToTimeFormat(numOfSeconds):
+	var seconds = fmod(numOfSeconds, 60)
+	var minutes = int(numOfSeconds) / 60
+	var hours = minutes / 60
+	minutes %= 60
+	return "%d : %d : %00.01f" % [hours, minutes, seconds]
+	#return "%d : %d : %d" % [hours, minutes, seconds]
 
 
 func toggleIsTiming():
-	print("timer row - toggling timing: ", %Title.text)
+	print("timer row - toggling timing: ", title)
 	timing = not timing
+	if not timing:
+		requestSave()
 
 
 
+var lastSavedSecond = 0
 func _physics_process(delta: float) -> void:
 	#print("timer row - is physics: ",)
 	if timing:
-		time += delta
+		data.time += delta
 		#print("timer row - is timing: ",)
-		%TimerLabelButton.text = roundDecimalPoints(time)
+		%TimerLabelButton.text = title + "\n" + floatToTimeFormat(data.time)
+		if int(data.time) % 60 == 0 and lastSavedSecond != int(data.time):
+			lastSavedSecond = int(data.time)
+			requestSave()
+
+
+func requestSave():
+	updated.emit(title, data)
+	saveRequested.emit()
+
+
+#

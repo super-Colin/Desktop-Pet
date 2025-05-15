@@ -18,9 +18,16 @@ var contextMenuIsOpen = false
 var callerButton
 
 
+enum groupTypes {TASK, CATEGORY}
+enum groupTagTypes {NOTES, COPYPASTE, ONGOING}
+enum hotbarTypes {TAB, ROW}
+
+
+
 func _ready() -> void:
 	if not contextMenuRef:
 		return
+
 
 
 

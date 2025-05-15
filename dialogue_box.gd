@@ -82,11 +82,11 @@ func onButtonGuiInput(event=null):
 
 
 
-func handleChangeWidth(valChanged):
+func handleChangeWidth(_valChanged):
 	var currentSize = get_tree().get_root().get_window().size
 	UI.handleWindowResize(Vector2(%WidthSlider.value, currentSize.y))
 
-func handleChangeHeight(valChanged):
+func handleChangeHeight(_valChanged):
 	var currentSize = get_tree().get_root().get_window().size
 	UI.handleWindowResize(Vector2(currentSize.x, %HeightSlider.value))
 

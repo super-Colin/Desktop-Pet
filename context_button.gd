@@ -42,7 +42,12 @@ func onButtonGuiInput(event=null):
 				right_click.emit()
 				#print("context button - ", $'.', ", ", tabName, ", ",title)
 				Globals.toggleContextMenu($'.', tabName, title, isHotbarShortcut)
-				
+
+@export var canBeHotbarShortcut = false
+@export var canBeDuplicated = false
+@export var canBeDeleted = false
+@export var canBeGrouped = false
+@export var groupLevel = "tab"
 
 func setUp(tab, label, isShortcut = false):
 	#print("context button - set up; tab: ", tab, ", label: ", label, ", is shortcut: ", isShortcut)

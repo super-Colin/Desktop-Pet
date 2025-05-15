@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://gphxfnof4hxd"]
+[gd_scene load_steps=5 format=3 uid="uid://dnk2085uctp2m"]
 
-[ext_resource type="Script" uid="uid://cap7wq2nvxm8r" path="res://tabs/snippets_tab.gd" id="1_qqqt6"]
-[ext_resource type="PackedScene" uid="uid://d3muq5wew7rtc" path="res://tabs/snippet_row.tscn" id="2_o2h5y"]
+[ext_resource type="Script" uid="uid://cap7wq2nvxm8r" path="res://tabs/snippets_tab.gd" id="1_2jiy2"]
+[ext_resource type="PackedScene" uid="uid://d3muq5wew7rtc" path="res://tabs/snippet_row.tscn" id="2_kjrfb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vl4ct"]
 bg_color = Color(0.443422, 0, 0.0709508, 1)
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_qqqt6")
+script = ExtResource("1_2jiy2")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="."]
 layout_mode = 2
@@ -80,10 +80,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SnippetRow" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("2_o2h5y")]
+[node name="SnippetRow" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("2_kjrfb")]
 layout_mode = 2
 
-[node name="SnippetRow2" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("2_o2h5y")]
+[node name="SnippetRow2" parent="VSplitContainer/HBoxContainer/RightSideScrollable/Snippets/SnippetList" instance=ExtResource("2_kjrfb")]
 layout_mode = 2
 
 [node name="SnippetEditor" type="VBoxContainer" parent="VSplitContainer"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://c8m8svhtp2ksf"]
 
 [ext_resource type="Script" uid="uid://ce3exek2bxi8c" path="res://dialogue_box.gd" id="1_n23yb"]
-[ext_resource type="PackedScene" uid="uid://gphxfnof4hxd" path="res://tabs/snippets_tab.tscn" id="1_senjy"]
 [ext_resource type="PackedScene" uid="uid://tlof5wxfa42m" path="res://tabs/to_do_tab.tscn" id="3_0nste"]
-[ext_resource type="PackedScene" uid="uid://cxv8c8kubeke7" path="res://tabs/timer_tab.tscn" id="4_if77y"]
 [ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://context_button.tscn" id="5_351bv"]
+[ext_resource type="PackedScene" uid="uid://bvyabbndhjtl3" path="res://tabs/tab_template.tscn" id="6_85jfh"]
+[ext_resource type="PackedScene" uid="uid://b4ne00l0xls1" path="res://tabs/timer_row.tscn" id="7_med3p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_senjy"]
 bg_color = Color(0.466971, 0.186746, 1.44392e-07, 1)
@@ -49,29 +49,27 @@ placeholder_text = "What's up?"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 2
 
-[node name="Snips" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("1_senjy")]
+[node name="To Do" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("3_0nste")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="To Do" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("3_0nste")]
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="Timers" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("4_if77y")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
 [node name="Images" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabsContainer"]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 3
+metadata/_tab_index = 1
 
 [node name="ContextButton" parent="MarginContainer/VBoxContainer/TabsContainer/Images" instance=ExtResource("5_351bv")]
 layout_mode = 2
+
+[node name="Timers" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("6_85jfh")]
+layout_mode = 2
+rowScene = ExtResource("7_med3p")
+SAVE_SECTION = "TIMERS_TAB"
+rowName = "timer"
+metadata/_tab_index = 2
 
 [node name="SpeechOutMenu" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true

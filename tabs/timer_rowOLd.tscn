@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4ne00l0xls1"]
+[gd_scene load_steps=4 format=3 uid="uid://chivjjobxk6ph"]
 
-[ext_resource type="Script" uid="uid://blqho1l5hjda4" path="res://tabs/timer_row.gd" id="1_korbx"]
+[ext_resource type="Script" uid="uid://blqho1l5hjda4" path="res://tabs/timer_row.gd" id="1_cc6ju"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vsv4r"]
 
@@ -10,7 +10,7 @@ bg_color = Color(0.199373, 0.199373, 0.199373, 1)
 [node name="TimerRow" type="PanelContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_korbx")
+script = ExtResource("1_cc6ju")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
