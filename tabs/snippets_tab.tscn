@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvyabbndhjtl3"]
+[gd_scene load_steps=10 format=3 uid="uid://chk6ormftuw86"]
 
-[ext_resource type="Script" uid="uid://cbfblgtxrrknp" path="res://tabs/tab_template.gd" id="1_s5pdf"]
+[ext_resource type="Script" uid="uid://cap7wq2nvxm8r" path="res://tabs/snippets_tab.gd" id="1_qqqt6"]
+[ext_resource type="PackedScene" uid="uid://bb06u3110oiyr" path="res://tabs/snippets_row.tscn" id="2_nxr6r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s5pdf"]
 bg_color = Color(1, 0.352941, 0.129412, 0.180392)
@@ -16,6 +17,9 @@ border_color = Color(0.8, 0.8, 0.8, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0ivd"]
 bg_color = Color(0.113429, 0.312392, 0.225213, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxr6r"]
+bg_color = Color(0.417862, 0.173686, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okqnh"]
 
@@ -36,7 +40,10 @@ size_flags_vertical = 3
 theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_s5pdf")
 drag_area_margin_begin = 4
 drag_area_margin_end = 4
-script = ExtResource("1_s5pdf")
+script = ExtResource("1_qqqt6")
+rowScene = ExtResource("2_nxr6r")
+SAVE_SECTION = "SNIPPETS_TAB"
+rowName = "snippet"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 2
@@ -56,6 +63,13 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_l0ivd")
 text = "New List"
+
+[node name="QuickSnipButton" type="Button" parent="HSplitContainer/LeftSide"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_nxr6r")
+text = "Quick Snip"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/LeftSide"]
 custom_minimum_size = Vector2(120, 0)

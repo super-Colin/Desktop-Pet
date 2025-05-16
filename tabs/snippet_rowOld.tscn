@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3muq5wew7rtc"]
-
-[ext_resource type="Script" uid="uid://cnfxgrf5cxb7r" path="res://tabs/snippet_row.gd" id="1_cmdpm"]
+[gd_scene load_steps=5 format=3 uid="uid://bwaq3u8a3mngu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u6pl2"]
 bg_color = Color(0.176471, 0.247059, 0.0705882, 0.670588)
@@ -14,7 +12,6 @@ bg_color = Color(0.199373, 0.199373, 0.199373, 1)
 
 [node name="SnippetRow" type="PanelContainer"]
 theme_override_styles/panel = SubResource("StyleBoxFlat_u6pl2")
-script = ExtResource("1_cmdpm")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

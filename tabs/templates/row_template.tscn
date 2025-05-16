@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bmu4vghkjvc6f"]
+[gd_scene load_steps=5 format=3 uid="uid://bmu4vghkjvc6f"]
 
-[ext_resource type="Script" uid="uid://bdep43r5o503b" path="res://tabs/row_template.gd" id="1_bysk7"]
+[ext_resource type="Script" uid="uid://bdep43r5o503b" path="res://tabs/templates/row_template.gd" id="1_bysk7"]
 [ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://context_button.tscn" id="2_bysk7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltona"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_korbx"]
 bg_color = Color(0.199373, 0.199373, 0.199373, 1)
@@ -18,11 +20,21 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ContextButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_bysk7")]
+[node name="TitleButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_bysk7")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Reset" type="Button" parent="HBoxContainer"]
+[node name="EditButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ltona")
+text = "E"
+
+[node name="ResetButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -30,7 +42,8 @@ theme_override_colors/font_color = Color(1, 0.507084, 0.440532, 1)
 theme_override_styles/normal = SubResource("StyleBoxFlat_korbx")
 text = "R"
 
-[node name="Delete" type="Button" parent="HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_horizontal = 8

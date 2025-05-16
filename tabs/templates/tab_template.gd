@@ -3,12 +3,12 @@ class_name TabTemplate
 
 
 
-var lists:Dictionary = {}
-var currentList:String = ""
+var lists:Dictionary = {"Random":{}}
+var currentList:String = "Random"
 var currentListButton:Node
 #var todoRowScene = preload("res://tabs/to_do_row.tscn")
 @export var rowScene:PackedScene
-var buttonScene = preload("res://context_button.tscn")
+var contextButtonScene = preload("res://context_button.tscn")
 var makingList = false
 
 var makingDuplicate:bool = false
@@ -35,14 +35,20 @@ func _ready() -> void:
 		makingNewList()
 	else:
 		highlightListList(currentList)
+	if "_readyHook" in $'.':
+		$'.'._readyHook()
 
+#func _readyHook():
 
 #region Editor
 func hideEditor():
 	%Editor.visible = false
 
 func showEditor():
-	%Editor.visible = false
+	%Editor.visible = true
+
+#func clearEditor():
+	#
 
 #endregion
 
@@ -86,7 +92,10 @@ func makeNewRow(rowKey):
 	var newRow = rowScene.instantiate()
 	newRow.setUp(rowKey, lists[currentList][rowKey])
 	#newRow.todoToggled.connect(todoToggled)
+	if "makeNewRowHook" in $'.':
+		$'.'.makeNewRowHook(newRow)
 	return newRow
+#func makeNewRow(rowScene:PackedScene):
 
 func makingNewList():
 	makingList = true
@@ -111,9 +120,12 @@ func deleteList(listName):
 	saveTab()
 	refreshListsList()
 
-func deleteListItem(todoName):
-	print(rowName + " tab - deleting: ", todoName)
-	lists[currentList].erase(todoName)
+func deleteListItem(rowTitle):
+	print(rowName + " tab - deleting: ", rowTitle)
+	if not lists[currentList].has(rowTitle):
+		print(rowName + " tab - ", currentList, " doesn't have that key, skipping: ", rowTitle)
+		return
+	lists[currentList].erase(rowTitle)
 	saveTab()
 	refreshList()
 
@@ -127,12 +139,12 @@ func refreshListsList():
 	#print("todo - todoLists: ", todoLists)
 	for key in lists.keys():
 		#print("todo tab - key: ", key)
-		var newButton = buttonScene.instantiate()
-		newButton.pressed.connect(swapActiveList.bind(key))
-		newButton.setUp(SAVE_SECTION, key, false)
-		newButton.deleteRequested.connect(deleteList)
-		newButton.duplicateRequested.connect(duplicateList)
-		%ListsList.add_child(newButton)
+		var newContextButton = contextButtonScene.instantiate()
+		newContextButton.pressed.connect(swapActiveList.bind(key))
+		newContextButton.setUp(SAVE_SECTION, key, false)
+		newContextButton.deleteRequested.connect(deleteList)
+		newContextButton.duplicateRequested.connect(duplicateList)
+		%ListsList.add_child(newContextButton)
 
 func refreshList():
 	#print("todo - ", todoLists[currentList])
@@ -155,10 +167,13 @@ func refreshList():
 func updateItemData(itemTitle, data, list):
 	lists[list][itemTitle] = data
 
-func saveNewRow():
+func saveNewRow(rowData:Dictionary={}, title:String=""):
 	#print("todo - new todo is: ", %NameInput.text)
-	var capitalized = Globals.customCapitalize(%NameInput.text)
-	lists[currentList][capitalized] = {}
+	var rowTitle
+	if title == "":
+		rowTitle = Globals.customCapitalize(%NameInput.text)
+	else: rowTitle = title
+	lists[currentList][rowTitle] = rowData
 	cleanInputBar()
 	refreshList()
 	saveTab()

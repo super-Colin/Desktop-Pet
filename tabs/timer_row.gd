@@ -1,14 +1,15 @@
 extends RowTemplate
 #class_name TimerRow 
 
+#Inherited:
 #signal editRequested(itemName:String)
 #signal deleteRequested(itemName:String)
 #signal updated(itemName:String, data:Dictionary)
 #signal saveRequested(itemName:String)
-
-
+#
 #var title:String
 #var data = {}
+
 var dataDefault = {
 		"time":0.0
 	}
@@ -29,11 +30,11 @@ func _ready() -> void:
 
 func setUp(name:String, setupData:Dictionary):
 	title = name
-	#print("timer row - setupDic: ", setupData, ", ", data )
 	if setupData == {}: # if no saved data
 		data = dataDefault
 		requestSave() # save the default data
 	else: data = setupData
+	#print("timer row - setupDic: ", setupData, ", ", data )
 	#print("timer row - setupDic: ", setupData, ", ", data )
 	%TimerLabelButton.text = title + "\n" + floatToTimeFormat(data.time)
 

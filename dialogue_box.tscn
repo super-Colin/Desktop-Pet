@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8m8svhtp2ksf"]
+[gd_scene load_steps=9 format=3 uid="uid://c8m8svhtp2ksf"]
 
 [ext_resource type="Script" uid="uid://ce3exek2bxi8c" path="res://dialogue_box.gd" id="1_n23yb"]
+[ext_resource type="PackedScene" uid="uid://chk6ormftuw86" path="res://tabs/snippets_tab.tscn" id="1_senjy"]
 [ext_resource type="PackedScene" uid="uid://tlof5wxfa42m" path="res://tabs/to_do_tab.tscn" id="3_0nste"]
 [ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://context_button.tscn" id="5_351bv"]
-[ext_resource type="PackedScene" uid="uid://bvyabbndhjtl3" path="res://tabs/tab_template.tscn" id="6_85jfh"]
+[ext_resource type="PackedScene" uid="uid://bvyabbndhjtl3" path="res://tabs/templates/tab_template.tscn" id="6_85jfh"]
 [ext_resource type="PackedScene" uid="uid://b4ne00l0xls1" path="res://tabs/timer_row.tscn" id="7_med3p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_senjy"]
@@ -70,6 +71,11 @@ rowScene = ExtResource("7_med3p")
 SAVE_SECTION = "TIMERS_TAB"
 rowName = "timer"
 metadata/_tab_index = 2
+
+[node name="Snippets" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("1_senjy")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="SpeechOutMenu" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
