@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://comy7xh06k0xj"]
+
+[ext_resource type="Script" uid="uid://b25yvhomx6wfr" path="res://tabs/todo_row.gd" id="1_c31rs"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://context_button.tscn" id="2_ysfk0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltona"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_korbx"]
+bg_color = Color(0.199373, 0.199373, 0.199373, 1)
+
+[node name="Row" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_c31rs")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_ysfk0")]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Strike" type="Line2D" parent="HBoxContainer/VBoxContainer/TitleButton"]
+unique_name_in_owner = true
+points = PackedVector2Array(-1, 0, 1637, 59)
+width = 4.0
+default_color = Color(0.164706, 1, 0.0980392, 0.470588)
+
+[node name="EditButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ltona")
+text = "E"
+
+[node name="ResetButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 0.507084, 0.440532, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_korbx")
+text = "R"
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_korbx")
+text = "X"

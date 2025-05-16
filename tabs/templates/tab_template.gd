@@ -90,11 +90,12 @@ func makeHighlightedButtonStylebox()->StyleBoxFlat:
 #region Make New / Duplicate
 func makeNewRow(rowKey):
 	var newRow = rowScene.instantiate()
-	newRow.setUp(rowKey, lists[currentList][rowKey])
+	newRow.setUp(rowKey, lists[currentList][rowKey], rowName)
 	#newRow.todoToggled.connect(todoToggled)
 	if "makeNewRowHook" in $'.':
 		$'.'.makeNewRowHook(newRow)
 	return newRow
+	
 #func makeNewRow(rowScene:PackedScene):
 
 func makingNewList():

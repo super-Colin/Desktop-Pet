@@ -49,6 +49,10 @@ func onButtonGuiInput(event=null):
 @export var canBeGrouped = false
 @export var groupLevel = "tab"
 
+var flags = {
+	isShortcut=false
+}
+
 func setUp(tab, label, isShortcut = false):
 	#print("context button - set up; tab: ", tab, ", label: ", label, ", is shortcut: ", isShortcut)
 	tabName = tab

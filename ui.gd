@@ -20,6 +20,8 @@ var xShift = 0
 signal changedScreenCorner(newCorner)
 signal toggledAlwaysOnTop(onOrOff)
 signal flippedXAxis
+signal expanedDialogueBox
+signal collapsedDialogueBox
 signal expandedSizeUpdated
 signal loaded
 signal newActiveTab(newActiveTab:String)
@@ -120,6 +122,7 @@ func expandMenu():
 	if xAlignment == "left":
 		get_window().position += Vector2i(xShift, 0)
 	menuOpen = true
+	expanedDialogueBox.emit()
 
 func hideMenu():
 	if not menuOpen:
@@ -130,6 +133,7 @@ func hideMenu():
 	if xAlignment == "left":
 		get_window().position -= Vector2i(xShift, 0)
 	menuOpen = false
+	collapsedDialogueBox.emit()
 
 
 

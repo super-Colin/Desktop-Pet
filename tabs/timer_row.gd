@@ -28,7 +28,7 @@ func _ready() -> void:
 
 
 
-func setUp(name:String, setupData:Dictionary):
+func setUp(name:String, setupData:Dictionary, tab:String):
 	title = name
 	if setupData == {}: # if no saved data
 		data = dataDefault
