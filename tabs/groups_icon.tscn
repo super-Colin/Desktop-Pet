@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bfedkwjxiho3r"]
+
+[node name="GroupsIcon" type="VBoxContainer"]
+custom_minimum_size = Vector2(12, 0)
+offset_right = 10.0
+offset_bottom = 38.0
+theme_override_constants/separation = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0.952571, 0.392637, 7.70092e-07, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(3.36915e-06, 0.647273, 0.843302, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0.554475, 0.208008, 1)

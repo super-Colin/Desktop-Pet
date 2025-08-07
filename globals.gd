@@ -18,7 +18,7 @@ var contextMenuIsOpen = false
 var callerButton
 
 
-enum groupTypes {TASK, CATEGORY, RANDOM}
+enum groupTypes {PROJECT, TASK, CATEGORY, RANDOM}
 enum groupTagTypes {NOTES, COPYPASTE, ONGOING, RANDOM}
 enum hotbarTypes {TAB, ROW, COPYPASTE, RANDOM}
 

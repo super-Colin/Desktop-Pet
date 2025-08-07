@@ -1,10 +1,22 @@
 extends Button
 
 
+@export var canBeHotbarShortcut = false
+@export var canBeDuplicated = false
+@export var canBeDeleted = false
+@export var canBeEdited = false
+@export var canBeGrouped = false
+@export var groupTypes:Array[Globals.groupTypes] = []
+
+var flags = {
+	isShortcut=false
+}
+
 signal left_click(nodeRef)
 signal right_click(nodeRef)
 
 signal deleteRequested(title)
+signal editRequested(title)
 signal copyRequested(title)
 signal duplicateRequested(title)
 
@@ -12,7 +24,10 @@ var title:String
 var contextIsOpen = false
 var tabName
 var isHotbarShortcut = false
+var groups = {}
 
+func emitEditRequest():
+	editRequested.emit(title)
 
 func emitDeleteRequest():
 	deleteRequested.emit(title)
@@ -43,15 +58,6 @@ func onButtonGuiInput(event=null):
 				#print("context button - ", $'.', ", ", tabName, ", ",title)
 				Globals.toggleContextMenu($'.', tabName, title, isHotbarShortcut)
 
-@export var canBeHotbarShortcut = false
-@export var canBeDuplicated = false
-@export var canBeDeleted = false
-@export var canBeGrouped = false
-@export var groupLevel = "tab"
-
-var flags = {
-	isShortcut=false
-}
 
 func setUp(tab, label, isShortcut = false):
 	#print("context button - set up; tab: ", tab, ", label: ", label, ", is shortcut: ", isShortcut)
