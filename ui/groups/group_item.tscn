@@ -18,6 +18,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="GroupsIcon" parent="HBoxContainer" instance=ExtResource("1_lokei")]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
@@ -30,29 +31,35 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+disabled = true
 text = "New Group"
 alignment = 0
 canBeDeleted = true
 canBeEdited = true
 editableInPlace = true
 editableColor = true
-canBeGrouped = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "To Top"
 
 [node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Hide"
 
 [node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Highlight"
 
 [node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Merge"

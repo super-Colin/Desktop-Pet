@@ -2,9 +2,7 @@ extends VBoxContainer
 
 
 #func _ready() -> void:
-	## left only for editor visiblity
-	#$ColorRect2.queue_free()
-	#$ColorRect3.queue_free()
+	#Groups.s_groupsUpdated.connect()
 
 func setColorsWithGroups(groupsIds:Array=[]):
 	clearUnneededColorRects()

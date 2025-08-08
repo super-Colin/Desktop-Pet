@@ -12,7 +12,7 @@ var callerButton
 func _ready() -> void:
 	#Globals.contextMenuClosed.connect(func():tabName = ""; title = "")
 	%AddToHotbarButton.pressed.connect(addHotbarShortcut)
-	%Duplicate.pressed.connect(duplicateList)
+	%DuplicateButton.pressed.connect(duplicateList)
 	%DeleteButton.pressed.connect(delete)
 	%EditButton.pressed.connect(_editPressed)
 
@@ -20,16 +20,22 @@ func _editPressed():
 	Globals.contextMenuTriggeredEdit()
 
 func duplicateList():
-	Globals.popupTriggeredDuplicateList()
+	Globals.contextMenuTriggeredDuplicateList()
 
 func copy():
-	Globals.popupTriggeredCopy()
+	Globals.contextMenuTriggeredCopy()
 
 func delete():
-	Globals.popupTriggeredDelete()
+	Globals.contextMenuTriggeredDelete()
 	#print("context popup - deleting: ", tabName, ", ", title)
 
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.is_pressed():
+		#var evLocal = make_input_local(event)
+		if !Rect2(Vector2(0,0), size).has_point(make_input_local(event).position):
+			#release_focus()
+			Globals.hideContextButtonMenu()
 
 
 #func setUp(tab, list, isShortcut = false, sublistItem = ""):
@@ -38,6 +44,13 @@ func setUp(buttonData):
 	tabName = "tab"
 	isHotbarShortcut = buttonData.isHotbarShortcut
 	task = "sublistItem"
+	%EditButton.visible = buttonData.canBeEdited
+	%DeleteButton.visible = buttonData.canBeDeleted
+	%DuplicateButton.visible = buttonData.canBeDuplicated
+	%CopyButton.visible = buttonData.canBeCopied
+	%GroupButton.visible = buttonData.canBeGrouped
+	%AddToHotbarButton.visible = buttonData.canBeHotbarShortcut
+	$'.'.size = Vector2.ZERO
 	#%AddToHotbarButton.pressed.connect(addHotbarShortcut)
 
 func addHotbarShortcut():

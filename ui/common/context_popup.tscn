@@ -6,7 +6,11 @@
 bg_color = Color(0.485287, 0.662448, 0.343871, 1)
 
 [node name="ContextPopup" type="PanelContainer"]
-offset_right = 40.0
+custom_minimum_size = Vector2(120, 0)
+offset_right = 128.0
+offset_bottom = 146.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_trw2q")
 script = ExtResource("1_lao8o")
 
@@ -36,19 +40,19 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Delete"
 
-[node name="Duplicate" type="Button" parent="MarginContainer/Menu"]
+[node name="DuplicateButton" type="Button" parent="MarginContainer/Menu"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Create a copy of this list"
 text = "Duplicate"
 
-[node name="Copy" type="Button" parent="MarginContainer/Menu"]
+[node name="CopyButton" type="Button" parent="MarginContainer/Menu"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "Copy"
 
-[node name="Group" type="Button" parent="MarginContainer/Menu"]
+[node name="GroupButton" type="Button" parent="MarginContainer/Menu"]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Group high level lists together"

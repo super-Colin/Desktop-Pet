@@ -24,7 +24,9 @@ func makeRowForGroup(groupDict):
 	var newRow = rowScene.instantiate()
 	newRow.setup(groupDict)
 	newRow.s_editSubmitted.connect(_editSubmitted)
+	newRow.s_deleteGroup.connect(Groups.deleteGroup)
 	%GroupsList.add_child(newRow)
+
 
 
 func makeRowForNewGroupCreation():

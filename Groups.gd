@@ -32,6 +32,12 @@ func _ready() -> void:
 			onlyGroupActive = true
 			onlyGroup = gId
 
+
+func deleteGroup(groupId):
+	savedGroups.erase(groupId)
+	s_groupsUpdated.emit()
+
+
 func getGroupColor(groupId)->Color:
 	#print("GROUPS - color for group: ", groupId, " is: ", savedGroups[groupId].color)
 	return savedGroups[groupId].color

@@ -86,10 +86,11 @@ func showContextButtonMenu(clickedNode):
 	contextMenuCallerButton = clickedNode
 	positionContextPopup()
 	#print("globals - showing context menu: ", clickedNode,", ", tab, ", ", listName)
-	contextMenuRef.visible = true
 	contextMenuIsOpen = true
 	#contextMenuRef.setUp(tab, listName, isShortcut)
 	contextMenuRef.setUp(clickedNode.buttonData)
+	contextMenuRef.visible = false
+	contextMenuRef.call_deferred("set_visible", true)
 	if "contextIsOpen" in clickedNode:
 		clickedNode.contextIsOpen = true
 

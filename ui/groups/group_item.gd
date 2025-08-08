@@ -2,6 +2,7 @@ extends VBoxContainer
 
 
 signal s_editSubmitted(dataDict)
+signal s_deleteGroup(gId)
 
 var groupId
 
@@ -11,6 +12,8 @@ var groupId
 func _ready() -> void:
 	%ContextButton.s_editSubmitted.connect(_editSubmitted)
 	%ContextButton.s_editRequested.connect(func():%ContextButton.editInPlace())
+	%ContextButton.s_deleteRequested.connect(func():s_deleteGroup.emit(groupId))
+	#Groups.s_groupsUpdated.connect(setGroupColor)
 	#$HBoxContainer/GroupsIcon.setColorsWithGroups([groupId])
 
 
@@ -41,6 +44,7 @@ func setup(groupDict, forNewItemCreation = false):
 	}
 	groupId = groupDict.id
 	buttonData.editingWhenLoaded = forNewItemCreation
+	$HBoxContainer/VBoxContainer/HBoxContainer.visible = ! forNewItemCreation
 	%ContextButton.setup(buttonData)
 	setGroupColor(forNewItemCreation)
 

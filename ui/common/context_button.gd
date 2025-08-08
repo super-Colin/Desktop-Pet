@@ -3,6 +3,7 @@ extends Button
 
 @export var canBeHotbarShortcut = false
 @export var canBeDuplicated = false
+@export var canBeCopied = false
 @export var canBeDeleted = false
 @export var canBeEdited = false
 @export var editableInPlace = false
@@ -18,26 +19,25 @@ var buttonData:Dictionary = {
 	name="",
 	color=Color.WHITE,
 	isHotbarShortcut=false,
-	canBeHotbarShortcut = canBeHotbarShortcut,
-	canBeDuplicated = canBeDuplicated,
-	canBeDeleted = canBeDeleted,
-	canBeEdited = canBeEdited,
-	editableInPlace = editableInPlace,
-	editableColor = editableColor,
-	editingWhenLoaded = editingWhenLoaded,
-	canBeGrouped = canBeGrouped,
-	groupTypes = groupTypes,
+	# Doing these here doesn't use the exported values
+	## * as set in a loaded / instantiated scene *
+	# Do them in _ready() instead
+	#canBeHotbarShortcut = canBeHotbarShortcut,
+	#editingWhenLoaded = editingWhenLoaded,
+	#.....
+	#canBeGrouped = canBeGrouped,
+	#groupTypes = groupTypes,
 }
 
 
 signal left_click(nodeRef)
 signal right_click(nodeRef)
 
-signal s_deleteRequested(title)
+signal s_deleteRequested()
 signal s_editRequested()
 signal s_editSubmitted(dataDict)
-signal s_copyRequested(title)
-signal s_duplicateRequested(title)
+signal s_copyRequested(dataDict)
+signal s_duplicateRequested(dataDict)
 
 var title:String
 var contextIsOpen:bool = false
@@ -56,6 +56,18 @@ func _ready() -> void:
 	$EditInput/LineEdit.text_submitted.connect(func(_text):editSubmitted())
 	$EditInput/SaveEditButton.pressed.connect(editSubmitted)
 	buttonData.canBeHotbarShortcut = canBeHotbarShortcut
+	buttonData.canBeDuplicated = canBeDuplicated
+	buttonData.canBeDeleted = canBeDeleted
+	buttonData.canBeEdited = canBeEdited
+	buttonData.canBeCopied = canBeCopied
+	buttonData.editableInPlace = editableInPlace
+	buttonData.editableColor = editableColor
+	buttonData.editingWhenLoaded = editingWhenLoaded
+	buttonData.canBeGrouped = canBeGrouped
+	buttonData.groupTypes = groupTypes
+
+
+
 
 
 
@@ -83,16 +95,6 @@ func editInPlace():
 	#$EditInput/LineEdit.grab_focus()
 	
 
-func editSubmitted():
-	print("button - edit submitted")
-	$EditInput.visible = false
-	if $EditInput/LineEdit.text == "":
-		buttonData.name = $EditInput/LineEdit.placeholder_text
-	else:
-		buttonData.name = $EditInput/LineEdit.text
-	$'.'.text = buttonData.name
-	buttonData.color = $EditInput/ColorPickerButton.color
-	s_editSubmitted.emit(buttonData)
 
 
 
@@ -125,11 +127,22 @@ func setup(newButtonData):
 
 
 
+func editSubmitted():
+	print("button - edit submitted")
+	$EditInput.visible = false
+	if $EditInput/LineEdit.text == "":
+		buttonData.name = $EditInput/LineEdit.placeholder_text
+	else:
+		buttonData.name = $EditInput/LineEdit.text
+	$'.'.text = buttonData.name
+	buttonData.color = $EditInput/ColorPickerButton.color
+	s_editSubmitted.emit(buttonData)
+
 # called from Global
 func emitEditRequest():
 	s_editRequested.emit()
 func emitDeleteRequest():
-	s_deleteRequested.emit(title)
+	s_deleteRequested.emit()
 func emitCopyRequest():
 	s_copyRequested.emit(title)
 func emitDuplicateRequest():
