@@ -1,10 +1,13 @@
-[gd_scene format=3 uid="uid://bfedkwjxiho3r"]
+[gd_scene load_steps=2 format=3 uid="uid://bfedkwjxiho3r"]
+
+[ext_resource type="Script" uid="uid://c43v352n2pimh" path="res://ui/common/groups_icon.gd" id="1_whiks"]
 
 [node name="GroupsIcon" type="VBoxContainer"]
 custom_minimum_size = Vector2(12, 0)
 offset_right = 10.0
 offset_bottom = 38.0
 theme_override_constants/separation = 0
+script = ExtResource("1_whiks")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(10, 10)

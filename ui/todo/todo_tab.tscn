@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://dko4dcm3n1nde"]
+
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="1_qm55l"]
+[ext_resource type="Script" uid="uid://b3rmnsdvyalke" path="res://ui/todo/todo_tab.gd" id="1_ypwqs"]
+[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/task_item.tscn" id="2_qm55l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qm55l"]
+bg_color = Color(0.992157, 0, 0.992157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypwqs"]
+bg_color = Color(0.992157, 0, 0.992157, 1)
+
+[node name="TodoTab" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ypwqs")
+
+[node name="NewCreator" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="LineEdit" parent="NewCreator"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New Todo"
+max_length = 200
+keep_editing_on_text_submit = true
+
+[node name="MakingListSign" type="Button" parent="NewCreator"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.992062, 0.00081187, 0.992056, 1)
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_qm55l")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ypwqs")
+disabled = true
+text = " List "
+
+[node name="SaveTodoButton" type="Button" parent="NewCreator"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)
+text = "Save"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainerLeft" type="ScrollContainer" parent="HSplitContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="LeftList" type="VBoxContainer" parent="HSplitContainer/ScrollContainerLeft"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ContextButton" parent="HSplitContainer/ScrollContainerLeft/LeftList" instance=ExtResource("1_qm55l")]
+layout_mode = 2
+text = "List One
+"
+alignment = 0
+
+[node name="ContextButton2" parent="HSplitContainer/ScrollContainerLeft/LeftList" instance=ExtResource("1_qm55l")]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.992157, 0, 0.992157, 1)
+text = "+ New List +"
+
+[node name="ScrollContainerRight" type="ScrollContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightList" type="VBoxContainer" parent="HSplitContainer/ScrollContainerRight"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TaskItem" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+layout_mode = 2
+
+[node name="TaskItem2" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+layout_mode = 2
+
+[node name="TaskItem3" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+layout_mode = 2
+
+[node name="TaskItem4" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+layout_mode = 2

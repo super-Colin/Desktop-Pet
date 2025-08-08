@@ -18,8 +18,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 Saver="*res://save_manager.gd"
-UI="*res://ui.gd"
 Globals="*res://globals.gd"
+UI="*res://ui.gd"
+Groups="*res://Groups.gd"
 
 [display]
 

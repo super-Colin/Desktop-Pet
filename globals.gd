@@ -13,14 +13,16 @@ signal closeProgramRequested
 
 var dialogueBoxRef
 var hotbarRef
+
 var contextMenuRef
 var contextMenuIsOpen = false
-var callerButton
+var contextMenuCallerButton
 
 
-enum groupTypes {PROJECT, TASK, CATEGORY, RANDOM}
-enum groupTagTypes {NOTES, COPYPASTE, ONGOING, RANDOM}
-enum hotbarTypes {TAB, ROW, COPYPASTE, RANDOM}
+enum TabTypes {TODOS, SNIPPETS, TIMERS, IMAGES, GROUPS, SETTINGS}
+enum GroupTypes {PROJECT, TASK, CATEGORY, OTHER}
+#enum GroupTagTypes {NOTES, COPYPASTE, ONGOING, OTHER}
+enum HotbarTypes {TAB, ROW, COPYPASTE, OTHER}
 
 
 
@@ -30,7 +32,7 @@ func _ready() -> void:
 
 
 
-
+# venn diagram icon for grouping
 
 
 func addToHotbar(tabName, list):
@@ -41,25 +43,36 @@ func addToHotbar(tabName, list):
 
 
 func positionContextPopup():
-	if not callerButton or not "contextIsOpen" in callerButton:
+	if not contextMenuCallerButton or not "contextIsOpen" in contextMenuCallerButton:
 		return
 	#print("globals - positionContextPopup: ", positionContextPopup)
 	contextMenuRef.global_position = get_viewport().get_mouse_position() + Vector2(10,10)
 
 
-func toggleContextMenu(clickedNode, tab, list, isShortcut = false):
+#func toggleContextMenu(clickedNode, tab, list, isShortcut = false):
+	##print("globals - about to toggle context menu, visible = : ", contextMenuIsOpen)
+	#if "contextIsOpen" in clickedNode:
+		#if clickedNode == callerButton:
+			#if not contextMenuIsOpen:
+				#showContextMenu(clickedNode, tab, list, isShortcut)
+			#else:
+				#hideContextPopup(clickedNode)
+		#else:
+			#showContextMenu(clickedNode, tab, list, isShortcut)
+	##print("globals - toggling context menu, visible = : ", contextMenuIsOpen)
+func toggleContextButtonMenu(clickedNode):
 	#print("globals - about to toggle context menu, visible = : ", contextMenuIsOpen)
 	if "contextIsOpen" in clickedNode:
-		if clickedNode == callerButton:
+		if clickedNode == contextMenuCallerButton:
 			if not contextMenuIsOpen:
-				showContextMenu(clickedNode, tab, list, isShortcut)
+				showContextButtonMenu(clickedNode)
 			else:
-				hideContextPopup(clickedNode)
+				hideContextButtonMenu(clickedNode)
 		else:
-			showContextMenu(clickedNode, tab, list, isShortcut)
+			showContextButtonMenu(clickedNode)
 	#print("globals - toggling context menu, visible = : ", contextMenuIsOpen)
 
-func hideContextPopup(clickedNode=null):
+func hideContextButtonMenu(clickedNode=null):
 	if not contextMenuRef:
 		return
 	contextMenuRef.visible = false
@@ -67,37 +80,42 @@ func hideContextPopup(clickedNode=null):
 	if clickedNode and "contextIsOpen" in clickedNode:
 		clickedNode.contextIsOpen = false
 
-func showContextMenu(clickedNode, tab, listName, isShortcut = false):
+func showContextButtonMenu(clickedNode):
 	if not contextMenuRef:
 		return
-	callerButton = clickedNode
+	contextMenuCallerButton = clickedNode
 	positionContextPopup()
-	print("globals - showing context menu: ", clickedNode,", ", tab, ", ", listName)
+	#print("globals - showing context menu: ", clickedNode,", ", tab, ", ", listName)
 	contextMenuRef.visible = true
 	contextMenuIsOpen = true
-	contextMenuRef.setUp(tab, listName, isShortcut)
+	#contextMenuRef.setUp(tab, listName, isShortcut)
+	contextMenuRef.setUp(clickedNode.buttonData)
 	if "contextIsOpen" in clickedNode:
 		clickedNode.contextIsOpen = true
 
-func popupTriggeredDelete():
-	if "emitDeleteRequest" in callerButton:
-		callerButton.emitDeleteRequest()
-		hideContextPopup(callerButton)
+func contextMenuTriggeredDelete():
+	if "emitDeleteRequest" in contextMenuCallerButton:
+		contextMenuCallerButton.emitDeleteRequest()
+		hideContextButtonMenu(contextMenuCallerButton)
 
 
-func popupTriggeredDuplicateList():
-	if "emitDuplicateRequest" in callerButton:
-		callerButton.emitDuplicateRequest()
-		hideContextPopup(callerButton)
+func contextMenuTriggeredDuplicateList():
+	if "emitDuplicateRequest" in contextMenuCallerButton:
+		contextMenuCallerButton.emitDuplicateRequest()
+		hideContextButtonMenu(contextMenuCallerButton)
 
 
 
-func popupTriggeredCopy():
-	if "emitCopyRequest" in callerButton:
-		callerButton.emitCopyRequest()
-		hideContextPopup(callerButton)
+func contextMenuTriggeredCopy():
+	if "emitCopyRequest" in contextMenuCallerButton:
+		contextMenuCallerButton.emitCopyRequest()
+		hideContextButtonMenu(contextMenuCallerButton)
 
 
+func contextMenuTriggeredEdit():
+	if "emitEditRequest" in contextMenuCallerButton:
+		contextMenuCallerButton.emitEditRequest()
+		hideContextButtonMenu(contextMenuCallerButton)
 
 
 

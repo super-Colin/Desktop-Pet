@@ -1,6 +1,6 @@
 extends Container
 
-var buttonScene = preload("res://context_button.tscn")
+var buttonScene = preload("res://ui/common/context_button.tscn")
 
 const SAVE_SECTION = "HOTBAR"
 var hotbarList:Dictionary = {} # "MyTodoList":{"dishes":true}
@@ -81,17 +81,17 @@ func makeHotbarShortcut(tabName, listName):
 
 
 
-func handleChangeShrunkenHeight(valChanged):
+func handleChangeShrunkenHeight(_valChanged):
 	UI.handleChangeShrunkenHeight(%ShrunkenHeightSlider.value)
 
-func handleChangeWidth(valChanged):
+func handleChangeWidth(_valChanged):
 	var currentSize = get_tree().get_root().get_window().size
 	UI.handleWindowResize(Vector2(%WidthSlider.value, currentSize.y))
 
-func handleChangeHeight(valChanged):
+func handleChangeHeight(_valChanged):
 	var currentSize = get_tree().get_root().get_window().size
 	UI.handleWindowResize(Vector2(currentSize.x, %HeightSlider.value))
-	Globals.hideContextPopup($'.')
+	Globals.hideContextButtonMenu($'.')
 
 func setSlidersFromSave():
 	var currentSize = get_tree().get_root().get_window().size

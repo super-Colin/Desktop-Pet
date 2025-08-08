@@ -40,20 +40,20 @@ func saveLastActiveTab(tabIndex):
 	Saver.saveGameSection(SAVE_SECTION, "lastActiveTab", tabIndex)
 
 
-func getTabNodeByName(name):
-	if name == "SNIPS_TAB":
+func getTabNodeByName(tabName):
+	if tabName == "SNIPS_TAB":
 		return %TabsContainer/Snips
-	elif name == "TODO_TAB":
+	elif tabName == "TODO_TAB":
 		return %"TabsContainer/To Do"
-	elif name == "TIMER_TAB":
+	elif tabName == "TIMER_TAB":
 		return %TabsContainer/Snips
 
-func getTabNumberByName(name):
-	if name == "SNIPS_TAB":
+func getTabNumberByName(tabName):
+	if tabName == "SNIPS_TAB":
 		return %TabsContainer/Snips
-	elif name == "TODO_TAB":
+	elif tabName == "TODO_TAB":
 		return %"TabsContainer/To Do"
-	elif name == "TIMER_TAB":
+	elif tabName == "TIMER_TAB":
 		return %TabsContainer/Snips
 
 func printTabs(g):
@@ -70,11 +70,11 @@ func onButtonGuiInput(event=null):
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				left_click.emit()
-				Globals.hideContextPopup($'.')
+				Globals.hideContextButtonMenu($'.')
 			MOUSE_BUTTON_RIGHT:
 				#print("dialogue - hiding context popup")
 				right_click.emit()
-				Globals.hideContextPopup($'.')
+				Globals.hideContextButtonMenu($'.')
 
 
 

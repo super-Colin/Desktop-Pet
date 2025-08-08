@@ -6,7 +6,8 @@ signal saved
 @onready var saveGameConfigNode:ConfigFile = ConfigFile.new()
 
 const SAVE_DIRECTORY_PATH = "user://"
-const SAVE_FILE_TITLE = "config"
+#const SAVE_DIRECTORY_PATH = "user://your_buddy//"
+const SAVE_FILE_TITLE = "stuff"
 const SAVE_FILE_PATH = SAVE_DIRECTORY_PATH + SAVE_FILE_TITLE + ".cfg"
 
 
@@ -56,11 +57,11 @@ func initNewSaveFile():
 	#reset_saveStates_all()
 
 
-func save_to_file(fileName:String, fileContent:String, fileExtension:String=".txt", directory:String=""):
+func save_to_file(fileName:String, fileContent:String, fileExtension:String=".txt", _directory:String=""):
 	var file = FileAccess.open("user://" + fileName + fileExtension, FileAccess.WRITE)
 	file.store_string(fileContent)
 
-func load_from_file(fileName:String, fileContent:String, fileExtension:String=".txt", directory:String="", isString:bool=true):
+func load_from_file(fileName:String, fileContent:String, fileExtension:String=".txt", _directory:String="", _isString:bool=true):
 	var file = FileAccess.open("user://" + fileName + fileExtension, FileAccess.READ)
 	var content = file.get_as_text()
 	return content

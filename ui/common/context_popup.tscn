@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dm7on4pqb75qj"]
 
-[ext_resource type="Script" uid="uid://bs5di66b5a8o6" path="res://context_popup.gd" id="1_lao8o"]
+[ext_resource type="Script" uid="uid://bs5di66b5a8o6" path="res://ui/common/context_popup.gd" id="1_lao8o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trw2q"]
 bg_color = Color(0.485287, 0.662448, 0.343871, 1)
@@ -25,6 +25,11 @@ unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Create a persistant shortcut in the hotbar"
 text = "Add to Hotbar"
+
+[node name="EditButton" type="Button" parent="MarginContainer/Menu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Edit"
 
 [node name="DeleteButton" type="Button" parent="MarginContainer/Menu"]
 unique_name_in_owner = true

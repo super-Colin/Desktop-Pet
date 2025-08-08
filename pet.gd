@@ -31,7 +31,12 @@ func _ready():
 	%Hotbar.shortcutPressed.connect(%DialogueBox.jumpToList)
 	Globals.closeProgramRequested.connect(closeProgram)
 	#%Hotbar.tab_changed.connect()
+	get_window().focus_exited.connect(_clearFocus)
 
+func _clearFocus():
+	var focused = get_viewport().gui_get_focus_owner()
+	if focused:
+		focused.release_focus()
 
 
 

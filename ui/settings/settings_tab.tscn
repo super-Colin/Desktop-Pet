@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3vitghnd0r7y"]
+
+[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/task_item.tscn" id="1_hdc7v"]
+
+[node name="SettingsTab" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+
+[node name="LeftList" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Preferences" type="Button" parent="ScrollContainer/LeftList"]
+layout_mode = 2
+text = "Colors"
+alignment = 0
+
+[node name="Preferences2" type="Button" parent="ScrollContainer/LeftList"]
+layout_mode = 2
+text = "Behaviors / Reminders"
+alignment = 0
+
+[node name="Preferences3" type="Button" parent="ScrollContainer/LeftList"]
+layout_mode = 2
+text = "Size"
+alignment = 0
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightList" type="VBoxContainer" parent="ScrollContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TaskItem" parent="ScrollContainer2/RightList" instance=ExtResource("1_hdc7v")]
+layout_mode = 2
+
+[node name="TaskItem2" parent="ScrollContainer2/RightList" instance=ExtResource("1_hdc7v")]
+layout_mode = 2
+
+[node name="TaskItem3" parent="ScrollContainer2/RightList" instance=ExtResource("1_hdc7v")]
+layout_mode = 2
+
+[node name="TaskItem4" parent="ScrollContainer2/RightList" instance=ExtResource("1_hdc7v")]
+layout_mode = 2
+
+[node name="ColorScheme" type="VBoxContainer" parent="ScrollContainer2/RightList"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer2/RightList/ColorScheme"]
+layout_mode = 2
+text = "Color Scheme:"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer2/RightList/ColorScheme"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer2/RightList/ColorScheme/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer2/RightList/ColorScheme/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Background [Primary]:"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="ScrollContainer2/RightList/ColorScheme/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(23, 23)
+layout_mode = 2
+color = Color(0.396889, 0.396889, 0.396889, 1)

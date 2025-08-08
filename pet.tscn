@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://d3qoc5nak4vhg" path="res://mouse.gd" id="3_vbt87"]
 [ext_resource type="PackedScene" uid="uid://b31kqduwxl6rw" path="res://hotbar.tscn" id="6_uvuc8"]
 [ext_resource type="PackedScene" uid="uid://c8m8svhtp2ksf" path="res://dialogue_box.tscn" id="7_uvuc8"]
-[ext_resource type="PackedScene" uid="uid://dm7on4pqb75qj" path="res://context_popup.tscn" id="7_x5jns"]
+[ext_resource type="PackedScene" uid="uid://dm7on4pqb75qj" path="res://ui/common/context_popup.tscn" id="7_x5jns"]
 
 [sub_resource type="GDScript" id="GDScript_qae7j"]
 script/source = "extends Node

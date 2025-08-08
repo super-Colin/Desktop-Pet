@@ -14,7 +14,10 @@ func _ready() -> void:
 	%AddToHotbarButton.pressed.connect(addHotbarShortcut)
 	%Duplicate.pressed.connect(duplicateList)
 	%DeleteButton.pressed.connect(delete)
+	%EditButton.pressed.connect(_editPressed)
 
+func _editPressed():
+	Globals.contextMenuTriggeredEdit()
 
 func duplicateList():
 	Globals.popupTriggeredDuplicateList()
@@ -29,11 +32,12 @@ func delete():
 
 
 
-func setUp(tab, list, isShortcut = false, sublistItem = ""):
-	title = list
-	tabName = tab
-	isHotbarShortcut = isShortcut
-	task = sublistItem
+#func setUp(tab, list, isShortcut = false, sublistItem = ""):
+func setUp(buttonData):
+	title = "list"
+	tabName = "tab"
+	isHotbarShortcut = buttonData.isHotbarShortcut
+	task = "sublistItem"
 	#%AddToHotbarButton.pressed.connect(addHotbarShortcut)
 
 func addHotbarShortcut():

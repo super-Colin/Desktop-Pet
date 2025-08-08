@@ -55,7 +55,7 @@ func interpretMouseInput(event: InputEventMouse)->void:
 	#print(event)
 	# If right click down skip, emit on release
 	if event is InputEventMouseButton and event.button_index == 2:
-		Globals.hideContextPopup()
+		Globals.hideContextButtonMenu()
 		if event.pressed:
 			return
 		else:
@@ -63,7 +63,7 @@ func interpretMouseInput(event: InputEventMouse)->void:
 			rightClicked.emit()
 	# If double click stop single click timer and stop dragging
 	if event is InputEventMouseButton and event.button_index == 1 and event.double_click:
-		Globals.hideContextPopup()
+		Globals.hideContextButtonMenu()
 		#print("Double clicked")
 		doubleClicked.emit()
 		beingDragged = false
@@ -71,7 +71,7 @@ func interpretMouseInput(event: InputEventMouse)->void:
 		$ClickTimer.stop()
 		return
 	if event is InputEventMouseButton and event.button_index == 1:
-		Globals.hideContextPopup()
+		Globals.hideContextButtonMenu()
 		# if the mouse button was pressed down
 		if event.pressed:
 			mouseBeingHeld = true

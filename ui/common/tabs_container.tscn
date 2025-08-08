@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://qnkgmxn0s0ju"]
+
+[ext_resource type="PackedScene" uid="uid://dko4dcm3n1nde" path="res://ui/todo/todo_tab.tscn" id="1_n4ml6"]
+
+[node name="TabsContainer" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tabs" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Tabs"]
+layout_mode = 2
+text = "Todo"
+
+[node name="Button2" type="Button" parent="Tabs"]
+layout_mode = 2
+text = "Snippets"
+
+[node name="TodoTab" parent="." instance=ExtResource("1_n4ml6")]
+layout_mode = 2
+size_flags_vertical = 3

@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddgsnw373tp3y"]
+
+[ext_resource type="Script" uid="uid://chx6j47j73av0" path="res://ui/groups/group_item.gd" id="1_chf1q"]
+[ext_resource type="PackedScene" uid="uid://bfedkwjxiho3r" path="res://ui/common/groups_icon.tscn" id="1_lokei"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="2_bs84n"]
+
+[node name="GroupItem" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_chf1q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GroupsIcon" parent="HBoxContainer" instance=ExtResource("1_lokei")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContextButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_bs84n")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "New Group"
+alignment = 0
+canBeDeleted = true
+canBeEdited = true
+editableInPlace = true
+editableColor = true
+canBeGrouped = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "To Top"
+
+[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Hide"
+
+[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Highlight"
+
+[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Merge"

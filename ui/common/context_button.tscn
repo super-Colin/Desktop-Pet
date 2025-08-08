@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvvsqwmgu8v15"]
+
+[ext_resource type="Script" uid="uid://c8nbvwh73vm3l" path="res://ui/common/context_button.gd" id="1_s7vf0"]
+
+[node name="ContextButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Context Button"
+script = ExtResource("1_s7vf0")
+
+[node name="EditInput" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LineEdit" type="LineEdit" parent="EditInput"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Edit Me"
+max_length = 200
+context_menu_enabled = false
+emoji_menu_enabled = false
+select_all_on_focus = true
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="EditInput"]
+visible = false
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SaveEditButton" type="Button" parent="EditInput"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)
+text = "Save"

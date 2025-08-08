@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bxnqdifccvnue"]
 
-[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://tabs/todo/task_item.tscn" id="1_kqdbr"]
+[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/task_item.tscn" id="1_kqdbr"]
 
 [node name="List" type="VBoxContainer"]
 offset_right = 40.0
