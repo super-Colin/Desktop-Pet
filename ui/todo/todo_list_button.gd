@@ -3,12 +3,14 @@ extends HBoxContainer
 
 signal s_editSubmitted
 signal s_deleteList(lId)
+signal s_pressed
 
 var groups = []
 var listId
 
 
 func _ready() -> void:
+	%ContextButton.pressed.connect(func():s_pressed.emit())
 	%ContextButton.s_editSubmitted.connect(_editSubmitted)
 	%ContextButton.s_editRequested.connect(func():%ContextButton.editInPlace())
 	%ContextButton.s_deleteRequested.connect(func():s_deleteList.emit(listId))

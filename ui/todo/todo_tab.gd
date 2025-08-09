@@ -50,20 +50,7 @@ func _ready() -> void:
 	refreshTodoList()
 
 
-func saveNewTodoItem(_text=null):
-	#print("todo - new todo is: ", %Name.text)
-	#var capitalized = Globals.customCapitalize(%Name.text)
-	#todoLists[currentList][capitalized] = false
-	var newItem = {
-		"name":%Name.text,
-		"priority":5,
-		"groups":[]
-	}
-	savedTodoLists[savedCurrentList].items.append(newItem)
-	#clearInputBar()
-	refreshTodoList()
-	saveTodos()
-	%Name.text = ""
+
 
 
 
@@ -88,6 +75,8 @@ func makeListButton(todoListDict, forNewCreation = false):
 	var newListButton = listButtonScene.instantiate()
 	newListButton.setup(todoListDict, forNewCreation)
 	newListButton.s_editSubmitted.connect(saveList)
+	if not forNewCreation:
+		newListButton.s_pressed.connect(swapActiveList.bind(todoListDict.id))
 	return newListButton
 
 
@@ -99,18 +88,53 @@ func refreshTodoList():
 		return
 	print("todo - ", savedTodoLists[savedCurrentList])
 	#sortByCompleted()
-	for todoItem in savedTodoLists[savedCurrentList].items:
+	for todoItem in savedTodoLists[savedCurrentList].items.values():
 		#print("todo tab - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
 		#print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
 		var newItemRow = itemRowScene.instantiate()
-		newItemRow.setup(todoItem, savedCurrentList)
+		#newItemRow.setup(todoItem, savedCurrentList)
+		newItemRow.setup(todoItem)
+		newItemRow.s_editSubmitted.connect(updateTodoItem)
+		#newItemRow.s_deleteGroup.connect(Groups.deleteGroup)
 		#newItemRow.todoToggled.connect(todoToggled)
 		#newItemRow.deleteRequested.connect(deleteListItem)
 		%TodosList.add_child(newItemRow)
 
 
+func updateTodoItem(todoItemDict:Dictionary):
+	print("todo tab - updated todo item to save is: ", todoItemDict)
+	if todoItemDict.has("deleteOld"):
+		print("todo tab - deleting old todo item: ", todoItemDict.deleteOld)
+		savedTodoLists[savedCurrentList].items.erase(todoItemDict.deleteOld)
+	savedTodoLists[savedCurrentList].items[todoItemDict.name] = todoItemDict
+	saveTodos()
+	refreshTodoList()
+
+func saveNewTodoItem(_text=null):
+	#print("todo - new todo is: ", %Name.text)
+	#var capitalized = Globals.customCapitalize(%Name.text)
+	#todoLists[currentList][capitalized] = false
+	var newItem = {
+		"name":%Name.text,
+		"priority":5,
+		"groups":[]
+	}
+	savedTodoLists[savedCurrentList].items[newItem.name] = newItem
+	#clearInputBar()
+	refreshTodoList()
+	saveTodos()
+	%Name.text = ""
 
 
+func deleteTodoItem(todoItemName:String, listId=null):
+	if not listId:
+		listId = savedCurrentList
+	var index = 0
+	for todoItem in savedTodoLists[listId].items:
+		if todoItem.name == todoItemName:
+			savedTodoLists[listId].items.erase(todoItem.name)
+			break
+		index += 1
 
 
 
@@ -124,7 +148,7 @@ func saveList(todoListDict:Dictionary):
 	#var capitalized = Globals.customCapitalize(%Name.text)
 	if not savedTodoLists.has(todoListDict.id):
 		savedTodoLists[todoListDict.id] = todoListDict
-		savedTodoLists[todoListDict.id].items = []
+		savedTodoLists[todoListDict.id].items = {}
 		savedTodoLists[todoListDict.id].groups = []
 	else:
 		savedTodoLists[todoListDict.id].name = todoListDict.name

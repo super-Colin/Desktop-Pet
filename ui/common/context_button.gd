@@ -19,6 +19,7 @@ var buttonData:Dictionary = {
 	name="",
 	color=Color.WHITE,
 	isHotbarShortcut=false,
+	groups = [],
 	# Doing these here doesn't use the exported values
 	## * as set in a loaded / instantiated scene *
 	# Do them in _ready() instead
@@ -43,7 +44,7 @@ var title:String
 var contextIsOpen:bool = false
 var tabName
 #var isHotbarShortcut:bool = false
-var groups:Dictionary = {}
+#var groups:Array = []
 
 
 
@@ -95,7 +96,7 @@ func editInPlace():
 	$'.'.text = ""
 	$EditInput.visible = true
 	#$EditInput/LineEdit.grab_focus()
-	
+
 
 
 
@@ -123,6 +124,8 @@ func setup(newButtonData):
 	for key in newButtonData.keys():
 		buttonData[key] = newButtonData[key]
 	$'.'.text = buttonData.name
+	#if not newButtonData.has("groups"):
+		#buttonData.groups = buttonData
 	$EditInput/ColorPickerButton.color = buttonData.color
 	if buttonData.has("editingWhenLoaded") and buttonData.editingWhenLoaded:
 		editInPlace()
