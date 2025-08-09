@@ -49,6 +49,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 1
+tab_focus_mode = 0
+deselect_enabled = true
 
 [node name="Todo" parent="MarginContainer/VBoxContainer/TabsContainer" instance=ExtResource("7_f71wr")]
 visible = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3vitghnd0r7y"]
 
-[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/task_item.tscn" id="1_hdc7v"]
+[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/todo_item.tscn" id="1_hdc7v"]
 
 [node name="SettingsTab" type="HSplitContainer"]
 anchors_preset = 15
@@ -32,6 +32,11 @@ alignment = 0
 [node name="Preferences3" type="Button" parent="ScrollContainer/LeftList"]
 layout_mode = 2
 text = "Size"
+alignment = 0
+
+[node name="Files" type="Button" parent="ScrollContainer/LeftList"]
+layout_mode = 2
+text = "Files"
 alignment = 0
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="."]

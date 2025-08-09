@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dko4dcm3n1nde"]
+[gd_scene load_steps=7 format=3 uid="uid://dko4dcm3n1nde"]
 
 [ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="1_qm55l"]
 [ext_resource type="Script" uid="uid://b3rmnsdvyalke" path="res://ui/todo/todo_tab.gd" id="1_ypwqs"]
-[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/task_item.tscn" id="2_qm55l"]
+[ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/todo_item.tscn" id="2_qm55l"]
+[ext_resource type="PackedScene" uid="uid://cs3qgsyk4wgqp" path="res://ui/todo/todo_list_button.tscn" id="3_n6muw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qm55l"]
-bg_color = Color(0.992157, 0, 0.992157, 1)
+bg_color = Color(0.992157, 1, 0.992157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypwqs"]
-bg_color = Color(0.992157, 0, 0.992157, 1)
+bg_color = Color(1, 1, 1, 1)
 
 [node name="TodoTab" type="VBoxContainer"]
 anchors_preset = 15
@@ -25,11 +26,12 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "New Todo"
+placeholder_text = "New Todo Item"
 max_length = 200
 keep_editing_on_text_submit = true
 
 [node name="MakingListSign" type="Button" parent="NewCreator"]
+visible = false
 layout_mode = 2
 focus_mode = 0
 theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
@@ -51,21 +53,22 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="ScrollContainerLeft" type="ScrollContainer" parent="HSplitContainer"]
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 
-[node name="LeftList" type="VBoxContainer" parent="HSplitContainer/ScrollContainerLeft"]
+[node name="ListsList" type="VBoxContainer" parent="HSplitContainer/ScrollContainerLeft"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ContextButton" parent="HSplitContainer/ScrollContainerLeft/LeftList" instance=ExtResource("1_qm55l")]
+[node name="TodoListButton" parent="HSplitContainer/ScrollContainerLeft/ListsList" instance=ExtResource("3_n6muw")]
 layout_mode = 2
-text = "List One
-"
-alignment = 0
 
-[node name="ContextButton2" parent="HSplitContainer/ScrollContainerLeft/LeftList" instance=ExtResource("1_qm55l")]
+[node name="TodoListButton2" parent="HSplitContainer/ScrollContainerLeft/ListsList" instance=ExtResource("3_n6muw")]
+layout_mode = 2
+
+[node name="ContextButton2" parent="HSplitContainer/ScrollContainerLeft/ListsList" instance=ExtResource("1_qm55l")]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.992157, 0, 0.992157, 1)
 text = "+ New List +"
@@ -74,19 +77,20 @@ text = "+ New List +"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RightList" type="VBoxContainer" parent="HSplitContainer/ScrollContainerRight"]
+[node name="TodosList" type="VBoxContainer" parent="HSplitContainer/ScrollContainerRight"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TaskItem" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+[node name="TaskItem" parent="HSplitContainer/ScrollContainerRight/TodosList" instance=ExtResource("2_qm55l")]
 layout_mode = 2
 
-[node name="TaskItem2" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+[node name="TaskItem2" parent="HSplitContainer/ScrollContainerRight/TodosList" instance=ExtResource("2_qm55l")]
 layout_mode = 2
 
-[node name="TaskItem3" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+[node name="TaskItem3" parent="HSplitContainer/ScrollContainerRight/TodosList" instance=ExtResource("2_qm55l")]
 layout_mode = 2
 
-[node name="TaskItem4" parent="HSplitContainer/ScrollContainerRight/RightList" instance=ExtResource("2_qm55l")]
+[node name="TaskItem4" parent="HSplitContainer/ScrollContainerRight/TodosList" instance=ExtResource("2_qm55l")]
 layout_mode = 2

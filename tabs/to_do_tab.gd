@@ -4,8 +4,7 @@ extends VBoxContainer
 var todoLists:Dictionary = {} # "MyTodoList":{"dishes":true}
 var currentList:String = "defualt"
 var currentListButton:Node
-#var todoRowScene = preload("res://tabs/to_do_row.tscn")
-#var buttonScene = preload("res://context_button.tscn")
+var todoRowScene = preload("res://tabs/to_do_rowOld.tscn")
 var buttonScene = preload("res://ui/common/context_button.tscn")
 
 var makingList = false

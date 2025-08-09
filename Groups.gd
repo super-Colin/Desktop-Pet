@@ -40,6 +40,8 @@ func deleteGroup(groupId):
 
 func getGroupColor(groupId)->Color:
 	#print("GROUPS - color for group: ", groupId, " is: ", savedGroups[groupId].color)
+	if not savedGroups.has(groupId):
+		return Color.WHITE
 	return savedGroups[groupId].color
 
 
@@ -53,12 +55,19 @@ func saveGroup(groupDict:Dictionary)->bool:
 	var validatedGroup = validateNewGroup(groupDict)
 	if not validatedGroup:
 		return false
-	if savedGroups.has(validatedGroup.id):
-		print("Groups - updating an existing group from: ", savedGroups[validatedGroup.id], " to ", validatedGroup.name)
+	#if savedGroups.has(validatedGroup.id):
+		#print("Groups - updating an existing group from: ", savedGroups[validatedGroup.id], " to ", validatedGroup.name)
 	savedGroups[validatedGroup.id] = validatedGroup
-	print("Groups - saving group: ", groupDict)
+	#print("Groups - saving group: ", groupDict)
 	Saver.saveGameSection(SAVE_SECTION, "groups", savedGroups)
+	#updateGroups()
 	return true
+
+
+func updateGroups():
+	s_groupsUpdated.emit()
+
+
 
 func validateNewGroup(newGroupDict:Dictionary):
 	if not newGroupDict.has("name") or newGroupDict.name == "":
@@ -67,7 +76,8 @@ func validateNewGroup(newGroupDict:Dictionary):
 		if not newGroupDict.has(key):
 			newGroupDict[key] = exampleGroup[key]
 	if not newGroupDict.has("id"):
-		newGroupDict.id = randi() % 10000000000
+		#newGroupDict.id = randi() % 10000000000
+		newGroupDict.id = randi()
 	return newGroupDict
 
 

@@ -81,7 +81,9 @@ func _ready() -> void:
 #@export var groupTypes:Array[Globals.GroupTypes] = []
 
 
-
+func startEditingInPlace():
+	editInPlace()
+	$EditInput/LineEdit.grab_focus()
 
 func editInPlace():
 	print("button - editing in place: ", buttonData)
@@ -122,7 +124,7 @@ func setup(newButtonData):
 		buttonData[key] = newButtonData[key]
 	$'.'.text = buttonData.name
 	$EditInput/ColorPickerButton.color = buttonData.color
-	if buttonData.editingWhenLoaded:
+	if buttonData.has("editingWhenLoaded") and buttonData.editingWhenLoaded:
 		editInPlace()
 
 

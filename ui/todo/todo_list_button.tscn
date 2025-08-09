@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs3qgsyk4wgqp"]
+
+[ext_resource type="Script" uid="uid://byonmroo7xdhv" path="res://ui/todo/todo_list_button.gd" id="1_pbtri"]
+[ext_resource type="PackedScene" uid="uid://bfedkwjxiho3r" path="res://ui/common/groups_icon.tscn" id="2_djaxx"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="3_8owor"]
+
+[node name="TodoListButton" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+offset_right = 136.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+theme_override_constants/separation = -2
+script = ExtResource("1_pbtri")
+
+[node name="GroupsIcon" parent="." instance=ExtResource("2_djaxx")]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContextButton" parent="ScrollContainer" instance=ExtResource("3_8owor")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Todo List
+"
+alignment = 0
+canBeCopied = true
+canBeDeleted = true
+canBeEdited = true
+editableInPlace = true
+canBeGrouped = true

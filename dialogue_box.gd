@@ -56,7 +56,7 @@ func getTabNumberByName(tabName):
 	elif tabName == "TIMER_TAB":
 		return %TabsContainer/Snips
 
-func printTabs(g):
+func printTabs(_g):
 	for t in %TabsContainer.get_children():
 		print(t.name)
 	print("------")

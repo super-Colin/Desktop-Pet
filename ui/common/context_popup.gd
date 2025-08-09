@@ -33,8 +33,10 @@ func delete():
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
 		#var evLocal = make_input_local(event)
+		# check if click is outside of menu, close if so
 		if !Rect2(Vector2(0,0), size).has_point(make_input_local(event).position):
 			#release_focus()
+			#if popOutMenuVisible:
 			Globals.hideContextButtonMenu()
 
 
