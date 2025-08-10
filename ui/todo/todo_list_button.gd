@@ -1,8 +1,8 @@
 extends HBoxContainer
 
 
-signal s_editSubmitted
-signal s_deleteList(lId)
+signal s_editSubmitted(listDict)
+signal s_deleteMe
 signal s_pressed
 signal s_groupsUpdated(newGroupIds:Array)
 
@@ -15,7 +15,7 @@ func _ready() -> void:
 	%ContextButton.pressed.connect(func():s_pressed.emit())
 	%ContextButton.s_editSubmitted.connect(_editSubmitted)
 	%ContextButton.s_editRequested.connect(func():%ContextButton.editInPlace())
-	%ContextButton.s_deleteRequested.connect(func():s_deleteList.emit(listId))
+	%ContextButton.s_deleteRequested.connect(func():s_deleteMe.emit())
 	Groups.s_groupsUpdated.connect(refreshGroupColors)
 	%ContextButton.s_groupsUpdated.connect(groupsUpdated)
 
@@ -28,7 +28,7 @@ func _editSubmitted(newButtonData):
 		"id":listId,
 		"name":newButtonData.name,
 		#"color":newButtonData.color,
-		#"groups":newButtonData.groups
+		"groups":newButtonData.groups
 	}
 	s_editSubmitted.emit(todoListData)
 	#setGroupColor()

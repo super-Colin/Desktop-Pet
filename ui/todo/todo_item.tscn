@@ -33,6 +33,12 @@ canBeEdited = true
 editableInPlace = true
 canBeGrouped = true
 
+[node name="StrikeLine" type="Line2D" parent="ScrollContainer/ContextButton"]
+visible = false
+points = PackedVector2Array(0, 5, 209, 33)
+width = 6.0
+default_color = Color(0.290196, 0.827451, 0, 0.47451)
+
 [node name="PriorityLevel" type="OptionButton" parent="."]
 layout_mode = 2
 selected = 5

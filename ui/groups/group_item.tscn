@@ -49,12 +49,12 @@ layout_mode = 2
 focus_mode = 0
 text = "To Top"
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="HideButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Hide"
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="HighlightButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 text = "Highlight"

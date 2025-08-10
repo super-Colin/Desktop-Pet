@@ -16,6 +16,7 @@ const exampleTodoItem = {
 	"name":"",
 	"priority":5,
 	"groups":[],
+	"completed":false
 }
 
 
@@ -45,12 +46,21 @@ func _ready() -> void:
 	%SaveTodoButton.pressed.connect(saveNewTodoItem)
 	%Name.text_submitted.connect(saveNewTodoItem)
 	##
-	refreshListsList()
+	refreshTab()
 	#highlightListList(currentList)
+	Groups.s_groupDeleted.connect(removeDeletedGroupFromTab)
+
+
+func removeDeletedGroupFromTab(groupId):
+	for listId in savedTodoLists.keys():
+		savedTodoLists[listId].groups.erase(groupId)
+		for todoItemKey in savedTodoLists[listId].items.keys():
+			savedTodoLists[listId].items[todoItemKey].groups.erase(groupId)
+	refreshTab()
+
+func refreshTab():
+	refreshListsList()
 	refreshTodoItemsList()
-
-
-
 
 
 
@@ -68,16 +78,24 @@ func refreshListsList():
 	# Create button config to create new on load and hide save button
 	var buttonSetup = {"name":"+ New List"}
 	%ListsList.add_child(makeListButton(newList, true))
+	makePlaceholderText()
 
+func makePlaceholderText():
+	var listName = ""
+	if savedCurrentList:
+		listName = savedTodoLists[savedCurrentList].name
+	%Name.placeholder_text = "New " + listName + " todo item"
 
 
 func makeListButton(todoListDict, forNewCreation = false):
 	var newListButton = listButtonScene.instantiate()
 	newListButton.setup(todoListDict, forNewCreation)
 	newListButton.s_editSubmitted.connect(saveList)
-	if not forNewCreation:
-		newListButton.s_groupsUpdated.connect(updateTodoListGroups.bind(todoListDict.id))
-		newListButton.s_pressed.connect(swapActiveList.bind(todoListDict.id))
+	if  forNewCreation:
+		return newListButton
+	newListButton.s_groupsUpdated.connect(updateTodoListGroups.bind(todoListDict.id))
+	newListButton.s_pressed.connect(swapActiveList.bind(todoListDict.id))
+	newListButton.s_deleteMe.connect(deleteList.bind(todoListDict.id))
 	return newListButton
 
 
@@ -97,9 +115,15 @@ func refreshTodoItemsList():
 		newItemRow.setup(todoItem)
 		newItemRow.s_editSubmitted.connect(updateTodoItem)
 		newItemRow.s_deleteMe.connect(deleteTodoItem)
-		#newItemRow.todoToggled.connect(todoToggled)
+		newItemRow.s_toggled.connect(todoToggled)
 		newItemRow.s_groupsUpdated.connect(updateTodoItemGroups.bind(todoItem.name))
 		%TodosList.add_child(newItemRow)
+
+
+func todoToggled(todoItemKey, isDone):
+	savedTodoLists[savedCurrentList].items[todoItemKey].completed = isDone
+	saveTodos()
+
 
 
 
@@ -112,20 +136,22 @@ func updateTodoItemGroups(newGroups, itemName):
 	saveTodos()
 
 
-func updateTodoItem(todoItemDict:Dictionary):
+func updateTodoItem(todoItemDict:Dictionary, refreshTodos=true):
 	print("todo tab - updated todo item to save is: ", todoItemDict)
 	if todoItemDict.has("deleteOld"):
 		print("todo tab - deleting old todo item: ", todoItemDict.deleteOld)
 		savedTodoLists[savedCurrentList].items.erase(todoItemDict.deleteOld)
 	savedTodoLists[savedCurrentList].items[todoItemDict.name] = todoItemDict
 	saveTodos()
-	refreshTodoItemsList()
+	if refreshTodos:
+		refreshTodoItemsList()
 
 func saveNewTodoItem(_text=null):
 	var newItem = {
 		"name":%Name.text,
 		"priority":5,
-		"groups":[]
+		"groups":[],
+		"completed":false
 	}
 	savedTodoLists[savedCurrentList].items[newItem.name] = newItem
 	refreshTodoItemsList()
@@ -162,6 +188,14 @@ func saveList(todoListDict:Dictionary):
 
 
 
+func deleteList(listId):
+	#print("todo tab - deleting list: ", listName)
+	savedTodoLists.erase(listId)
+	if listId == savedCurrentList:
+		savedCurrentList = savedTodoLists.keys()[0]
+	#Globals.deleteHotbarShortcut.emit(listName)
+	saveTodos()
+	refreshTab()
 
 
 
@@ -201,20 +235,7 @@ func fillInList(newListDict:Dictionary):
 
 
 
-#func todoToggled(title):
-	#todoLists[currentList][title] = not todoLists[currentList][title]
-	##print("todo - todo toggled: ", todoLists[currentList][title])
-	## use Strike through to show completed status (maybe also a check mark)
-	#saveTodos()
 
-#
-#func deleteList(listName):
-	#print("todo tab - deleting list: ", listName)
-	#todoLists.erase(listName)
-	#currentList = todoLists.keys()[0]
-	#Globals.deleteHotbarShortcut.emit(listName)
-	#saveTodos()
-	##refreshListsList()
 
 
 
@@ -276,7 +297,9 @@ func swapActiveList(newListId):
 	savedCurrentList = newListId
 	refreshTodoItemsList()
 	#highlightListList(currentList)
+	makePlaceholderText()
 	saveTodos()
+	
 
 
 

@@ -6,11 +6,12 @@ extends HBoxContainer
 signal s_editSubmitted(dataDict)
 signal s_deleteMe(dataDict)
 signal s_groupsUpdated(newGroupIds:Array)
-signal s_toggled(isDone:bool)
+signal s_toggled(todoItemName, isDone:bool)
 
 var itemName
 var priorityLevel
 var groups = []
+var completed = false
 
 
 
@@ -23,7 +24,15 @@ func _ready() -> void:
 	$PriorityLevel.item_selected.connect(priorityLevelEdited)
 	Groups.s_groupsUpdated.connect(refreshGroupColors)
 	%ContextButton.s_groupsUpdated.connect(groupsUpdated)
+	%ContextButton.pressed.connect(todoToggled)
+	%ContextButton.resized.connect(setCompletion)
 
+
+
+func todoToggled():
+	completed = ! completed
+	setCompletion()
+	s_toggled.emit(itemName, completed)
 
 
 func setup(todoDict):
@@ -33,6 +42,7 @@ func setup(todoDict):
 		#"tabName":"TODOS",
 		#"groups":todoDict.groups
 	}
+	
 	itemName = todoDict.name
 	priorityLevel = todoDict.priority
 	setPriorityLevel()
@@ -40,7 +50,22 @@ func setup(todoDict):
 	if todoDict.has("groups"):
 		$GroupsIcon.setColorsWithGroups(todoDict.groups)
 		buttonData.groups = todoDict.groups
+		groups = todoDict.groups
+	completed = todoDict.completed
 	%ContextButton.setup(buttonData)
+	setCompletion()
+	#call_deferred("setCompletion")
+
+
+func setCompletion():
+	if completed:
+		var btnSize = %ContextButton.get_rect().size
+		$ScrollContainer/ContextButton/StrikeLine.visible = true
+		$ScrollContainer/ContextButton/StrikeLine.points[0] = Vector2(0, btnSize.y/2)
+		$ScrollContainer/ContextButton/StrikeLine.points[1] = Vector2(btnSize.x, btnSize.y/2)
+	else:
+		$ScrollContainer/ContextButton/StrikeLine.visible = false
+
 
 
 
@@ -52,6 +77,7 @@ func _editSubmitted(newButtonData):
 		#"color":newButtonData.color,
 		"groups":newButtonData.groups,
 		"priority":priorityLevel,
+		#"completed":completed,
 	}
 	if not itemName == todoData.name:
 		#print("todo item - need to delete renamed item")

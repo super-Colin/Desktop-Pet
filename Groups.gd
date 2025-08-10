@@ -10,6 +10,7 @@ const exampleGroup = {
 }
 
 signal s_groupsUpdated
+signal s_groupDeleted(groupId)
 
 
 var savedGroups:Dictionary = {}
@@ -34,14 +35,19 @@ func _ready() -> void:
 
 
 func deleteGroup(groupId):
+	print("Groups - deleting group: ", groupId)
 	savedGroups.erase(groupId)
+	s_groupDeleted.emit(groupId)
+	#call_deferred(func():s_groupsUpdated.emit())
 	s_groupsUpdated.emit()
 
 
 func getGroupIds():
 	return savedGroups.keys()
 
-func getGroupName(groupId):
+func getGroupName(groupId, fallback:String):
+	if not groupId:
+		return fallback
 	return savedGroups[groupId].name
 
 func getGroupColor(groupId)->Color:
