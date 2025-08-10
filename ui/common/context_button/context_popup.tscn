@@ -1,0 +1,102 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm7on4pqb75qj"]
+
+[ext_resource type="Script" uid="uid://bs5di66b5a8o6" path="res://ui/common/context_button/context_popup.gd" id="1_lao8o"]
+[ext_resource type="PackedScene" uid="uid://bfedkwjxiho3r" path="res://ui/common/groups_icon.tscn" id="2_d3tno"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trw2q"]
+bg_color = Color(0.485287, 0.662448, 0.343871, 1)
+
+[node name="ContextPopup" type="PanelContainer"]
+custom_minimum_size = Vector2(120, 0)
+offset_right = 128.0
+offset_bottom = 181.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_trw2q")
+script = ExtResource("1_lao8o")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MainMenu" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GroupButton" type="Button" parent="MarginContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Group high level lists together"
+text = "Group With"
+
+[node name="AddToHotbarButton" type="Button" parent="MarginContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Create a persistant shortcut in the hotbar"
+text = "Add to Hotbar"
+
+[node name="EditButton" type="Button" parent="MarginContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Edit"
+
+[node name="DeleteButton" type="Button" parent="MarginContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Delete"
+
+[node name="DuplicateButton" type="Button" parent="MarginContainer/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Create a copy of this list"
+text = "Duplicate"
+
+[node name="CopyButton" type="Button" parent="MarginContainer/MainMenu"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Copy"
+
+[node name="GroupingMenu" type="ScrollContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(130, 100)
+layout_mode = 2
+
+[node name="GroupingMenuList" type="VBoxContainer" parent="MarginContainer/GroupingMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GroupingMenu/GroupingMenuList"]
+layout_mode = 2
+
+[node name="GroupsIcon" parent="MarginContainer/GroupingMenu/GroupingMenuList/HBoxContainer" instance=ExtResource("2_d3tno")]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/GroupingMenu/GroupingMenuList/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Group 1"
+
+[node name="Label" type="Label" parent="MarginContainer/GroupingMenu/GroupingMenuList/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Group 1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/GroupingMenu/GroupingMenuList"]
+layout_mode = 2
+
+[node name="GroupsIcon" parent="MarginContainer/GroupingMenu/GroupingMenuList/HBoxContainer2" instance=ExtResource("2_d3tno")]
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/GroupingMenu/GroupingMenuList/HBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+text = "Another Group"
+
+[node name="Label" type="Label" parent="MarginContainer/GroupingMenu/GroupingMenuList/HBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "Another Group"

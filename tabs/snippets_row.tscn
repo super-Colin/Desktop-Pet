@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bb06u3110oiyr"]
 
 [ext_resource type="Script" uid="uid://cp55d7qqov8rl" path="res://tabs/snippets_row.gd" id="1_o77gq"]
-[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="2_q4p0x"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button/context_button.tscn" id="2_q4p0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ltona"]
 

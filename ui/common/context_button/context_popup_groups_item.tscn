@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfjlx6nx5pqth"]
+
+[ext_resource type="Script" uid="uid://dlqf3gf6pdgbv" path="res://ui/common/context_button/context_popup_groups_item.gd" id="1_fmr4g"]
+[ext_resource type="PackedScene" uid="uid://bfedkwjxiho3r" path="res://ui/common/groups_icon.tscn" id="1_ic1aa"]
+
+[node name="ContextPopupGroupsItem" type="HBoxContainer"]
+script = ExtResource("1_fmr4g")
+
+[node name="GroupsIcon" parent="." instance=ExtResource("1_ic1aa")]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+button_pressed = true
+text = "Another Group"

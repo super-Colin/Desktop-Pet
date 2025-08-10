@@ -47,7 +47,7 @@ func _ready() -> void:
 	##
 	refreshListsList()
 	#highlightListList(currentList)
-	refreshTodoList()
+	refreshTodoItemsList()
 
 
 
@@ -81,7 +81,7 @@ func makeListButton(todoListDict, forNewCreation = false):
 
 
 
-func refreshTodoList():
+func refreshTodoItemsList():
 	for c in %TodosList.get_children():
 		c.queue_free()
 	if not savedCurrentList:
@@ -95,10 +95,16 @@ func refreshTodoList():
 		#newItemRow.setup(todoItem, savedCurrentList)
 		newItemRow.setup(todoItem)
 		newItemRow.s_editSubmitted.connect(updateTodoItem)
-		#newItemRow.s_deleteGroup.connect(Groups.deleteGroup)
+		newItemRow.s_deleteMe.connect(deleteTodoItem)
 		#newItemRow.todoToggled.connect(todoToggled)
-		#newItemRow.deleteRequested.connect(deleteListItem)
+		newItemRow.s_groupsUpdated.connect(updateTodoItemGroups.bind(todoItem.name))
 		%TodosList.add_child(newItemRow)
+
+
+
+func updateTodoItemGroups(groups, itemName):
+	savedTodoLists[savedCurrentList].items[itemName].groups = groups
+	saveTodos()
 
 
 func updateTodoItem(todoItemDict:Dictionary):
@@ -108,33 +114,24 @@ func updateTodoItem(todoItemDict:Dictionary):
 		savedTodoLists[savedCurrentList].items.erase(todoItemDict.deleteOld)
 	savedTodoLists[savedCurrentList].items[todoItemDict.name] = todoItemDict
 	saveTodos()
-	refreshTodoList()
+	refreshTodoItemsList()
 
 func saveNewTodoItem(_text=null):
-	#print("todo - new todo is: ", %Name.text)
-	#var capitalized = Globals.customCapitalize(%Name.text)
-	#todoLists[currentList][capitalized] = false
 	var newItem = {
 		"name":%Name.text,
 		"priority":5,
 		"groups":[]
 	}
 	savedTodoLists[savedCurrentList].items[newItem.name] = newItem
-	#clearInputBar()
-	refreshTodoList()
+	refreshTodoItemsList()
 	saveTodos()
 	%Name.text = ""
 
 
-func deleteTodoItem(todoItemName:String, listId=null):
-	if not listId:
-		listId = savedCurrentList
-	var index = 0
-	for todoItem in savedTodoLists[listId].items:
-		if todoItem.name == todoItemName:
-			savedTodoLists[listId].items.erase(todoItem.name)
-			break
-		index += 1
+
+func deleteTodoItem(todoItemName):
+	savedTodoLists[savedCurrentList].items.erase(todoItemName)
+	refreshTodoItemsList()
 
 
 
@@ -214,13 +211,6 @@ func fillInList(newListDict:Dictionary):
 	#saveTodos()
 	##refreshListsList()
 
-#func deleteListItem(todoName):
-	#print("todo tab - deleting: ", todoName)
-	#todoLists[currentList].erase(todoName)
-	#saveTodos()
-	#refreshTodoList()
-
-
 
 
 
@@ -250,13 +240,6 @@ func fillInList(newListDict:Dictionary):
 
 
 
-#func saveTodo():
-	##if makingList:
-		##saveNewList()
-	##elif makingDuplicate:
-		##saveNewDuplicateList()
-	##else:
-	#saveNewTodo()
 
 #func saveNewDuplicateList():
 	#print("todo tab - saving duplicate list: ", duplicatingList)
@@ -286,7 +269,7 @@ func saveTodos():
 
 func swapActiveList(newListId):
 	savedCurrentList = newListId
-	refreshTodoList()
+	refreshTodoItemsList()
 	#highlightListList(currentList)
 	saveTodos()
 

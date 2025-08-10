@@ -1,6 +1,6 @@
 extends Container
 
-var buttonScene = preload("res://ui/common/context_button.tscn")
+var buttonScene = preload("res://ui/common/context_button/context_button.tscn")
 
 const SAVE_SECTION = "HOTBAR"
 var hotbarList:Dictionary = {} # "MyTodoList":{"dishes":true}

@@ -4,15 +4,44 @@ extends VBoxContainer
 #func _ready() -> void:
 	#Groups.s_groupsUpdated.connect()
 
+func setColorWithColors(colors:Array=[]):
+	clearUnneededColorRects()
+	if colors.size() == 0:
+		$ColorRect.visible = false
+		return
+	var theColor = colors.pop_front()
+	#print("group icon - firstColorGId: ", firstColorGId)
+	if not theColor is Color or theColor == Color.WHITE:
+		print("group icon - given non color: ", theColor)
+		theColor = Color(theColor)
+	$ColorRect.color = theColor
+	for color in colors:
+		var newColor = $ColorRect.duplicate()
+		newColor.color = color
+		$'.'.add_child(newColor)
+
+
 func setColorsWithGroups(groupsIds:Array=[]):
 	clearUnneededColorRects()
 	if groupsIds.size() == 0:
 		$ColorRect.visible = false
 		return
+	$ColorRect.visible = true
 	# remove first color from array to always keep 
-	var firstColorGId = groupsIds.pop_front()
-	$ColorRect.color = Groups.getGroupColor(firstColorGId)
+	#var firstColorGId = groupsIds.pop_front()
+	##print("group icon - firstColorGId: ", firstColorGId)
+	#var theColor = Groups.getGroupColor(firstColorGId)
+	##if not theColor is Color or theColor == Color.WHITE:
+	#if not theColor is Color:
+		#print("group icon - given non color: ", theColor)
+		#theColor = Color(theColor)
+	#$ColorRect.color = theColor
+	var isFirstColor = true
 	for gId in groupsIds:
+		if isFirstColor:
+			isFirstColor = false
+			$ColorRect.color = Groups.getGroupColor(gId)
+			continue
 		var newColor = $ColorRect.duplicate()
 		newColor.color = Groups.getGroupColor(gId)
 		$'.'.add_child(newColor)

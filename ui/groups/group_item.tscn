@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://chx6j47j73av0" path="res://ui/groups/group_item.gd" id="1_chf1q"]
 [ext_resource type="PackedScene" uid="uid://bfedkwjxiho3r" path="res://ui/common/groups_icon.tscn" id="1_lokei"]
-[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="2_bs84n"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button/context_button.tscn" id="2_bs84n"]
 
 [node name="GroupItem" type="VBoxContainer"]
 anchors_preset = 10

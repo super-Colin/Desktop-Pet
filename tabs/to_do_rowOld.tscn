@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmu4jpxf562kr"]
 
 [ext_resource type="Script" uid="uid://3oywx1gd6owi" path="res://tabs/to_do_rowOld.gd" id="1_sjkpp"]
-[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="2_d41c2"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button/context_button.tscn" id="2_d41c2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whak8"]
 bg_color = Color(0.199373, 0.199373, 0.199373, 1)

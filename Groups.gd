@@ -38,6 +38,12 @@ func deleteGroup(groupId):
 	s_groupsUpdated.emit()
 
 
+func getGroupIds():
+	return savedGroups.keys()
+
+func getGroupName(groupId):
+	return savedGroups[groupId].name
+
 func getGroupColor(groupId)->Color:
 	#print("GROUPS - color for group: ", groupId, " is: ", savedGroups[groupId].color)
 	if not savedGroups.has(groupId):
@@ -82,7 +88,8 @@ func validateNewGroup(newGroupDict:Dictionary):
 
 
 
-
+func getGroup(groupId):
+	return savedGroups[groupId].duplicate()
 
 func getGroupNames():
 	var names = []

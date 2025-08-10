@@ -40,11 +40,16 @@ signal s_editSubmitted(dataDict)
 signal s_copyRequested(dataDict)
 signal s_duplicateRequested(dataDict)
 
-var title:String
+signal s_groupsUpdated(newGroupIds:Array)
+
+
+#var title:String
 var contextIsOpen:bool = false
 var tabName
 #var isHotbarShortcut:bool = false
-#var groups:Array = []
+#var groups:Array = [] # kept in buttonData
+
+
 
 
 
@@ -66,21 +71,15 @@ func _ready() -> void:
 	buttonData.editingWhenLoaded = editingWhenLoaded
 	buttonData.canBeGrouped = canBeGrouped
 	buttonData.groupTypes = groupTypes
+	$EditInput/LineEdit.focus_exited.connect(cancelEdit)
 
 
 
 
 
-
-#@export var canBeHotbarShortcut = false
-#@export var canBeDuplicated = false
-#@export var canBeDeleted = false
-#@export var canBeEdited = false
-#@export var editableInPlace = false
-#@export var editableColor = false
-#@export var canBeGrouped = false
-#@export var groupTypes:Array[Globals.GroupTypes] = []
-
+func cancelEdit():
+	$EditInput.visible = false
+	$'.'.text = buttonData.name
 
 func startEditingInPlace():
 	editInPlace()
@@ -149,6 +148,6 @@ func emitEditRequest():
 func emitDeleteRequest():
 	s_deleteRequested.emit()
 func emitCopyRequest():
-	s_copyRequested.emit(title)
+	s_copyRequested.emit(buttonData.name)
 func emitDuplicateRequest():
-	s_duplicateRequested.emit(title)
+	s_duplicateRequested.emit(buttonData.name)

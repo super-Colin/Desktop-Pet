@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvvsqwmgu8v15"]
 
-[ext_resource type="Script" uid="uid://c8nbvwh73vm3l" path="res://ui/common/context_button.gd" id="1_s7vf0"]
+[ext_resource type="Script" uid="uid://c8nbvwh73vm3l" path="res://ui/common/context_button/context_button.gd" id="1_s7vf0"]
 
 [node name="ContextButton" type="Button"]
 offset_right = 8.0

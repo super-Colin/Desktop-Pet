@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dko4dcm3n1nde"]
 
-[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button.tscn" id="1_qm55l"]
+[ext_resource type="PackedScene" uid="uid://cvvsqwmgu8v15" path="res://ui/common/context_button/context_button.tscn" id="1_qm55l"]
 [ext_resource type="Script" uid="uid://b3rmnsdvyalke" path="res://ui/todo/todo_tab.gd" id="1_ypwqs"]
 [ext_resource type="PackedScene" uid="uid://cuyjgb3rti5nj" path="res://ui/todo/todo_item.tscn" id="2_qm55l"]
 [ext_resource type="PackedScene" uid="uid://cs3qgsyk4wgqp" path="res://ui/todo/todo_list_button.tscn" id="3_n6muw"]
@@ -29,6 +29,7 @@ size_flags_horizontal = 3
 placeholder_text = "New Todo Item"
 max_length = 200
 keep_editing_on_text_submit = true
+context_menu_enabled = false
 
 [node name="MakingListSign" type="Button" parent="NewCreator"]
 visible = false

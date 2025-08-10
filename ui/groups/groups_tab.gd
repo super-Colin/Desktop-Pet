@@ -31,8 +31,8 @@ func makeRowForGroup(groupDict):
 #{"name":"New Group"}
 func makeRowForNewGroupCreation():
 	var newRow = rowScene.instantiate()
-	#newRow.setup(Groups.validateNewGroup({"name":"New Group"}), true)
-	newRow.setup(Groups.validateNewGroup({"name":"New Group"}))
+	newRow.setup(Groups.validateNewGroup({"name":"New Group"}), true)
+	#newRow.setup(Groups.validateNewGroup({"name":"New Group", "editingWhenLoaded":true}))
 	newRow.s_editSubmitted.connect(_editSubmitted)
 	%GroupsList.add_child(newRow)
 
