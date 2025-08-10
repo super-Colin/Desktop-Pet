@@ -67,6 +67,7 @@ func saveGroup(groupDict:Dictionary)->bool:
 	#print("Groups - saving group: ", groupDict)
 	Saver.saveGameSection(SAVE_SECTION, "groups", savedGroups)
 	#updateGroups()
+	s_groupsUpdated.emit()
 	return true
 
 

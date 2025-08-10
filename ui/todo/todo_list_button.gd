@@ -4,6 +4,8 @@ extends HBoxContainer
 signal s_editSubmitted
 signal s_deleteList(lId)
 signal s_pressed
+signal s_groupsUpdated(newGroupIds:Array)
+
 
 var groups = []
 var listId
@@ -14,6 +16,8 @@ func _ready() -> void:
 	%ContextButton.s_editSubmitted.connect(_editSubmitted)
 	%ContextButton.s_editRequested.connect(func():%ContextButton.editInPlace())
 	%ContextButton.s_deleteRequested.connect(func():s_deleteList.emit(listId))
+	Groups.s_groupsUpdated.connect(refreshGroupColors)
+	%ContextButton.s_groupsUpdated.connect(groupsUpdated)
 
 
 
@@ -39,24 +43,35 @@ func setup(todoListDict, forNewItemCreation = false):
 	listId = todoListDict.id
 	#itemName = todoListDict.name
 	#buttonData.editingWhenLoaded = forNewItemCreation
-	%ContextButton.setup(buttonData)
 	if forNewItemCreation:
 		%ContextButton.pressed.connect(func():%ContextButton.startEditingInPlace())
 	if todoListDict.has("groups"):
 		$GroupsIcon.setColorsWithGroups(todoListDict.groups)
+		buttonData.groups = todoListDict.groups
+	%ContextButton.setup(buttonData)
 
 
 
 
 
-
-
-
-
+func groupsUpdated(newGroupIds):
+	print("todo item - groups updated:", newGroupIds)
+	groups = newGroupIds
+	setGroupIconColor(newGroupIds)
+	s_groupsUpdated.emit(newGroupIds)
 
 
 func setGroupIconColor(groupIds:Array):
 	$GroupsIcon.setColorsWithGroups(groupIds)
+
+func refreshGroupColors():
+	groupsUpdated(groups)
+
+
+
+
+
+
 
 
 

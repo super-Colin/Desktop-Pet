@@ -76,6 +76,7 @@ func makeListButton(todoListDict, forNewCreation = false):
 	newListButton.setup(todoListDict, forNewCreation)
 	newListButton.s_editSubmitted.connect(saveList)
 	if not forNewCreation:
+		newListButton.s_groupsUpdated.connect(updateTodoListGroups.bind(todoListDict.id))
 		newListButton.s_pressed.connect(swapActiveList.bind(todoListDict.id))
 	return newListButton
 
@@ -102,8 +103,12 @@ func refreshTodoItemsList():
 
 
 
-func updateTodoItemGroups(groups, itemName):
-	savedTodoLists[savedCurrentList].items[itemName].groups = groups
+func updateTodoListGroups(newGroups, listId):
+	savedTodoLists[listId].groups = newGroups
+	saveTodos()
+
+func updateTodoItemGroups(newGroups, itemName):
+	savedTodoLists[savedCurrentList].items[itemName].groups = newGroups
 	saveTodos()
 
 

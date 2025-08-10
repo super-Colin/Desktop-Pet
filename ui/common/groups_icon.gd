@@ -27,20 +27,11 @@ func setColorsWithGroups(groupsIds:Array=[]):
 		$ColorRect.visible = false
 		return
 	$ColorRect.visible = true
-	# remove first color from array to always keep 
-	#var firstColorGId = groupsIds.pop_front()
-	##print("group icon - firstColorGId: ", firstColorGId)
-	#var theColor = Groups.getGroupColor(firstColorGId)
-	##if not theColor is Color or theColor == Color.WHITE:
-	#if not theColor is Color:
-		#print("group icon - given non color: ", theColor)
-		#theColor = Color(theColor)
-	#$ColorRect.color = theColor
 	var isFirstColor = true
 	for gId in groupsIds:
 		if isFirstColor:
-			isFirstColor = false
 			$ColorRect.color = Groups.getGroupColor(gId)
+			isFirstColor = false
 			continue
 		var newColor = $ColorRect.duplicate()
 		newColor.color = Groups.getGroupColor(gId)

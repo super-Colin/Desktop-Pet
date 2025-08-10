@@ -16,6 +16,7 @@ func getDict():
 
 func setup(groupDict, currentlyActive=false):
 	print("popup group item - group dict is: ", groupDict)
+	print("popup group item - group currentlyActive is: ", currentlyActive)
 	groupId = groupDict.id
 	$GroupsIcon.setColorWithColors([groupDict.color])
 	$CheckBox.text = groupDict.name
