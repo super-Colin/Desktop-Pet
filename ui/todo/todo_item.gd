@@ -105,7 +105,8 @@ func setGroupIconColor(groupIds:Array):
 
 
 func setPriorityLevel():
-	$PriorityLevel.select(priorityLevel)
+	var index = 9 - priorityLevel 
+	$PriorityLevel.select(index)
 
 func priorityLevelEdited(newOptionIndex):
 	priorityLevel = int($PriorityLevel.get_item_text(newOptionIndex))

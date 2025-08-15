@@ -52,6 +52,7 @@ text = "Save"
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/minimum_grab_thickness = 12
 
 [node name="ScrollContainerLeft" type="ScrollContainer" parent="HSplitContainer"]
 custom_minimum_size = Vector2(140, 0)

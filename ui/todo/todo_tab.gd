@@ -119,13 +119,10 @@ func refreshTodoItemsList():
 		return
 	#print("todo - ", savedTodoLists[savedCurrentList])
 	#sortByCompleted()
-	var sortedItemKeys = sortTodoItemsByCompletion(savedTodoLists[savedCurrentList].items)
-	for todoItemKey in sortedItemKeys:
-		var todoItem = savedTodoLists[savedCurrentList].items[todoItemKey]
-		#print("todo tab - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
-		#print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
+	var sortedItems = sortTodoItems(savedTodoLists[savedCurrentList].items)
+	for todoItem in sortedItems:
+		#var todoItem = savedTodoLists[savedCurrentList].items[todoItemKey]
 		var newItemRow = itemRowScene.instantiate()
-		#newItemRow.setup(todoItem, savedCurrentList)
 		newItemRow.setup(todoItem)
 		newItemRow.s_editSubmitted.connect(updateTodoItem)
 		newItemRow.s_deleteMe.connect(deleteTodoItem)
@@ -134,21 +131,51 @@ func refreshTodoItemsList():
 		%TodosList.add_child(newItemRow)
 
 
-func sortTodoItemsByCompletion(todoItemsDict:Dictionary)->Array:
+
+func sortTodoItems(todoItemsDict:Dictionary)->Array:
 	if not todoItemsDict:
 		return []
+	# sort by completion first
 	var completedItems = []
 	var uncompletedItems = []
 	for key in todoItemsDict.keys():
 		if todoItemsDict[key].completed:
-			completedItems.append(key)
+			completedItems.append(todoItemsDict[key])
 		else:
-			uncompletedItems.append(key)
-	uncompletedItems.append_array(completedItems)
-	var sortedKeyArray = uncompletedItems # uncompleted first (top of list)
-	print("todo tab - sorted items: ", sortedKeyArray)
-	return sortedKeyArray
- 
+			uncompletedItems.append(todoItemsDict[key])
+	# then sort each bucket by priority
+	print("todo tab - completed items: ", completedItems)
+	var sortedUncompletedItems = sortTodoItemsByPriority(uncompletedItems)
+	var sortedCompletedItems = sortTodoItemsByPriority(completedItems)
+	# append completed to uncompleted so they are on bottom
+	sortedUncompletedItems.append_array(sortedCompletedItems)
+	var sortedArray = sortedUncompletedItems # uncompleted first (top of list)
+	print("todo tab - sorted items: ", sortedArray)
+	return sortedArray
+
+func sortTodoItemsByPriority(todoItemsArray:Array)->Array:
+	if not todoItemsArray:
+		return []
+	var priorityBuckuts = {}
+	# make buckets
+	var i = 1
+	while i <= 9: 
+		priorityBuckuts[i] = []
+		i += 1
+	# put in buckets
+	for item in todoItemsArray:
+		priorityBuckuts[item.priority].append(item)
+	# combine buckets from highest to lowest
+	print("todo tab - sorting priorityBuckuts: ", priorityBuckuts)
+	var sortedItems = []
+	i = 9
+	while i >= 1: 
+		sortedItems.append_array(priorityBuckuts[i])
+		i -= 1
+	print("todo tab - sortedItems: ", sortedItems)
+	return sortedItems
+
+
 
 func todoToggled(todoItemKey, isDone):
 	savedTodoLists[savedCurrentList].items[todoItemKey].completed = isDone
