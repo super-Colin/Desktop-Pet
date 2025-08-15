@@ -57,10 +57,10 @@ func onButtonGuiInput(event=null):
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
 				#left_click.emit()
-				Globals.hideContextPopup($'.')
+				Globals.hideContextButtonMenu($'.')
 			MOUSE_BUTTON_RIGHT:
 				#right_click.emit()
-				Globals.hideContextPopup($'.')
+				Globals.hideContextButtonMenu($'.')
 
 
 func makeHotbarShortcut(tabName, listName):

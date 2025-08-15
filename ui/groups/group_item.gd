@@ -19,6 +19,7 @@ func _ready() -> void:
 
 
 
+
 func _editSubmitted(newButtonData):
 	print("group item - edit submitted")
 	var groupData = {
@@ -44,9 +45,15 @@ func setup(groupDict, forNewItemCreation = false):
 	}
 	groupId = groupDict.id
 	buttonData.editingWhenLoaded = forNewItemCreation
-	$HBoxContainer/VBoxContainer/HBoxContainer.visible = ! forNewItemCreation
+	%GroupSettings.visible = ! forNewItemCreation
 	%ContextButton.setup(buttonData)
 	setGroupColor(forNewItemCreation)
+	if forNewItemCreation:
+		return
+	%GroupSettings/ToTopButton.pressed.connect(Groups.toggleSortTop.bind(groupId))
+	%GroupSettings/ToTopButton.button_pressed = Groups.hasATopGroup([groupId])
+	%GroupSettings/ToBottomButton.pressed.connect(Groups.toggleSortBottom.bind(groupId))
+	%GroupSettings/ToBottomButton.button_pressed = Groups.hasABottomGroup([groupId])
 
 
 

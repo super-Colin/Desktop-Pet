@@ -39,7 +39,8 @@ func makeRowForNewGroupCreation():
 
 func _editSubmitted(groupData):
 	#print("groups tab - edit submitted")
-	Groups.saveGroup(groupData)
+	Groups.updateGroup(groupData)
+	#Groups.saveGroup(groupData)
 	refreshGroupsList()
 
 

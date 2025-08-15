@@ -6,13 +6,13 @@ const listButtonScene = preload("res://ui/todo/todo_list_button.tscn")
 const itemRowScene = preload("res://ui/todo/todo_item.tscn")
 
 const exampleTodoList = {
-	#"id":0,
+	#"id":0, # generated
 	"name":"",
 	"items":[],
 	"groups":[],
 }
 const exampleTodoItem = {
-	#"listId":"",
+	#"listId":"", # generated
 	"name":"",
 	"priority":5,
 	"groups":[],
@@ -31,12 +31,7 @@ var savedTodoLists:Dictionary = {} # "MyTodoList":{"dishes":true}
 var savedCurrentList
 
 var currentListButton:Node
-#const rowScene = preload("res://ui/groups/group_item.tscn")
-#const buttonScene = preload("res://ui/common/context_button.tscn")
 
-
-var makingDuplicate:bool = false
-var duplicatingList:String = ""
 
 
 func _ready() -> void:
@@ -49,6 +44,7 @@ func _ready() -> void:
 	refreshTab()
 	#highlightListList(currentList)
 	Groups.s_groupDeleted.connect(removeDeletedGroupFromTab)
+	Groups.s_groupsUpdated.connect(refreshListsList)
 
 
 func removeDeletedGroupFromTab(groupId):
@@ -68,15 +64,31 @@ func refreshTab():
 func refreshListsList():
 	for c in %ListsList.get_children():
 		c.queue_free()
-	#print("todo - todoLists: ", todoLists)
+	print("todo - todoLists: ", savedTodoLists.keys())
+	var topRows = []
+	var middleRows = []
+	var bottomRows = []
 	for listId in savedTodoLists.keys():
-		#print("todo tab - list key: ", key)
-		%ListsList.add_child(makeListButton(savedTodoLists[listId]))
+		var newListButton = makeListButton(savedTodoLists[listId])
+		#print("todo tab - list key: ", listId)
+		if Groups.hasATopGroup(savedTodoLists[listId].groups):
+			topRows.append(newListButton)
+			continue
+		if Groups.hasABottomGroup(savedTodoLists[listId].groups):
+			bottomRows.append(newListButton)
+			continue
+		middleRows.append(newListButton)
+	# append the sorted and created rows
+	for r in topRows:
+		%ListsList.add_child(r)
+	for r in middleRows:
+		%ListsList.add_child(r)
+	for r in bottomRows:
+		%ListsList.add_child(r)
 	# create a button to create a new list
 	# give it a name, and have the id be filled in
 	var newList = fillInList({"name":"+ New List"})
 	# Create button config to create new on load and hide save button
-	var buttonSetup = {"name":"+ New List"}
 	%ListsList.add_child(makeListButton(newList, true))
 	makePlaceholderText()
 
@@ -105,9 +117,11 @@ func refreshTodoItemsList():
 		c.queue_free()
 	if not savedCurrentList:
 		return
-	print("todo - ", savedTodoLists[savedCurrentList])
+	#print("todo - ", savedTodoLists[savedCurrentList])
 	#sortByCompleted()
-	for todoItem in savedTodoLists[savedCurrentList].items.values():
+	var sortedItemKeys = sortTodoItemsByCompletion(savedTodoLists[savedCurrentList].items)
+	for todoItemKey in sortedItemKeys:
+		var todoItem = savedTodoLists[savedCurrentList].items[todoItemKey]
 		#print("todo tab - list: ", currentList, ", key: ", key, ", list:", todoLists[currentList][key])
 		#print("todo tab - key: ", key, ", status: ", todoLists[currentList][key])
 		var newItemRow = itemRowScene.instantiate()
@@ -119,6 +133,22 @@ func refreshTodoItemsList():
 		newItemRow.s_groupsUpdated.connect(updateTodoItemGroups.bind(todoItem.name))
 		%TodosList.add_child(newItemRow)
 
+
+func sortTodoItemsByCompletion(todoItemsDict:Dictionary)->Array:
+	if not todoItemsDict:
+		return []
+	var completedItems = []
+	var uncompletedItems = []
+	for key in todoItemsDict.keys():
+		if todoItemsDict[key].completed:
+			completedItems.append(key)
+		else:
+			uncompletedItems.append(key)
+	uncompletedItems.append_array(completedItems)
+	var sortedKeyArray = uncompletedItems # uncompleted first (top of list)
+	print("todo tab - sorted items: ", sortedKeyArray)
+	return sortedKeyArray
+ 
 
 func todoToggled(todoItemKey, isDone):
 	savedTodoLists[savedCurrentList].items[todoItemKey].completed = isDone
@@ -217,7 +247,6 @@ func fillInList(newListDict:Dictionary):
 		if not newListDict.has(key):
 			newListDict[key] = exampleTodoList[key]
 	if not newListDict.has("id"):
-		#newGroupDict.id = randi() % 10000000000
 		newListDict.id = randi()
 	print("todo tab - filled in list: ", newListDict)
 	return newListDict

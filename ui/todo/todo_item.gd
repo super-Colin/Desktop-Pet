@@ -22,7 +22,7 @@ func _ready() -> void:
 	%ContextButton.s_editSubmitted.connect(_editSubmitted)
 	%ContextButton.s_deleteRequested.connect(func():s_deleteMe.emit(itemName))
 	$PriorityLevel.item_selected.connect(priorityLevelEdited)
-	Groups.s_groupsUpdated.connect(refreshGroupColors)
+	Groups.s_groupColorsUpdated.connect(refreshGroupColors)
 	%ContextButton.s_groupsUpdated.connect(groupsUpdated)
 	%ContextButton.pressed.connect(todoToggled)
 	%ContextButton.resized.connect(setCompletion)
@@ -42,7 +42,6 @@ func setup(todoDict):
 		#"tabName":"TODOS",
 		#"groups":todoDict.groups
 	}
-	
 	itemName = todoDict.name
 	priorityLevel = todoDict.priority
 	setPriorityLevel()
@@ -77,7 +76,7 @@ func _editSubmitted(newButtonData):
 		#"color":newButtonData.color,
 		"groups":newButtonData.groups,
 		"priority":priorityLevel,
-		#"completed":completed,
+		"completed":completed,
 	}
 	if not itemName == todoData.name:
 		#print("todo item - need to delete renamed item")
@@ -88,11 +87,13 @@ func _editSubmitted(newButtonData):
 
 
 
-
+func refreshGroupColors():
+	setGroupIconColor(groups)
 
 func groupsUpdated(newGroupIds):
 	print("todo item - groups updated:", newGroupIds)
-	groups = newGroupIds
+	if newGroupIds:
+		groups = newGroupIds
 	setGroupIconColor(newGroupIds)
 	s_groupsUpdated.emit(newGroupIds)
 
@@ -100,8 +101,6 @@ func groupsUpdated(newGroupIds):
 func setGroupIconColor(groupIds:Array):
 	$GroupsIcon.setColorsWithGroups(groupIds)
 
-func refreshGroupColors():
-	groupsUpdated(groups)
 
 
 

@@ -16,7 +16,7 @@ func _ready() -> void:
 	%ContextButton.s_editSubmitted.connect(_editSubmitted)
 	%ContextButton.s_editRequested.connect(func():%ContextButton.editInPlace())
 	%ContextButton.s_deleteRequested.connect(func():s_deleteMe.emit())
-	Groups.s_groupsUpdated.connect(refreshGroupColors)
+	Groups.s_groupColorsUpdated.connect(refreshGroupColors)
 	%ContextButton.s_groupsUpdated.connect(groupsUpdated)
 
 
@@ -41,13 +41,11 @@ func setup(todoListDict, forNewItemCreation = false):
 		#"tabName":"TODOS",
 	}
 	listId = todoListDict.id
-	#itemName = todoListDict.name
-	#buttonData.editingWhenLoaded = forNewItemCreation
 	if forNewItemCreation:
 		%ContextButton.pressed.connect(func():%ContextButton.startEditingInPlace())
-	if todoListDict.has("groups"):
-		$GroupsIcon.setColorsWithGroups(todoListDict.groups)
-		buttonData.groups = todoListDict.groups
+	$GroupsIcon.setColorsWithGroups(todoListDict.groups)
+	buttonData.groups = todoListDict.groups
+	groups = buttonData.groups
 	%ContextButton.setup(buttonData)
 
 
@@ -55,21 +53,19 @@ func setup(todoListDict, forNewItemCreation = false):
 
 
 func groupsUpdated(newGroupIds):
-	print("todo item - groups updated:", newGroupIds)
-	groups = newGroupIds
+	print("todo list item - groups updated:", newGroupIds)
+	if newGroupIds:
+		groups = newGroupIds
+	print("todo list item - groups are now:", groups)
 	setGroupIconColor(newGroupIds)
 	s_groupsUpdated.emit(newGroupIds)
 
+func refreshGroupColors():
+	print("todo list item - refreshGroupColors")
+	setGroupIconColor(groups)
 
 func setGroupIconColor(groupIds:Array):
 	$GroupsIcon.setColorsWithGroups(groupIds)
-
-func refreshGroupColors():
-	groupsUpdated(groups)
-
-
-
-
 
 
 

@@ -86,7 +86,7 @@ func startEditingInPlace():
 	$EditInput/LineEdit.grab_focus()
 
 func editInPlace():
-	print("button - editing in place: ", buttonData)
+	#print("button - editing in place: ", buttonData)
 	if editableColor:
 		$EditInput/ColorPickerButton.color = buttonData.color
 		$EditInput/ColorPickerButton.visible = true
@@ -132,7 +132,7 @@ func setup(newButtonData):
 
 
 func editSubmitted():
-	print("button - edit submitted")
+	#print("button - edit submitted")
 	$EditInput.visible = false
 	if $EditInput/LineEdit.text == "":
 		buttonData.name = $EditInput/LineEdit.placeholder_text

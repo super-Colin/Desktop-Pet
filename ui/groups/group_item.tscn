@@ -41,25 +41,33 @@ canBeEdited = true
 editableInPlace = true
 editableColor = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="GroupSettings" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-text = "To Top"
-
-[node name="HideButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ToTopButton" type="Button" parent="HBoxContainer/VBoxContainer/GroupSettings"]
 layout_mode = 2
 focus_mode = 0
-text = "Hide"
+theme_override_colors/font_pressed_color = Color(0.960784, 0.74902, 0.305882, 1)
+toggle_mode = true
+text = "Top"
 
-[node name="HighlightButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ToBottomButton" type="Button" parent="HBoxContainer/VBoxContainer/GroupSettings"]
+layout_mode = 2
+focus_mode = 0
+theme_override_colors/font_pressed_color = Color(0.958848, 0.747854, 0.304786, 1)
+toggle_mode = true
+text = "Bottom"
+
+[node name="HighlightButton" type="Button" parent="HBoxContainer/VBoxContainer/GroupSettings"]
+visible = false
 layout_mode = 2
 focus_mode = 0
 text = "Highlight"
 
-[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Button4" type="Button" parent="HBoxContainer/VBoxContainer/GroupSettings"]
+visible = false
 layout_mode = 2
+tooltip_text = "This will delete the next selected group, and add this group in it's place anywhere it was used"
 focus_mode = 0
 text = "Merge"

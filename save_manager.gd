@@ -31,11 +31,11 @@ func setValForBatchSave(sectionName, sectionKey, sectionData):
 
 func saveBatch():
 	saveGameConfigNode.save(SAVE_FILE_PATH)
-	print("SAVER - saved batch")
+	#print("SAVER - saved batch")
 	saved.emit()
 
 func saveGameSection(sectionName, sectionKey, sectionData):
-	print("SAVER - saving: ", sectionName)
+	#print("SAVER - saving: ", sectionName)
 	if saveGameConfigNode == null:print("saves - saveGameSection didn't have config var")
 	saveGameConfigNode.set_value(sectionName, sectionKey, sectionData)
 	saveGameConfigNode.save(SAVE_FILE_PATH)
