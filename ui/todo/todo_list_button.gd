@@ -50,7 +50,8 @@ func setup(todoListDict, forNewItemCreation = false):
 
 
 
-
+func setButtonPressed(onOrOff:bool):
+	%ContextButton.button_pressed = onOrOff
 
 func groupsUpdated(newGroupIds):
 	print("todo list item - groups updated:", newGroupIds)

@@ -64,13 +64,17 @@ func refreshTab():
 func refreshListsList():
 	for c in %ListsList.get_children():
 		c.queue_free()
-	print("todo - todoLists: ", savedTodoLists.keys())
+	#print("todo - todoLists: ", savedTodoLists.keys())
 	var topRows = []
 	var middleRows = []
 	var bottomRows = []
 	for listId in savedTodoLists.keys():
 		var newListButton = makeListButton(savedTodoLists[listId])
 		#print("todo tab - list key: ", listId)
+		if savedCurrentList:
+			if savedCurrentList == listId:
+				currentListButton = newListButton
+				newListButton.setButtonPressed(true)
 		if Groups.hasATopGroup(savedTodoLists[listId].groups):
 			topRows.append(newListButton)
 			continue
@@ -106,7 +110,7 @@ func makeListButton(todoListDict, forNewCreation = false):
 	if  forNewCreation:
 		return newListButton
 	newListButton.s_groupsUpdated.connect(updateTodoListGroups.bind(todoListDict.id))
-	newListButton.s_pressed.connect(swapActiveList.bind(todoListDict.id))
+	newListButton.s_pressed.connect(swapActiveList.bind(todoListDict.id, newListButton))
 	newListButton.s_deleteMe.connect(deleteList.bind(todoListDict.id))
 	return newListButton
 
@@ -144,13 +148,13 @@ func sortTodoItems(todoItemsDict:Dictionary)->Array:
 		else:
 			uncompletedItems.append(todoItemsDict[key])
 	# then sort each bucket by priority
-	print("todo tab - completed items: ", completedItems)
+	#print("todo tab - completed items: ", completedItems)
 	var sortedUncompletedItems = sortTodoItemsByPriority(uncompletedItems)
 	var sortedCompletedItems = sortTodoItemsByPriority(completedItems)
 	# append completed to uncompleted so they are on bottom
 	sortedUncompletedItems.append_array(sortedCompletedItems)
 	var sortedArray = sortedUncompletedItems # uncompleted first (top of list)
-	print("todo tab - sorted items: ", sortedArray)
+	#print("todo tab - sorted items: ", sortedArray)
 	return sortedArray
 
 func sortTodoItemsByPriority(todoItemsArray:Array)->Array:
@@ -166,13 +170,13 @@ func sortTodoItemsByPriority(todoItemsArray:Array)->Array:
 	for item in todoItemsArray:
 		priorityBuckuts[item.priority].append(item)
 	# combine buckets from highest to lowest
-	print("todo tab - sorting priorityBuckuts: ", priorityBuckuts)
+	#print("todo tab - sorting priorityBuckuts: ", priorityBuckuts)
 	var sortedItems = []
 	i = 9
 	while i >= 1: 
 		sortedItems.append_array(priorityBuckuts[i])
 		i -= 1
-	print("todo tab - sortedItems: ", sortedItems)
+	#print("todo tab - sortedItems: ", sortedItems)
 	return sortedItems
 
 
@@ -229,7 +233,7 @@ func deleteTodoItem(todoItemName):
 
 
 func saveList(todoListDict:Dictionary):
-	print("todo tab - new list to save is: ", todoListDict)
+	#print("todo tab - new list to save is: ", todoListDict)
 	#var capitalized = Globals.customCapitalize(%Name.text)
 	if not savedTodoLists.has(todoListDict.id):
 		savedTodoLists[todoListDict.id] = todoListDict
@@ -349,7 +353,12 @@ func saveTodos():
 	Saver.saveGameSection(SAVE_SECTION, "currentList", savedCurrentList)
 	#print("todo - saved")
 
-func swapActiveList(newListId):
+func swapActiveList(newListId, newButton):
+	if newButton == currentListButton:
+		currentListButton.setButtonPressed(true)
+		return
+	currentListButton.setButtonPressed(false)
+	currentListButton = newButton
 	savedCurrentList = newListId
 	refreshTodoItemsList()
 	#highlightListList(currentList)
