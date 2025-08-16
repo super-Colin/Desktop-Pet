@@ -19,6 +19,7 @@ script = ExtResource("1_mjyg7")
 layout_mode = 2
 
 [node name="Flatten" type="Button" parent="Standard"]
+visible = false
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 tooltip_text = "Remove any invisble formatting around the content in your clipboard"
@@ -35,6 +36,7 @@ text = "Top"
 
 [node name="Sides" type="Button" parent="Standard"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 tooltip_text = "Toggle which side the pop out is on"
@@ -59,7 +61,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Shrunken window height"
-min_value = 50.0
+min_value = 80.0
 max_value = 600.0
 step = 10.0
 value = 200.0

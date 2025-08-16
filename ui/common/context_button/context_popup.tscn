@@ -4,7 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://bfedkwjxiho3r" path="res://ui/common/groups_icon.tscn" id="2_d3tno"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trw2q"]
-bg_color = Color(0.485287, 0.662448, 0.343871, 1)
+bg_color = Color(0.3202, 0.450079, 0.212308, 0.917647)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="ContextPopup" type="PanelContainer"]
 custom_minimum_size = Vector2(120, 0)

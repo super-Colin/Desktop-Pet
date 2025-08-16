@@ -44,6 +44,7 @@ text = " List "
 
 [node name="SaveTodoButton" type="Button" parent="NewCreator"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 theme_override_colors/font_color = Color(2.88785e-06, 0.88136, 0.952338, 1)

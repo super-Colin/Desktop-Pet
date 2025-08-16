@@ -1,12 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://c8m8svhtp2ksf"]
 
+[ext_resource type="Theme" uid="uid://c528u1i1a4r74" path="res://ui/themes/basic.tres" id="1_351bv"]
 [ext_resource type="Script" uid="uid://ce3exek2bxi8c" path="res://dialogue_box.gd" id="1_n23yb"]
 [ext_resource type="PackedScene" uid="uid://byv13bdjt26gx" path="res://ui/groups/groups_tab.tscn" id="4_if77y"]
 [ext_resource type="PackedScene" uid="uid://dko4dcm3n1nde" path="res://ui/todo/todo_tab.tscn" id="7_f71wr"]
 [ext_resource type="PackedScene" uid="uid://d3vitghnd0r7y" path="res://ui/settings/settings_tab.tscn" id="8_f71wr"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_senjy"]
-bg_color = Color(0.466971, 0.186746, 1.44392e-07, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ilnc5"]
 content_margin_left = 8.0
@@ -25,7 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_senjy")
+theme = ExtResource("1_351bv")
 script = ExtResource("1_n23yb")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
